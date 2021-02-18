@@ -1,13 +1,13 @@
 import React, { Component } from 'react'
-import "./Lesson1/Todo.css"
-import Todo from "./Lesson1/Todo"
+import "./TasksFromLesson6/Tasks.css"
+import Tasks from "./TasksFromLesson6/Tasks"
 
 
 function App() {
 
     return (
       <div className="wrapper">
-        <Todo />
+        <Tasks />
       </div>
     )
   }

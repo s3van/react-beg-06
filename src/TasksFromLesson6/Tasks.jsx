@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
-import "./Todo.css"
+import "./Tasks.css"
 
-export class Todo extends React.Component {
+export class Tasks extends React.Component {
 
     state = {
         tasks: ["Task1", "Task2", "Task3"],
@@ -53,4 +53,4 @@ export class Todo extends React.Component {
     }
 }
 
-export default Todo
+export default Tasks
