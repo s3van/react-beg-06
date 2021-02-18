@@ -1,13 +1,16 @@
 import React, { Component } from 'react'
-import "./TasksFromLesson6/Tasks.css"
-import Tasks from "./TasksFromLesson6/Tasks"
+import "./Todo/Global.css"
+import Todo from "./Todo/Todo"
+// import "./TasksFromLesson6/Tasks.css"
+// import Tasks from "./TasksFromLesson6/Tasks"
 
 
 function App() {
 
     return (
       <div className="wrapper">
-        <Tasks />
+        {/* <Tasks /> */}
+        <Todo />
       </div>
     )
   }
