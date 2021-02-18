@@ -7,7 +7,7 @@ export default class App extends Component {
     return (
       <div className="wrapper">
         <h1>LBranch</h1>
-        <h2>Lesson Branch</h2>
+
         <h3>Lesson Branch</h3>
       </div>
     )
