@@ -1,14 +1,15 @@
 import React, { Component } from 'react'
-import "./App.css"
-import AddNewTask from "./Lesson1/AddNewTask"
+import "./Lesson1/Todo.css"
+import Todo from "./Lesson1/Todo"
 
 
-export default class App extends Component {
-  render() {
+function App() {
+
     return (
       <div className="wrapper">
-        <AddNewTask />
+        <Todo />
       </div>
     )
   }
-}
+
+export default App
