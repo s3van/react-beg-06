@@ -7,8 +7,8 @@ export default class App extends Component {
     return (
       <div className="wrapper">
         <h1>LBranch</h1>
-
         <h3>Lesson Branch</h3>
+        console.log("Test 2")
       </div>
     )
   }
