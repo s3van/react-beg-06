@@ -26,7 +26,6 @@ export class AddTask extends Component {
     render() {
         return (
             <div className={AddTaskStyles.wrapper}>
-                <h1>Add Task</h1>
                  <div>
                     <input 
                     type="text" 

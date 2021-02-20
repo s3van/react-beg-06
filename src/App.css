@@ -41,9 +41,44 @@ table {
 	border-collapse: collapse;
 	border-spacing: 0;
 }
+button{
+	border-radius: 10%;
+	padding: 3.3px 10px;
+	background-color: rgb(46, 173, 152);
+	margin-left: 10px;
+	text-decoration: none;
+	border: none;
+} 
+button:focus {
+	  outline: none;
+}
+button:active {
+	transform: translateY(4px);
+	
+}
+button:hover {
+	border-color: currentColor;
+	background-color: rgb(154, 219, 219);
+	transition: ease .2s;
+	cursor: pointer;
+} 
+  
+input {
+	font-size: 16px;
+	width: 200px;
+	border: none;
+	border-bottom: 1px solid #ccc;
+}
+  
+  
+input:focus {
+	outline: none;
+}
+  
+input:focus::-webkit-input-placeholder {opacity: 0; transition: opacity 0.3s ease;}
+
 
 .app-wrapper{
-	border: 5px solid black;
 	display: flex;
 	justify-content: center;
 	align-items: center;

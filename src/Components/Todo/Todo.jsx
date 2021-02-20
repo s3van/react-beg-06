@@ -6,7 +6,7 @@ import TodoStyles from './Todo.module.css'
 export class Tasks extends React.Component {
 
     state = {
-        tasks: ["Task1", "Task2", "Task3"],
+        tasks: ["Task 1", "Task 2", "Task 3"],
     }
 
    
@@ -34,6 +34,7 @@ export class Tasks extends React.Component {
 
         return (
             <div className={TodoStyles.wrapper} >
+                <h1>Todo Component</h1>
                 <AddTask handleSubmit={this.handleSubmit}/>
                 <div className={TodoStyles.wrapper2}>
                     {tasksJSX}
