@@ -5,7 +5,10 @@ import "./App.css"
 export default class App extends Component {
   render() {
     return (
-      <div className="wrapper">
+      <div className="App">
+        <div>
+          <h1>Hello World</h1>
+        </div>
       </div>
     )
   }
