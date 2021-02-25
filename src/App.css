@@ -44,15 +44,27 @@ table {
 
   
 input {
-	font-size: 16px;
-	width: 200px;
-	border: none;
-	border-bottom: 1px solid #ccc;
+	width: 30%;
+    height: 40px;
+    background: #fff;
+    border: 1px solid #e7e7e7;
+    border-right: 0;
+    font-size: 15px;
+    font-style: italic;
+    font-weight: 300;
+    font-family: 'Montserrat', sans-serif;
+    padding: 13px;
+    line-height: 1.1;
 }
   
   
 input:focus {
-	outline: none;
+	outline: 0;
+    border-color: #95e1d3;
+}
+
+input::placeholder{
+    color: #ccc;
 }
   
 input:focus::-webkit-input-placeholder {opacity: 0; transition: opacity 0.3s ease;}
