@@ -3,7 +3,7 @@ import Task from '../Task/Task'
 import AddTask from '../AddTask/AddTask'
 import TodoStyles from './Todo.module.css'
 
-export class Tasks extends React.Component {
+export class Todo extends React.Component {
 
     state = {
         tasks: ["Task 1", "Task 2", "Task 3"],
@@ -42,4 +42,4 @@ export class Tasks extends React.Component {
     }
 }
 
-export default Tasks
+export default Todo
