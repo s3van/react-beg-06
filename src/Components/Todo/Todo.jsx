@@ -1,45 +1,46 @@
-import React, { Component } from 'react'
-import Task from '../Task/Task'
-import AddTask from '../AddTask/AddTask'
-import TodoStyles from './Todo.module.css'
+import React, { Component } from "react";
+import Task from "../Task/Task";
+import AddTask from "../AddTask/AddTask";
+import TodoStyles from "./Todo.module.css";
+import { Container, Row, Col } from "react-bootstrap";
 
 export class Todo extends React.Component {
+  state = {
+    tasks: ["Task 1", "Task 2", "Task 3", "Task 4"],
+  };
 
-    state = {
-        tasks: ["Task 1", "Task 2", "Task 3"],
-    }
+  handleSubmit = (value) => {
+    const tasks = [...this.state.tasks];
+    tasks.push(value);
+    this.setState(
+      {
+        tasks: tasks,
+      }
+    );
+  };
 
-    handleSubmit = (value) => {
+  render() {
+    const tasksJSX = this.state.tasks.map(function (task, index) {
+      return <Col key={index} xs={12} sm={6} md={4} lg={3}>
+      <Task task={task} />
+      </Col>
+    });
 
-        const tasks = [...this.state.tasks]
-        tasks.push(value)
-        this.setState({
-            tasks: tasks,
-        }, () => {
-            //console.log("Tasks", this.state.tasks)
-        }
-        )
+    return (
+      <Container className={TodoStyles.wrapper}>
+        <Row>
+          <Col>
+            <h1>Todo Component</h1>
+            <AddTask handleSubmit={this.handleSubmit} />
+          </Col>
+        </Row>
 
-    }
-
-    render() {
-         
-        const tasksJSX = this.state.tasks.map(function (task, index){
-        return (
-            <Task task={task} key={index}/>
-        )
-        })
-
-        return (
-            <div className={TodoStyles.wrapper} >
-                <h1>Todo Component</h1>
-                <AddTask handleSubmit={this.handleSubmit}/>
-                <div className={TodoStyles.wrapper2}>
-                    {tasksJSX}
-                </div>
-            </div>
-        )
-    }
+        <Row>
+            {tasksJSX}
+        </Row>
+      </Container>
+    );
+  }
 }
 
-export default Todo
+export default Todo;

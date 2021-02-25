@@ -13,7 +13,7 @@ export class AddTask extends Component {
             inputValue: value
         })
     }
-
+    
     handleSubmit2 = () => {
         if(!this.state.inputValue)
         return
@@ -23,6 +23,15 @@ export class AddTask extends Component {
         })
     }
 
+    handleSubmit3 = (event) => {
+        if(event.keyCode === 13){
+        this.props.handleSubmit(this.state.inputValue)
+        this.setState({
+            inputValue: ""
+        })}
+    }
+    
+
     render() {
         return (
             <div className={AddTaskStyles.wrapper}>
@@ -31,10 +40,12 @@ export class AddTask extends Component {
                     type="text" 
                     placeholder="Add Task"
                     onChange={this.handleChange}
+                    onKeyUp={this.handleSubmit3}
                     value={this.state.inputValue} 
                     />
                     <button 
-                    onClick={this.handleSubmit2}>
+                    onClick={this.handleSubmit2}
+                    className={AddTaskStyles.btn}>
                     Add</button>
                 </div> 
             </div>

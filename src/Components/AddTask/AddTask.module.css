@@ -3,4 +3,25 @@
     margin: 30px;
 }
 
+.btn{
+	border-radius: 10%;
+	padding: 3.3px 10px;
+	background-color: rgb(46, 173, 152);
+	text-decoration: none;
+    border: none;
+    margin-left: 10px;
+} 
+.btn:focus {
+	  outline: none;
+}
+.btn:active {
+	transform: translateY(4px);
+	
+}
+.btn:hover {
+	border-color: currentColor;
+	background-color: rgb(154, 219, 219);
+	transition: ease .2s;
+	cursor: pointer;
 
+} 
