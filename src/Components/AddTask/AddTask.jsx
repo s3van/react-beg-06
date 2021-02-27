@@ -13,21 +13,13 @@ export class AddTask extends Component {
     });
   };
 
-  handleSubmit2 = () => {
-    if (!this.state.inputValue) return;
+  handleSubmit = ({key, type}) => {
+    if (!this.state.inputValue || (type === "keypress" && key !== "Enter")) 
+      return;
     this.props.handleSubmit(this.state.inputValue);
-    this.setState({
-      inputValue: "",
-    });
-  };
-
-  handleSubmit3 = (event) => {
-    if (this.state.inputValue && event.keyCode === 13) {
-      this.props.handleSubmit(this.state.inputValue);
       this.setState({
         inputValue: "",
       });
-    }
   };
 
   render() {
@@ -38,10 +30,10 @@ export class AddTask extends Component {
             type="text"
             placeholder="Add Task"
             onChange={this.handleChange}
-            onKeyUp={this.handleSubmit3}
+            onKeyPress={this.handleSubmit}
             value={this.state.inputValue}
           />
-          <button onClick={this.handleSubmit2} className={AddTaskStyles.btn}>
+          <button onClick={this.handleSubmit} className={AddTaskStyles.btn}>
             Add
           </button>
         </div>
