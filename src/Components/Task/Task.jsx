@@ -1,21 +1,32 @@
 import TaskStyles from "./Task.module.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTrash, faEdit } from "@fortawesome/free-solid-svg-icons";
+import { Card, Button } from "react-bootstrap";
 
 const Task = (props) => {
-  const { task } = props;
+
+  const { task, handleDelete } = props;
+
+  const handleDeleteTask = (event) => {
+    handleDelete(task._id)
+  }
+
   return (
-    <div className={TaskStyles.wrapper}>
-      <p className={TaskStyles.ptask}>{task}</p>
-      <button className={TaskStyles.btn1}>✓</button>
-      <button className={TaskStyles.btn2}>✗</button>
-      <div className={TaskStyles.info}>
-        <span className={TaskStyles.span1}>▲</span>
-        <span className={TaskStyles.span2}>
-          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quidem
-          laudantium optio natus sunt expedita animi reiciendis assumenda dolore
-          perferendis itaque
-        </span>
+    <Card className={TaskStyles.wrapper}>
+      <div className={TaskStyles.tools_wrapper}>
+        <button className={TaskStyles.deleteBtn} onClick={handleDeleteTask}>
+          <FontAwesomeIcon icon={faTrash} />
+        </button>
+        <button className={TaskStyles.editBtn}>
+          <FontAwesomeIcon icon={faEdit} />
+        </button>
+        <input type="checkbox" className={TaskStyles.inpt}/>
       </div>
-    </div>
+      <Card.Body>
+        <Card.Title style={{color: "#003049"}}>{task.title}</Card.Title>
+      </Card.Body>
+      <Card.Text className={TaskStyles.info}>{task.text}</Card.Text>
+    </Card>
   );
 };
 

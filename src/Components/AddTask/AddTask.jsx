@@ -13,7 +13,9 @@ export class AddTask extends Component {
     });
   };
 
-  handleSubmit = ({key, type}) => {
+  handleSubmit = (event) => {
+    const { key } = event
+    const { type } = event
     if (!this.state.inputValue || (type === "keypress" && key !== "Enter")) 
       return;
     this.props.handleSubmit(this.state.inputValue);
