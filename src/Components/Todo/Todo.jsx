@@ -11,7 +11,7 @@ export class Todo extends React.Component {
       { _id: IdGenerator(), title: "Task 1", text: "Info" },
       { _id: IdGenerator(), title: "Task 2", text: "Info" },
       { _id: IdGenerator(), title: "Task 3", text: "Info" },
-      { _id: IdGenerator(), title: "Task4 ", text: "Info" },
+      { _id: IdGenerator(), title: "Task 4", text: "Info" },
     ],
   };
 
@@ -39,6 +39,7 @@ export class Todo extends React.Component {
   };
 
   render() {
+
     const tasksJSX = this.state.tasks.map((task) => {
       return (
         <Col key={task._id} xs={12} sm={6} md={4} lg={3}>
@@ -57,7 +58,7 @@ export class Todo extends React.Component {
         </Row>
 
         <Row>
-          {tasksJSX.length ? tasksJSX : <p>No Tasks</p>}
+          {tasksJSX.length ? tasksJSX : <p className={TodoStyles.ptux}>No Tasks</p>}
         </Row>
       </Container>
     );

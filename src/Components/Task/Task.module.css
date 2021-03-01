@@ -13,7 +13,7 @@
     cursor: pointer;
 }
 
-.tools_wrapper{
+.toolsWrapper{
     margin-top: 10px;
     width: 100%;
     display: flex;
@@ -48,7 +48,7 @@
 
 .editBtn{
     padding: 3px 7px;
-    border-radius: 5px;
+    border-radius: 4px;
     border: 0;
     background: #F77F00;
     color: snow;
@@ -71,7 +71,7 @@
 
 .deleteBtn{
     padding: 3px 9px;
-    border-radius: 5px;
+    border-radius: 4px;
     border: 0;
     background: #D62828;
     color: snow;

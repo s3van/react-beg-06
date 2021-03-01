@@ -7,20 +7,24 @@ const Task = (props) => {
 
   const { task, handleDelete } = props;
 
-  const handleDeleteTask = (event) => {
+  const handleDeleteTask = () => {
     handleDelete(task._id)
   }
 
+  // const handleCh = (_id) => {
+  //   console.log("_id", task._id)
+  // }
+
   return (
     <Card className={TaskStyles.wrapper}>
-      <div className={TaskStyles.tools_wrapper}>
+      <div className={TaskStyles.toolsWrapper}>
         <button className={TaskStyles.deleteBtn} onClick={handleDeleteTask}>
           <FontAwesomeIcon icon={faTrash} />
         </button>
         <button className={TaskStyles.editBtn}>
           <FontAwesomeIcon icon={faEdit} />
         </button>
-        <input type="checkbox" className={TaskStyles.inpt}/>
+        <input type="checkbox"  className={TaskStyles.inpt}/>
       </div>
       <Card.Body>
         <Card.Title style={{color: "#003049"}}>{task.title}</Card.Title>

@@ -4,6 +4,7 @@
     text-align: center;
     width: 600px;
     max-height: 69.5vh;
+    min-height: 69.5vh;
     padding: 10px;
     overflow: scroll;
     background-color: #EAE2B7;
@@ -11,8 +12,15 @@
 h1{
     font-size: 30px;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
-    font-weight: 700;
+    font-weight: 500;
     margin-top: 20px;
+}
+.ptux{
+    margin: 0 auto;
+    font-size: 30px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-weight: 500;
+
 }
 ::-webkit-scrollbar {
 	width: 6px;
