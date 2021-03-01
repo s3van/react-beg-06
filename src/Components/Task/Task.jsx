@@ -1,7 +1,7 @@
 import TaskStyles from "./Task.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash, faEdit } from "@fortawesome/free-solid-svg-icons";
-import { Card, Button } from "react-bootstrap";
+import { Card } from "react-bootstrap";
 
 const Task = (props) => {
 
