@@ -13,6 +13,7 @@ export class Todo extends React.Component {
       { _id: IdGenerator(), title: "Task 3", text: "Info" },
       { _id: IdGenerator(), title: "Task 4", text: "Info" },
     ],
+    checkedTasks: new Set(),
   };
 
   handleSubmit = (value) => {
@@ -25,25 +26,44 @@ export class Todo extends React.Component {
 
   handleDelete = (_id) => {
     let tasks = [...this.state.tasks];
-    // const idx = tasks.findIndex(task => task._id === _id);
-    // tasks.splice(idx,1)
-    // this.setState(
-    //   {
-    //     tasks: tasks,
-    //   }
-    // );
     tasks = tasks.filter((task) => task._id !== _id);
     this.setState({
       tasks: tasks,
     });
   };
 
-  render() {
+  handleToggleCheck = (_id) => {
+    let checkedTasks = new Set(this.state.checkedTasks);
+    if (!checkedTasks.has(_id)) {
+      checkedTasks.add(_id);
+    } else {
+      checkedTasks.delete(_id);
+    }
+    this.setState({
+      checkedTasks: checkedTasks,
+    });
+  };
 
+  handleDeleteChekedTasks = () => {
+    let tasks = [...this.state.tasks];
+    tasks = tasks.filter((task) => !this.state.checkedTasks.has(task._id));
+    this.setState({
+      tasks: tasks,
+      checkedTasks: new Set(),
+    });
+  };
+
+  render() {
     const tasksJSX = this.state.tasks.map((task) => {
       return (
         <Col key={task._id} xs={12} sm={6} md={4} lg={3}>
-          <Task task={task} handleDelete={this.handleDelete} />
+          <Task
+            task={task}
+            handleDelete={this.handleDelete}
+            handleToggleCheck={this.handleToggleCheck}
+            isAnyTaskChecked={!!this.state.checkedTasks.size}
+            isChecked={this.state.checkedTasks.has(task._id)}
+          />
         </Col>
       );
     });
@@ -53,12 +73,28 @@ export class Todo extends React.Component {
         <Row>
           <Col>
             <h1>Todo Component</h1>
-            <AddTask handleSubmit={this.handleSubmit} />
+            <AddTask
+              handleSubmit={this.handleSubmit}
+              isAnyTaskChecked={!!this.state.checkedTasks.size}
+            />
           </Col>
         </Row>
 
         <Row>
-          {tasksJSX.length ? tasksJSX : <p className={TodoStyles.ptux}>No Tasks</p>}
+          {tasksJSX.length ? (
+            tasksJSX
+          ) : (
+            <p className={TodoStyles.ptux}>No Tasks</p>
+          )}
+        </Row>
+        <Row className={TodoStyles.alldeletebtnwrap}>
+          <button
+            className={TodoStyles.deleteChekedBtn}
+            onClick={this.handleDeleteChekedTasks}
+            disabled={!!!this.state.checkedTasks.size}
+          >
+            Delete
+          </button>
         </Row>
       </Container>
     );

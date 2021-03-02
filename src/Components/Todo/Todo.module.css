@@ -3,18 +3,20 @@
     margin: 0 auto;
     text-align: center;
     width: 600px;
-    max-height: 69.5vh;
-    min-height: 69.5vh;
+    max-height: 75vh;
+    min-height: 75vh;
     padding: 10px;
     overflow: scroll;
     background-color: #EAE2B7;
 }
+
 h1{
     font-size: 30px;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     font-weight: 500;
     margin-top: 20px;
 }
+
 .ptux{
     margin: 0 auto;
     font-size: 30px;
@@ -22,12 +24,47 @@ h1{
     font-weight: 500;
 
 }
+
 ::-webkit-scrollbar {
 	width: 6px;
 	background-color: #F5F5F5;
 }
+
 ::-webkit-scrollbar-thumb {
 	background-color: #696969;
 	border-radius: 5px;
 }
  
+.alldeletebtnwrap{
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+
+}
+
+.deleteChekedBtn{
+    padding: 3px 9px;
+    border-radius: 4px;
+    border: 0;
+    background: #D62828;
+    color: snow;
+    transition: all 0.2s linear;
+}
+
+.deleteChekedBtn:focus {
+	  outline: none;
+}
+
+.deleteChekedBtn:active {
+	transform: translateY(4px);
+}
+
+.deleteChekedBtn:disabled{
+    opacity: 0.5;
+}
+
+.deleteChekedBtn:hover {
+	background-color: rgb(252, 81, 69);
+	transition: ease .3s;
+	cursor: pointer;
+} 

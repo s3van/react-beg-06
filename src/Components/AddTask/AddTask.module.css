@@ -2,11 +2,13 @@
     text-align: center;
     margin: 30px;
 }
+
 .item{
 	display: flex;
 	justify-content: center;
 	align-items: center;
 }
+
 .btn{
 	width: 10%;
 	padding: 8px 0;
@@ -15,19 +17,26 @@
     font-weight: 700;
     color: snow;
     border-radius: 0 7px 7px 0;
-    transition: background 0.2s linear;
+    transition: all 0.2s ease;
 } 
+
 .btn:focus {
 	  outline: none;
 }
+
 .btn:active {
 	transform: translateX(4px);
 }
+
 .btn:hover {
 	background-color: rgba(0, 82, 105, 0.733);
-	transition: ease .2s;
+	transition: all 0.2s ease;
 	cursor: pointer;
 } 
+
+.btn:disabled{
+    opacity: 0.5;
+}
 
 input {
 	width: 30%;
@@ -54,4 +63,4 @@ input::placeholder{
     color: #ccc;
 }
   
-input:focus::-webkit-input-placeholder {opacity: 0; transition: opacity 0.3s ease;}
+input:focus::-webkit-input-placeholder {opacity: 0; transition: opacity 0.3s ease;} 

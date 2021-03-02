@@ -25,6 +25,9 @@ export class AddTask extends Component {
   };
 
   render() {
+    
+    const { isAnyTaskChecked } = this.props;
+
     return (
       <div className={AddTaskStyles.wrapper}>
         <div className={AddTaskStyles.item}>
@@ -34,8 +37,13 @@ export class AddTask extends Component {
             onChange={this.handleChange}
             onKeyPress={this.handleSubmit}
             value={this.state.inputValue}
+            disabled={isAnyTaskChecked}
           />
-          <button onClick={this.handleSubmit} className={AddTaskStyles.btn}>
+          <button
+            onClick={this.handleSubmit}
+            className={AddTaskStyles.btn}
+            disabled={isAnyTaskChecked}
+          >
             Add
           </button>
         </div>

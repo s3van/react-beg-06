@@ -6,8 +6,13 @@
     align-items: center;
     height: 240px;
     margin: 15px 0;
-    transition: box-shadow 0.3s;
+    transition: all 0.2s ease;
 }
+
+.checkedWrapper{
+    opacity: 0.5;
+}
+
 .wrapper:hover{
     box-shadow: 0 0 40px rgba(0,0,0,0.5);
     cursor: pointer;
@@ -52,7 +57,7 @@
     border: 0;
     background: #F77F00;
     color: snow;
-    transition: all 0.3s linear;
+    transition: all 0.2s ease;
 } 
 
 .editBtn:focus {
@@ -65,8 +70,13 @@
 
 .editBtn:hover {
 	background-color: rgb(255, 163, 77);
-	transition: ease .3s;
+	transition: all .2s ease;
 	cursor: pointer;
+}
+
+.editBtn:disabled{
+    opacity: 0.5;
+    transform: none;
 }
 
 .deleteBtn{
@@ -75,7 +85,7 @@
     border: 0;
     background: #D62828;
     color: snow;
-    transition: all 0.3s linear;
+    transition: all 0.2s ease;
 } 
 
 .deleteBtn:focus {
@@ -88,8 +98,13 @@
 
 .deleteBtn:hover {
 	background-color: rgb(252, 81, 69);
-	transition: ease .3s;
+	transition: all 0.2s ease;
 	cursor: pointer;
+}
+
+.deleteBtn:disabled{
+    opacity: 0.5;
+    transform: none;
 }
 
 .inpt{
@@ -100,3 +115,4 @@
 .inpt:hover {
    cursor: pointer;
   }
+
