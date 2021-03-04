@@ -5,7 +5,7 @@ import TodoStyles from "./Todo.module.css";
 import { Container, Row, Col } from "react-bootstrap";
 import IdGenerator from "../../Utlis/IdGenerator";
 
-export class Todo extends React.Component {
+export class Todo extends React.PureComponent {
   state = {
     tasks: [
       { _id: IdGenerator(), title: "Task 1", text: "Info" },
@@ -17,7 +17,7 @@ export class Todo extends React.Component {
   };
 
   handleSubmit = (value) => {
-    const tasks = [...this.state.tasks];
+    let tasks = [...this.state.tasks];
     tasks.push({ text: "Info", title: value, _id: IdGenerator() });
     this.setState({
       tasks: tasks,

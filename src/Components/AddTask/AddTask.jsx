@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import AddTaskStyles from "./AddTask.module.css";
 
-export class AddTask extends Component {
+export class AddTask extends React.PureComponent {
   state = {
     inputValue: "",
   };
@@ -25,7 +25,6 @@ export class AddTask extends Component {
   };
 
   render() {
-    
     const { isAnyTaskChecked } = this.props;
 
     return (
