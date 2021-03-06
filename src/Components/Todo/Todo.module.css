@@ -3,8 +3,8 @@
     margin: 0 auto;
     text-align: center;
     width: 600px;
-    max-height: 75vh;
-    min-height: 75vh;
+    max-height: 80vh;
+    min-height: 80vh;
     padding: 10px;
     overflow: scroll;
     background-color: #EAE2B7;
@@ -35,36 +35,72 @@ h1{
 	border-radius: 5px;
 }
  
-.alldeletebtnwrap{
+.btnWrap{
     display: flex;
-    justify-content: center;
-    align-items: flex-end;
-
+    height: 10vh;
+    justify-content: space-between;
+    flex-direction: column;
+    align-items: center;
 }
 
-.deleteChekedBtn{
+.deleteCheckedBtn{
     padding: 3px 9px;
     border-radius: 4px;
     border: 0;
     background: #D62828;
     color: snow;
-    transition: all 0.2s linear;
+    transition: all 0.2s ease;
 }
 
-.deleteChekedBtn:focus {
+.deleteCheckedBtn:focus {
 	  outline: none;
 }
 
-.deleteChekedBtn:active {
+.deleteCheckedBtn:active {
 	transform: translateY(4px);
 }
 
-.deleteChekedBtn:disabled{
-    opacity: 0.5;
-}
-
-.deleteChekedBtn:hover {
+.deleteCheckedBtn:hover {
 	background-color: rgb(252, 81, 69);
-	transition: ease .3s;
+	transition: all 0.2s ease;
 	cursor: pointer;
 } 
+
+.deleteCheckedBtn:disabled{
+    opacity: 0.5;
+    transition: 0.1s;
+    transition: none;
+}
+
+.checkedAllTasksBtn{
+
+    padding: 3px 9px;
+    border-radius: 4px;
+    border: 0;
+    background: #1e3836;
+    color: snow;
+    transition: all 0.2s ease;
+
+}
+
+
+
+.checkedAllTasksBtn:focus {
+    outline: none;
+}
+
+.checkedAllTasksBtn:active {
+  transform: translateY(4px);
+}
+
+.checkedAllTasksBtn:hover {
+  background-color: rgb(55, 95, 89);
+  transition: all 0.2s ease;
+  cursor: pointer;
+} 
+
+.checkedAllTasksBtn:disabled{
+    opacity: 0.5;
+    transition: 0s;
+    transform: none;
+  }

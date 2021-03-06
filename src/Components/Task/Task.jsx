@@ -42,7 +42,8 @@ const Task = (props) => {
         <input
           type="checkbox"
           className={TaskStyles.inpt}
-          onClick={handleToggleCheckTask}
+          onChange={handleToggleCheckTask}
+          checked={isChecked}
         />
       </div>
       <Card.Body>

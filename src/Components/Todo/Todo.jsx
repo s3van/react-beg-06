@@ -44,7 +44,7 @@ export class Todo extends React.PureComponent {
     });
   };
 
-  handleDeleteChekedTasks = () => {
+  handleDeleteCheckedTasks = () => {
     let tasks = [...this.state.tasks];
     tasks = tasks.filter((task) => !this.state.checkedTasks.has(task._id));
     this.setState({
@@ -52,7 +52,21 @@ export class Todo extends React.PureComponent {
       checkedTasks: new Set(),
     });
   };
-
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+  handleCheckedAllTasks = () => {
+    let checkedTasks = new Set(this.state.checkedTasks);
+    const tasks = this.state.tasks.map((task) => {
+      if (!checkedTasks.has(task._id)) {
+        checkedTasks.add(task._id);
+      } else {
+        checkedTasks.delete(task._id);
+      }
+    })
+    this.setState({
+      checkedTasks: checkedTasks,
+    });
+  };
+//////////////////////////////////////////////////////////////////////////////////////////////////////
   render() {
     const tasksJSX = this.state.tasks.map((task) => {
       return (
@@ -87,13 +101,20 @@ export class Todo extends React.PureComponent {
             <p className={TodoStyles.ptux}>No Tasks</p>
           )}
         </Row>
-        <Row className={TodoStyles.alldeletebtnwrap}>
+        <Row className={TodoStyles.btnWrap}>
           <button
-            className={TodoStyles.deleteChekedBtn}
-            onClick={this.handleDeleteChekedTasks}
+            className={TodoStyles.deleteCheckedBtn}
+            onClick={this.handleDeleteCheckedTasks}
             disabled={!!!this.state.checkedTasks.size}
           >
-            Delete
+            Delete Selected
+          </button>
+          <button
+            className={TodoStyles.checkedAllTasksBtn}
+            onClick={this.handleCheckedAllTasks}
+            disabled={!!!tasksJSX.length}
+          >
+            {!!!this.state.checkedTasks.size ? ("Choose All") :  ("Remove All")}
           </button>
         </Row>
       </Container>

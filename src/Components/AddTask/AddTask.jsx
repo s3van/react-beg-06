@@ -41,7 +41,7 @@ export class AddTask extends React.PureComponent {
           <button
             onClick={this.handleSubmit}
             className={AddTaskStyles.btn}
-            disabled={isAnyTaskChecked}
+            disabled={isAnyTaskChecked || !this.state.inputValue}
           >
             Add
           </button>
