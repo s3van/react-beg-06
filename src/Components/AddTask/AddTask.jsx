@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import AddTaskStyles from "./AddTask.module.css";
+import PropTypes from "prop-types";
 
 export class AddTask extends React.PureComponent {
   state = {
@@ -50,5 +51,10 @@ export class AddTask extends React.PureComponent {
     );
   }
 }
+
+AddTask.propTypes = {
+  handleSubmit: PropTypes.func.isRequired,
+  isAnyTaskChecked: PropTypes.bool,
+};
 
 export default AddTask;

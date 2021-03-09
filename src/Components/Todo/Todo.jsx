@@ -55,17 +55,16 @@ export class Todo extends React.PureComponent {
 
   toggleCheckedAllTasks = () => {
     let checkedTasks = new Set(this.state.checkedTasks);
-    
-      if (this.state.tasks.length === this.state.checkedTasks.size) {
-        checkedTasks.clear();
-        console.log(checkedTasks)
-      } 
-      else{
-        this.state.tasks.forEach((task) => {
-          checkedTasks.add(task._id)
-          console.log(checkedTasks)
-        })
-      }
+
+    if (this.state.tasks.length === this.state.checkedTasks.size) {
+      checkedTasks.clear();
+      console.log(checkedTasks);
+    } else {
+      this.state.tasks.forEach((task) => {
+        checkedTasks.add(task._id);
+        console.log(checkedTasks);
+      });
+    }
     this.setState({
       checkedTasks: checkedTasks,
     });
@@ -118,7 +117,9 @@ export class Todo extends React.PureComponent {
             onClick={this.toggleCheckedAllTasks}
             disabled={!!!tasksJSX.length}
           >
-            {(this.state.checkedTasks.size === this.state.tasks.length ) ? ("Remove All") : ("Choose All")}
+            {this.state.checkedTasks.size === this.state.tasks.length
+              ? "Remove All"
+              : "Choose All"}
           </button>
         </Row>
       </Container>

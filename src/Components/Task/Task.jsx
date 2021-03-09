@@ -3,8 +3,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash, faEdit } from "@fortawesome/free-solid-svg-icons";
 import { Card } from "react-bootstrap";
 import { memo } from "react";
+import PropTypes from "prop-types";
 
-const Task = (props) => {
+function Task(props) {
   const {
     task,
     handleDelete,
@@ -52,6 +53,18 @@ const Task = (props) => {
       <Card.Text className={TaskStyles.info}>{task.text}</Card.Text>
     </Card>
   );
+}
+
+Task.propTypes = {
+  task: PropTypes.exact({
+    _id: PropTypes.number.isRequired,
+    title: PropTypes.string,
+    text: PropTypes.string,
+  }),
+  handleDelete: PropTypes.func.isRequired,
+  handleToggleCheck: PropTypes.func.isRequired,
+  isAnyTaskChecked: PropTypes.bool,
+  isChecked: PropTypes.bool,
 };
 
 export default memo(Task);
