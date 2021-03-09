@@ -52,21 +52,25 @@ export class Todo extends React.PureComponent {
       checkedTasks: new Set(),
     });
   };
-//////////////////////////////////////////////////////////////////////////////////////////////////////
-  handleCheckedAllTasks = () => {
+
+  toggleCheckedAllTasks = () => {
     let checkedTasks = new Set(this.state.checkedTasks);
-    const tasks = this.state.tasks.map((task) => {
-      if (!checkedTasks.has(task._id)) {
-        checkedTasks.add(task._id);
-      } else {
-        checkedTasks.delete(task._id);
+    
+      if (this.state.tasks.length === this.state.checkedTasks.size) {
+        checkedTasks.clear();
+        console.log(checkedTasks)
+      } 
+      else{
+        this.state.tasks.forEach((task) => {
+          checkedTasks.add(task._id)
+          console.log(checkedTasks)
+        })
       }
-    })
     this.setState({
       checkedTasks: checkedTasks,
     });
   };
-//////////////////////////////////////////////////////////////////////////////////////////////////////
+
   render() {
     const tasksJSX = this.state.tasks.map((task) => {
       return (
@@ -76,7 +80,7 @@ export class Todo extends React.PureComponent {
             handleDelete={this.handleDelete}
             handleToggleCheck={this.handleToggleCheck}
             isAnyTaskChecked={!!this.state.checkedTasks.size}
-            isChecked={this.state.checkedTasks.has(task._id)}
+            isChecked={!!this.state.checkedTasks.has(task._id)}
           />
         </Col>
       );
@@ -111,10 +115,10 @@ export class Todo extends React.PureComponent {
           </button>
           <button
             className={TodoStyles.checkedAllTasksBtn}
-            onClick={this.handleCheckedAllTasks}
+            onClick={this.toggleCheckedAllTasks}
             disabled={!!!tasksJSX.length}
           >
-            {!!!this.state.checkedTasks.size ? ("Choose All") :  ("Remove All")}
+            {(this.state.checkedTasks.size === this.state.tasks.length ) ? ("Remove All") : ("Choose All")}
           </button>
         </Row>
       </Container>
