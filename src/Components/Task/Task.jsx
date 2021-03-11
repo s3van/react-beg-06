@@ -1,7 +1,7 @@
 import TaskStyles from "./Task.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash, faEdit } from "@fortawesome/free-solid-svg-icons";
-import { Card } from "react-bootstrap";
+import { Card, Modal } from "react-bootstrap";
 import { memo } from "react";
 import PropTypes from "prop-types";
 
@@ -16,6 +16,7 @@ function Task(props) {
 
   const handleDeleteTask = () => {
     handleDelete(task._id);
+
   };
 
   const handleToggleCheckTask = () => {
@@ -26,45 +27,49 @@ function Task(props) {
   if (isChecked) {
     cls.push(TaskStyles.checkedWrapper);
   }
-
   return (
-    <Card className={cls.join(" ")}>
-      <div className={TaskStyles.toolsWrapper}>
-        <button
-          className={TaskStyles.deleteBtn}
-          onClick={handleDeleteTask}
-          disabled={isAnyTaskChecked}
-        >
-          <FontAwesomeIcon icon={faTrash} />
-        </button>
-        <button className={TaskStyles.editBtn} disabled={isAnyTaskChecked}>
-          <FontAwesomeIcon icon={faEdit} />
-        </button>
-        <input
-          type="checkbox"
-          className={TaskStyles.inpt}
-          onChange={handleToggleCheckTask}
-          checked={isChecked}
-        />
-      </div>
-      <Card.Body>
-        <Card.Title style={{ color: "#003049" }}>{task.title}</Card.Title>
-      </Card.Body>
-      <Card.Text className={TaskStyles.info}>{task.text}</Card.Text>
-    </Card>
+    <>
+      <Card className={cls.join(" ")}>
+        <div className={TaskStyles.toolsWrapper}>
+          <button
+            className={TaskStyles.deleteBtn}
+            disabled={isAnyTaskChecked}
+            onClick={handleDeleteTask}
+          >
+            <FontAwesomeIcon icon={faTrash} />
+          </button>
+          <button className={TaskStyles.editBtn} disabled={isAnyTaskChecked}>
+            <FontAwesomeIcon icon={faEdit} />
+          </button>
+          <input
+            type="checkbox"
+            className={TaskStyles.inpt}
+            onChange={handleToggleCheckTask}
+            checked={isChecked}
+          />
+        </div>
+        <Card.Body>
+          <Card.Title style={{ color: "#003049" }}>{task.title}</Card.Title>
+        </Card.Body>
+        <Card.Text className={TaskStyles.info}>
+          <span>Info</span>
+          {task.description}
+        </Card.Text>
+      </Card>
+    </>
   );
 }
 
 Task.propTypes = {
   task: PropTypes.exact({
-    _id: PropTypes.number.isRequired,
-    title: PropTypes.string,
-    text: PropTypes.string,
+    _id: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
   }),
   handleDelete: PropTypes.func.isRequired,
   handleToggleCheck: PropTypes.func.isRequired,
-  isAnyTaskChecked: PropTypes.bool,
-  isChecked: PropTypes.bool,
+  isAnyTaskChecked: PropTypes.bool.isRequired,
+  isChecked: PropTypes.bool.isRequired,
 };
 
 export default memo(Task);

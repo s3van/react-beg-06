@@ -25,6 +25,33 @@ h1{
 
 }
 
+.setbtn{
+    margin: 27px 0;
+    width: 15%;
+    height: 40px;
+	padding: 8px 0;
+    border: 0;
+    background: rgb(97, 118, 119);
+    font-weight: 700;
+    color: snow;
+    border-radius: 5px;
+    transition: all 0.2s ease;
+}
+
+.setbtn:focus {
+    outline: none;
+}
+
+.setbtn:hover {
+  background-color: rgba(141, 141, 141, 0.733);
+  transition: all 0.2s ease;
+  cursor: pointer;
+} 
+
+.setbtn:active {
+	transform: translateY(2px);
+}
+
 ::-webkit-scrollbar {
 	width: 6px;
 	background-color: #F5F5F5;
@@ -73,8 +100,7 @@ h1{
 }
 
 .checkedAllTasksBtn{
-
-    padding: 3px 9px;
+    padding: 2px 26px;
     border-radius: 4px;
     border: 0;
     background: #1e3836;
@@ -104,3 +130,73 @@ h1{
     transition: 0s;
     transform: none;
   }
+
+  .footer{
+    display: flex;
+    justify-content: center;
+}
+
+.btn1{
+    width: 15%;
+    height: 40px;
+	padding: 8px 0;
+    border: 0;
+    background: #e92424;
+    font-weight: 700;
+    color: snow;
+    border-radius: 2px;
+    transition: all 0.2s ease;
+    margin-right: 5px;
+} 
+
+.btn1:focus {
+	  outline: none;
+}
+
+.btn1:active {
+	transform: translateX(-5px);
+}
+
+.btn1:hover {
+	background-color: rgba(202, 31, 31, 0.733);
+	transition: all 0.2s ease;
+	cursor: pointer;
+} 
+
+.btn1:disabled{
+    opacity: 0.5;
+} 
+
+.btn2{
+    width: 15%;
+    height: 40px;
+	padding: 8px 0;
+    border: 0;
+    background: rgb(119, 119, 119);
+    font-weight: 700;
+    color: snow;
+    border-radius: 2px;
+    transition: all 0.2s ease;
+} 
+
+.btn2:focus {
+	  outline: none;
+}
+
+.btn2:active {
+	transform: translateX(-5px);
+}
+
+.btn2:hover {
+	background-color: rgba(124, 124, 124, 0.733);
+	transition: all 0.2s ease;
+	cursor: pointer;
+} 
+
+.btn2:disabled{
+    opacity: 0.5;
+} 
+
+.btn2:active{
+    transform: translateX(5px);
+}

@@ -38,6 +38,9 @@
     color: #EAE2B7;
     cursor: pointer;
     transition: all 0.3s linear;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
 }
 
 .info:hover{
