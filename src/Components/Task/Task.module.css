@@ -30,6 +30,7 @@
     width: 100%;
     position: absolute;
     bottom: 0;
+    margin: 0 5px;
     font-weight: 500;
     font-style: inherit;
     border: none;

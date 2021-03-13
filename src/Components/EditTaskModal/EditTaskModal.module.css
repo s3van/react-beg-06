@@ -97,10 +97,6 @@ textarea:focus::-webkit-input-placeholder {opacity: 0; transition: opacity 0.3s 
 	cursor: pointer;
 } 
 
-.btn1:disabled{
-    opacity: 0.5;
-} 
-
 .btn2{
     width: 35%;
     height: 40px;
@@ -125,10 +121,6 @@ textarea:focus::-webkit-input-placeholder {opacity: 0; transition: opacity 0.3s 
 	background-color: rgba(124, 124, 124, 0.733);
 	transition: all 0.2s ease;
 	cursor: pointer;
-} 
-
-.btn2:disabled{
-    opacity: 0.5;
 } 
 
 .btn2:active{

@@ -1,0 +1,73 @@
+.footer{
+    width: 50%;
+    padding-bottom: 5px;
+    display: flex;
+    justify-content: center;
+    margin: 0 auto;
+
+}
+
+.btn1{
+    width: 25%;
+    height: 40px;
+	padding: 8px 0;
+    border: 0;
+    background: #a10000;
+    font-weight: 700;
+    color: snow;
+    border-radius: 2px;
+    transition: all 0.2s ease;
+    margin-right: 5px;
+} 
+
+.btn1:focus {
+	  outline: none;
+}
+
+.btn1:active {
+	transform: translateX(-5px);
+}
+
+.btn1:hover {
+	background-color: rgba(105, 0, 0, 0.733);
+	transition: all 0.2s ease;
+	cursor: pointer;
+} 
+
+.btn1:disabled{
+    opacity: 0.5;
+} 
+
+.btn2{
+    width: 25%;
+    height: 40px;
+	padding: 8px 0;
+    border: 0;
+    background: rgb(119, 119, 119);
+    font-weight: 700;
+    color: snow;
+    border-radius: 2px;
+    transition: all 0.2s ease;
+} 
+
+.btn2:focus {
+	  outline: none;
+}
+
+.btn2:active {
+	transform: translateX(-5px);
+}
+
+.btn2:hover {
+	background-color: rgba(124, 124, 124, 0.733);
+	transition: all 0.2s ease;
+	cursor: pointer;
+} 
+
+.btn2:disabled{
+    opacity: 0.5;
+} 
+
+.btn2:active{
+    transform: translateX(5px);
+}

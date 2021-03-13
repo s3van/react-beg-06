@@ -1,7 +1,7 @@
 import TaskStyles from "./Task.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash, faEdit } from "@fortawesome/free-solid-svg-icons";
-import { Card, Modal } from "react-bootstrap";
+import { Card } from "react-bootstrap";
 import { memo } from "react";
 import PropTypes from "prop-types";
 
@@ -12,6 +12,7 @@ function Task(props) {
     handleToggleCheck,
     isAnyTaskChecked,
     isChecked,
+    setEditableTask,
   } = props;
 
   const handleDeleteTask = () => {
@@ -38,7 +39,11 @@ function Task(props) {
           >
             <FontAwesomeIcon icon={faTrash} />
           </button>
-          <button className={TaskStyles.editBtn} disabled={isAnyTaskChecked}>
+          <button 
+          className={TaskStyles.editBtn} 
+          disabled={isAnyTaskChecked}
+          onClick={() => setEditableTask(task)}
+          >
             <FontAwesomeIcon icon={faEdit} />
           </button>
           <input
@@ -70,6 +75,7 @@ Task.propTypes = {
   handleToggleCheck: PropTypes.func.isRequired,
   isAnyTaskChecked: PropTypes.bool.isRequired,
   isChecked: PropTypes.bool.isRequired,
+  setEditableTask: PropTypes.func.isRequired,
 };
 
 export default memo(Task);

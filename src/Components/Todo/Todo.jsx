@@ -3,31 +3,21 @@ import Task from "../Task/Task";
 import TodoStyles from "./Todo.module.css";
 import { Container, Row, Col, Modal } from "react-bootstrap";
 import IdGenerator from "../../Utlis/IdGenerator";
-import AddTaskModal from "../AddTaskModal/AddTaskModal";
+import DeleteTaskModal from "../DeleteTaskModal/DeleteTaskModal";
+import  {AddTaskModal, EditTaskModal} from "../MainComponent/MainComponent"
 
 export class Todo extends React.PureComponent {
   state = {
     tasks: [
-      { _id: IdGenerator(), title: "Task 1", description: "" },
-      { _id: IdGenerator(), title: "Task 2", description: "" },
-      { _id: IdGenerator(), title: "Task 3", description: "" },
-      { _id: IdGenerator(), title: "Task 4", description: "" },
+      { _id: IdGenerator(), title: "Task 1", description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem, exercitationem?" },
+      { _id: IdGenerator(), title: "Task 2", description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem, exercitationem?" },
+      { _id: IdGenerator(), title: "Task 3", description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem, exercitationem?" },
+      { _id: IdGenerator(), title: "Task 4", description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem, exercitationem?" },
     ],
     checkedTasks: new Set(),
     isOpenAddTaskModal: false,
-    isOpenTodoModal: false,
-  };
-
-  toggleOpenAddTaskModal = () => {
-    this.setState({
-      isOpenAddTaskModal: !this.state.isOpenAddTaskModal,
-    });
-  };
-
-  toggleOpenTodoModal = () => {
-    this.setState({
-      isOpenTodoModal: !this.state.isOpenTodoModal,
-    });
+    isOpenDeleteTaskModal: false,
+    editableTask: null,
   };
 
   handleSubmit = (formData) => {
@@ -65,7 +55,6 @@ export class Todo extends React.PureComponent {
       tasks: tasks,
       checkedTasks: new Set(),
     });
-    this.toggleOpenTodoModal();
   };
 
   toggleCheckedAllTasks = () => {
@@ -82,6 +71,51 @@ export class Todo extends React.PureComponent {
     });
   };
 
+  toggleOpenAddTaskModal = () => {
+    this.setState({
+      isOpenAddTaskModal: !this.state.isOpenAddTaskModal,
+    });
+  };
+
+  toggleOpenDeleteTaskModal = () => {
+    this.setState({
+      isOpenDeleteTaskModal: !this.state.isOpenDeleteTaskModal,
+    });
+  };
+
+  getTaskFromCheckedTasks  = () => {
+    let id = null;
+    this.state.checkedTasks.forEach((_id) => {
+      id = _id;
+    });
+    return (
+      this.state.tasks.find((task) => 
+      task._id === id
+    )
+    )
+  }
+
+  setEditableTask = (editTask) =>{
+    this.setState({
+      editableTask: editTask
+    })
+  }
+
+  removEditableTask = () => {
+    this.setState({
+      editableTask: null
+    })
+  }
+
+  handleEditTask = (editableTask) => {
+    const tasks = [...this.state.tasks]
+    const idx = tasks.findIndex((task) => task._id === editableTask._id)
+    tasks[idx] = editableTask
+    this.setState({
+      tasks: tasks
+    })
+  }
+
   render() {
     const tasksJSX = this.state.tasks.map((task) => {
       return (
@@ -92,6 +126,7 @@ export class Todo extends React.PureComponent {
             handleToggleCheck={this.handleToggleCheck}
             isAnyTaskChecked={!!this.state.checkedTasks.size}
             isChecked={!!this.state.checkedTasks.has(task._id)}
+            setEditableTask={this.setEditableTask}
           />
         </Col>
       );
@@ -105,7 +140,8 @@ export class Todo extends React.PureComponent {
               <h1>Todo Component</h1>
               <button
                 onClick={this.toggleOpenAddTaskModal}
-                className={TodoStyles.setbtn}
+                className={TodoStyles.setBtn}
+                disabled={!!this.state.checkedTasks.size}
               >
                 Add Task
               </button>
@@ -119,51 +155,14 @@ export class Todo extends React.PureComponent {
               <p className={TodoStyles.ptux}>No Tasks</p>
             )}
           </Row>
-          <Modal
-            show={this.state.isOpenTodoModal}
-            onHide={this.toggleOpenTodoModal}
-            size="lg"
-            aria-labelledby="contained-modal-title-vcenter"
-            centered
-          >
-            <Modal.Header closeButton>
-              <Modal.Title
-                style={{
-                  display: "flex",
-                  justifyContent: "center",
-                  width: "100%",
-                }}
-              >
-                <div> Do you really want to delete ?</div>
-              </Modal.Title>
-            </Modal.Header>
-            <Modal.Body>
-              <div className={TodoStyles.footer}>
-                <button
-                  className={TodoStyles.btn1}
-                  onClick={this.handleDeleteCheckedTasks}
-                >
-                  Delete
-                </button>
-                <button
-                  className={TodoStyles.btn2}
-                  onClick={this.toggleOpenTodoModal}
-                >
-                  Close
-                </button>
-              </div>
-            </Modal.Body>
-          </Modal>
-
           <Row className={TodoStyles.btnWrap}>
             <button
               className={TodoStyles.deleteCheckedBtn}
-              onClick={this.toggleOpenTodoModal}
+              onClick={this.toggleOpenDeleteTaskModal}
               disabled={!!!this.state.checkedTasks.size}
             >
               Delete Selected
             </button>
-
             <button
               className={TodoStyles.checkedAllTasksBtn}
               onClick={this.toggleCheckedAllTasks}
@@ -177,9 +176,23 @@ export class Todo extends React.PureComponent {
         </Container>
         {this.state.isOpenAddTaskModal && (
           <AddTaskModal
-            onHide={this.toggleOpenAddTaskModal}
-            onSubmit={this.handleSubmit}
+            onHide1={this.toggleOpenAddTaskModal}
+            onSubmit1={this.handleSubmit}
             isAnyTaskChecked={!!this.state.checkedTasks.size}
+          />
+        )}
+         {this.state.isOpenDeleteTaskModal && (
+          <DeleteTaskModal
+            onHide={this.toggleOpenDeleteTaskModal}
+            onSubmit={this.handleDeleteCheckedTasks}
+            checkedTasksCount={this.state.checkedTasks.size > 1 ? this.state.checkedTasks.size : this.getTaskFromCheckedTasks()}
+          />
+        )}
+        {this.state.editableTask && (
+          <EditTaskModal 
+          onHide2={this.removEditableTask}
+          editableTask={this.state.editableTask}
+          onSubmit2={this.handleEditTask}
           />
         )}
       </>
