@@ -1,10 +1,11 @@
 import React, { PureComponent } from "react";
 import Task from "../Task/Task";
 import TodoStyles from "./Todo.module.css";
-import { Container, Row, Col, Modal } from "react-bootstrap";
+import { Container, Row, Col } from "react-bootstrap";
 import IdGenerator from "../../Utlis/IdGenerator";
+import AddTaskModal from "../AddTaskModal/AddTaskModal"
 import DeleteTaskModal from "../DeleteTaskModal/DeleteTaskModal";
-import  {AddTaskModal, EditTaskModal} from "../MainComponent/MainComponent"
+import EditTaskModal from "../EditTaskModal/EditTaskModal"
 
 export class Todo extends React.PureComponent {
   state = {
@@ -176,8 +177,8 @@ export class Todo extends React.PureComponent {
         </Container>
         {this.state.isOpenAddTaskModal && (
           <AddTaskModal
-            onHide1={this.toggleOpenAddTaskModal}
-            onSubmit1={this.handleSubmit}
+            onHide={this.toggleOpenAddTaskModal}
+            onSubmit={this.handleSubmit}
             isAnyTaskChecked={!!this.state.checkedTasks.size}
           />
         )}
@@ -190,9 +191,9 @@ export class Todo extends React.PureComponent {
         )}
         {this.state.editableTask && (
           <EditTaskModal 
-          onHide2={this.removEditableTask}
+          onHide={this.removEditableTask}
           editableTask={this.state.editableTask}
-          onSubmit2={this.handleEditTask}
+          onSubmit={this.handleEditTask}
           />
         )}
       </>
