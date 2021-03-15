@@ -169,7 +169,7 @@ export class Todo extends React.PureComponent {
               onClick={this.toggleCheckedAllTasks}
               disabled={!!!tasksJSX.length}
             >
-              {this.state.checkedTasks.size === this.state.tasks.length
+              {this.state.tasks.length && this.state.checkedTasks.size === this.state.tasks.length
                 ? "Remove All"
                 : "CHoose All"}
             </button>

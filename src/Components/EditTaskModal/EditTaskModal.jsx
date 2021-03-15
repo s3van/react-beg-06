@@ -93,7 +93,7 @@ class EditTaskModal extends React.PureComponent {
             onClick={this.props.onHide}
             className={EditTaskModalStyles.btn2}
           >
-            Close
+            Cancel
           </button>
         </div>
       </Modal>
