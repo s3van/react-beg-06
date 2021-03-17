@@ -1,15 +1,16 @@
-import React, { PureComponent, createRef} from "react";
+import React, { PureComponent, createRef } from "react";
 import { Modal } from "react-bootstrap";
-import AddTaskModalStyles from "./AddTaskModal.module.css";
+import MainModalStyles from "./MainModal.module.css";
 import PropTypes from "prop-types";
 
-class AddTaskModal extends React.PureComponent {
+class MainModal extends React.PureComponent {
   constructor(props) {
     super(props);
     this.inputRef = React.createRef();
     this.state = {
       title: "",
       description: "",
+      ...props.editableTask,
     };
   }
 
@@ -28,11 +29,7 @@ class AddTaskModal extends React.PureComponent {
       !this.state.description
     )
       return;
-    const formData = {
-      title: this.state.title,
-      description: this.state.description,
-    };
-    this.props.onSubmit(formData);
+    this.props.onSubmit(this.state);
     this.props.onHide();
   };
 
@@ -41,7 +38,7 @@ class AddTaskModal extends React.PureComponent {
   }
 
   render() {
-    const { onHide, isAnyTaskChecked } = this.props;
+    const { onHide, editableTask } = this.props;
 
     return (
       <Modal
@@ -59,12 +56,12 @@ class AddTaskModal extends React.PureComponent {
               width: "100%",
             }}
           >
-            <div>Add Task</div>
+            <div>{!editableTask ? "Add Task " : "Edit Task"}</div>
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <div className={AddTaskModalStyles.wrapper}>
-            <div className={AddTaskModalStyles.item}>
+          <div className={MainModalStyles.wrapper}>
+            <div className={MainModalStyles.item}>
               <input
                 type="text"
                 name="title"
@@ -72,40 +69,34 @@ class AddTaskModal extends React.PureComponent {
                 onChange={this.handleChange}
                 onKeyPress={this.handleS}
                 value={this.state.title}
-                disabled={isAnyTaskChecked}
                 ref={this.inputRef}
                 onSubmit={(e) => e.preventDefault()}
               />
               <textarea
                 name="description"
                 onChange={this.handleChange}
-                className={AddTaskModalStyles.textarea}
+                className={MainModalStyles.textarea}
                 placeholder="Description"
                 value={this.state.description}
-                disabled={isAnyTaskChecked}
                 onSubmit={(e) => e.preventDefault()}
               ></textarea>
             </div>
           </div>
         </Modal.Body>
-        <div className={AddTaskModalStyles.footer}>
+        <div className={MainModalStyles.footer}>
           <button
             onClick={this.handleS}
-            className={AddTaskModalStyles.btn1}
-            disabled={
-              isAnyTaskChecked || !this.state.title || !this.state.description
-            }
+            className={MainModalStyles.btn1}
+            disabled={!this.state.title || !this.state.description}
           >
-            Add
+            {editableTask ? "Save" : "Add"}
           </button>
           <button
-            onClick={this.props.onHide}
-            className={AddTaskModalStyles.btn2}
-            disabled={
-              isAnyTaskChecked || !this.state.title || !this.state.description
-            }
+            onClick={(event) => this.props.onHide()}
+            className={MainModalStyles.btn2}
+            disabled={!this.state.title || !this.state.description}
           >
-            Close
+            {!editableTask ? "Close" : "Cancel"}
           </button>
         </div>
       </Modal>
@@ -113,10 +104,9 @@ class AddTaskModal extends React.PureComponent {
   }
 }
 
-AddTaskModal.propTypes = {
+MainModal.propTypes = {
   onSubmit: PropTypes.func.isRequired,
-  isAnyTaskChecked: PropTypes.bool.isRequired,
   onHide: PropTypes.func.isRequired,
 };
 
-export default AddTaskModal;
+export default MainModal;

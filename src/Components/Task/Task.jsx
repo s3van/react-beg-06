@@ -12,7 +12,7 @@ function Task(props) {
     handleToggleCheck,
     isAnyTaskChecked,
     isChecked,
-    setEditableTask,
+    toggleSetEditableTask,
   } = props;
 
   const handleDeleteTask = () => {
@@ -42,7 +42,7 @@ function Task(props) {
           <button 
           className={TaskStyles.editBtn} 
           disabled={isAnyTaskChecked}
-          onClick={() => setEditableTask(task)}
+          onClick={() => toggleSetEditableTask(task)}
           >
             <FontAwesomeIcon icon={faEdit} />
           </button>
@@ -57,7 +57,7 @@ function Task(props) {
           <Card.Title style={{ color: "#003049" }}>{task.title}</Card.Title>
         </Card.Body>
         <Card.Text className={TaskStyles.info}>
-          <span>Info</span>
+          <span>Description</span>
           {task.description}
         </Card.Text>
       </Card>
@@ -75,7 +75,7 @@ Task.propTypes = {
   handleToggleCheck: PropTypes.func.isRequired,
   isAnyTaskChecked: PropTypes.bool.isRequired,
   isChecked: PropTypes.bool.isRequired,
-  setEditableTask: PropTypes.func.isRequired,
+  toggleSetEditableTask: PropTypes.func.isRequired,
 };
 
 export default memo(Task);

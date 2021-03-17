@@ -3,17 +3,34 @@ import Task from "../Task/Task";
 import TodoStyles from "./Todo.module.css";
 import { Container, Row, Col } from "react-bootstrap";
 import IdGenerator from "../../Utlis/IdGenerator";
-import AddTaskModal from "../AddTaskModal/AddTaskModal"
+
 import DeleteTaskModal from "../DeleteTaskModal/DeleteTaskModal";
-import EditTaskModal from "../EditTaskModal/EditTaskModal"
+
+import MainModal from "../MainModal/MainModal";
 
 export class Todo extends React.PureComponent {
   state = {
     tasks: [
-      { _id: IdGenerator(), title: "Task 1", description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem, exercitationem?" },
-      { _id: IdGenerator(), title: "Task 2", description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem, exercitationem?" },
-      { _id: IdGenerator(), title: "Task 3", description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem, exercitationem?" },
-      { _id: IdGenerator(), title: "Task 4", description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem, exercitationem?" },
+      {
+        _id: IdGenerator(),
+        title: "Task 1",
+        description: "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
+      },
+      {
+        _id: IdGenerator(),
+        title: "Task 2",
+        description: "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
+      },
+      {
+        _id: IdGenerator(),
+        title: "Task 3",
+        description: "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
+      },
+      {
+        _id: IdGenerator(),
+        title: "Task 4",
+        description: "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
+      },
     ],
     checkedTasks: new Set(),
     isOpenAddTaskModal: false,
@@ -21,7 +38,7 @@ export class Todo extends React.PureComponent {
     editableTask: null,
   };
 
-  handleSubmit = (formData) => {
+  handleAddTask = (formData) => {
     let tasks = [...this.state.tasks];
     tasks.push({ ...formData, _id: IdGenerator() });
     this.setState({
@@ -84,38 +101,40 @@ export class Todo extends React.PureComponent {
     });
   };
 
-  getTaskFromCheckedTasks  = () => {
+  getTaskFromCheckedTasks = () => {
     let id = null;
     this.state.checkedTasks.forEach((_id) => {
       id = _id;
     });
-    return (
-      this.state.tasks.find((task) => 
-      task._id === id
-    )
-    )
-  }
+    return this.state.tasks.find((task) => task._id === id);
+  };
 
-  setEditableTask = (editTask) =>{
-    this.setState({
-      editableTask: editTask
-    })
-  }
+  // setEditableTask = (editTask) => {
+  //   this.setState({
+  //     editableTask: editTask,
+  //   });
+  // };
 
-  removEditableTask = () => {
+  // removEditableTask = () => {
+  //   this.setState({
+  //     editableTask: null,
+  //   });
+  // };
+
+  toggleSetEditableTask = (editableTask = null) => {
     this.setState({
-      editableTask: null
-    })
+      editableTask: editableTask,
+    });
   }
 
   handleEditTask = (editableTask) => {
-    const tasks = [...this.state.tasks]
-    const idx = tasks.findIndex((task) => task._id === editableTask._id)
-    tasks[idx] = editableTask
+    const tasks = [...this.state.tasks];
+    const idx = tasks.findIndex((task) => task._id === editableTask._id);
+    tasks[idx] = editableTask;
     this.setState({
-      tasks: tasks
-    })
-  }
+      tasks: tasks,
+    });
+  };
 
   render() {
     const tasksJSX = this.state.tasks.map((task) => {
@@ -127,7 +146,7 @@ export class Todo extends React.PureComponent {
             handleToggleCheck={this.handleToggleCheck}
             isAnyTaskChecked={!!this.state.checkedTasks.size}
             isChecked={!!this.state.checkedTasks.has(task._id)}
-            setEditableTask={this.setEditableTask}
+            toggleSetEditableTask={this.toggleSetEditableTask}
           />
         </Col>
       );
@@ -169,31 +188,36 @@ export class Todo extends React.PureComponent {
               onClick={this.toggleCheckedAllTasks}
               disabled={!!!tasksJSX.length}
             >
-              {this.state.tasks.length && this.state.checkedTasks.size === this.state.tasks.length
-                ? "Remove All"
-                : "CHoose All"}
+              {this.state.tasks.length &&
+              this.state.checkedTasks.size === this.state.tasks.length
+                ? "Deselect"
+                : "Select all"}
             </button>
           </Row>
         </Container>
-        {this.state.isOpenAddTaskModal && (
-          <AddTaskModal
-            onHide={this.toggleOpenAddTaskModal}
-            onSubmit={this.handleSubmit}
-            isAnyTaskChecked={!!this.state.checkedTasks.size}
-          />
-        )}
-         {this.state.isOpenDeleteTaskModal && (
+        {this.state.isOpenDeleteTaskModal && (
           <DeleteTaskModal
             onHide={this.toggleOpenDeleteTaskModal}
             onSubmit={this.handleDeleteCheckedTasks}
-            checkedTasksCount={this.state.checkedTasks.size > 1 ? this.state.checkedTasks.size : this.getTaskFromCheckedTasks()}
+            checkedTasksCount={
+              this.state.checkedTasks.size > 1
+                ? this.state.checkedTasks.size
+                : this.getTaskFromCheckedTasks()
+            }
+          />
+        )}
+
+        {this.state.isOpenAddTaskModal && (
+          <MainModal
+            onHide={this.toggleOpenAddTaskModal}
+            onSubmit={this.handleAddTask}
           />
         )}
         {this.state.editableTask && (
-          <EditTaskModal 
-          onHide={this.removEditableTask}
-          editableTask={this.state.editableTask}
-          onSubmit={this.handleEditTask}
+          <MainModal
+            onHide={this.toggleSetEditableTask}
+            onSubmit={this.handleEditTask}
+            editableTask={this.state.editableTask}
           />
         )}
       </>
