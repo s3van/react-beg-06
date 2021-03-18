@@ -59,6 +59,30 @@ export class Todo extends React.PureComponent {
       });
   };
 
+  handleEditTask = (editableTask) => {
+    fetch(`${API_HOST}/task/${editableTask._id}`, {
+      method: "PUT",
+      body: JSON.stringify(editableTask),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.error) throw data.error;
+        const tasks = [...this.state.tasks];
+        const idx = tasks.findIndex((task) => task._id === editableTask._id);
+        tasks[idx] = editableTask;
+        this.setState({
+          tasks: tasks,
+        });
+      })
+
+      .catch((error) => {
+        console.log("EDITABLETASK", error);
+      });
+  };
+
   handleCheckTask = (_id) => {
     let checkedTasks = new Set(this.state.checkedTasks);
     if (!checkedTasks.has(_id)) {
@@ -73,7 +97,6 @@ export class Todo extends React.PureComponent {
 
   handleDeleteTaskCheckedTasks = () => {
     const { checkedTasks } = this.state;
-
     fetch(`${API_HOST}/task`, {
       method: "PATCH",
       body: JSON.stringify({ tasks: Array.from(checkedTasks) }),
@@ -137,30 +160,6 @@ export class Todo extends React.PureComponent {
     this.setState({
       editableTask: editableTask,
     });
-  };
-
-  handleEditTask = (editableTask) => {
-    fetch(`${API_HOST}/task/${editableTask._id}`, {
-      method: "PUT",
-      body: JSON.stringify(editableTask),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.error) throw data.error;
-        const tasks = [...this.state.tasks];
-        const idx = tasks.findIndex((task) => task._id === editableTask._id);
-        tasks[idx] = editableTask;
-        this.setState({
-          tasks: tasks,
-        });
-      })
-
-      .catch((error) => {
-        console.log("EDITABLETASK", error);
-      });
   };
 
   componentDidMount() {
