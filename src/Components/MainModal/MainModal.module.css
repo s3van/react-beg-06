@@ -1,6 +1,7 @@
 .wrapper{
     text-align: center;
     margin: 30px;
+    margin-top: 80px;
 }
 
 .item{
@@ -19,9 +20,8 @@
     text-align: center;
 }
 
-input {
+.itemInput {
 	width: 80%;
-    height: 50px;
     background: #fff;
     border: 1px solid #bebebe;
     font-size: 15px;
@@ -33,16 +33,16 @@ input {
     border-radius: 2px;
 }
   
-input:focus {
+.itemInput:focus {
 	outline: 0;
     border-color: #166996;
 }
 
-input::placeholder{
+.itemInput::placeholder{
     color: #ccc;
 }
   
-input:focus::-webkit-input-placeholder {opacity: 0; transition: opacity 0.3s ease;} 
+.itemInput:focus::-webkit-input-placeholder {opacity: 0; transition: opacity 0.3s ease;} 
 
 .textarea{
     resize: none;
@@ -70,6 +70,30 @@ textarea::placeholder{
   
 textarea:focus::-webkit-input-placeholder {opacity: 0; transition: opacity 0.3s ease;} 
 
+.datepickerWrapper input{
+    height: 30px;
+    width: 80px;
+    background: #fff;
+    border: 1px solid #bebebe;
+    font-size: 15px;
+    font-style: italic;
+    font-weight: 300;
+    font-family: 'Montserrat', sans-serif;
+
+    line-height: 1.1;
+    border-radius: 2px;
+}
+.datepickerWrapper input:focus {
+	outline: 0;
+    border-color: #166996;
+}
+
+.datepickerWrapper input::placeholder{
+    color: #ccc;
+}
+  
+.datepickerWrapper input:focus::-webkit-input-placeholder {opacity: 0; transition: opacity 0.3s ease;} 
+
 .btn1{
     width: 35%;
     height: 40px;
@@ -82,6 +106,7 @@ textarea:focus::-webkit-input-placeholder {opacity: 0; transition: opacity 0.3s 
     transition: all 0.2s ease;
     margin-right: 5px;
 } 
+
 
 .btn1:focus {
 	  outline: none;

@@ -8,34 +8,35 @@ import PropTypes from "prop-types";
 function Task(props) {
   const {
     task,
-    handleDelete,
-    handleToggleCheck,
+    handleDeleteTask,
+    handleCheckTask,
     isAnyTaskChecked,
     isChecked,
     toggleSetEditableTask,
   } = props;
 
-  const handleDeleteTask = () => {
-    handleDelete(task._id);
+  const handleDelete = () => {
+    handleDeleteTask(task._id);
 
   };
 
-  const handleToggleCheckTask = () => {
-    handleToggleCheck(task._id);
+  const handleCheck = () => {
+    handleCheckTask(task._id);
   };
 
   const cls = [TaskStyles.wrapper];
   if (isChecked) {
     cls.push(TaskStyles.checkedWrapper);
   }
+  
   return (
     <>
-      <Card className={cls.join(" ")}>
+      <Card className={cls.join(" ")} style={{minWidth: "250px", maxWidth: "250px"}}>
         <div className={TaskStyles.toolsWrapper}>
           <button
             className={TaskStyles.deleteBtn}
             disabled={isAnyTaskChecked}
-            onClick={handleDeleteTask}
+            onClick={handleDelete}
           >
             <FontAwesomeIcon icon={faTrash} />
           </button>
@@ -49,7 +50,7 @@ function Task(props) {
           <input
             type="checkbox"
             className={TaskStyles.inpt}
-            onChange={handleToggleCheckTask}
+            onChange={handleCheck}
             checked={isChecked}
           />
         </div>
@@ -59,6 +60,10 @@ function Task(props) {
         <Card.Text className={TaskStyles.info}>
           <span>Description</span>
           {task.description}
+         <span>
+         Date:
+          {task.date.slice(0,10)}
+         </span>
         </Card.Text>
       </Card>
     </>
@@ -66,13 +71,14 @@ function Task(props) {
 }
 
 Task.propTypes = {
-  task: PropTypes.exact({
-    _id: PropTypes.string.isRequired,
-    title: PropTypes.string.isRequired,
-    description: PropTypes.string.isRequired,
-  }),
-  handleDelete: PropTypes.func.isRequired,
-  handleToggleCheck: PropTypes.func.isRequired,
+  // task: PropTypes.exact({
+  //   _id: PropTypes.string.isRequired,
+  //   title: PropTypes.string.isRequired,
+  //   description: PropTypes.string.isRequired,
+  //   date: PropTypes.string.isRequired
+  // }),
+  handleDeleteTask: PropTypes.func.isRequired,
+  handleCheckTask: PropTypes.func.isRequired,
   isAnyTaskChecked: PropTypes.bool.isRequired,
   isChecked: PropTypes.bool.isRequired,
   toggleSetEditableTask: PropTypes.func.isRequired,

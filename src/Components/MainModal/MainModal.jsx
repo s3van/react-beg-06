@@ -2,6 +2,8 @@ import React, { PureComponent, createRef } from "react";
 import { Modal } from "react-bootstrap";
 import MainModalStyles from "./MainModal.module.css";
 import PropTypes from "prop-types";
+import DatePicker from "react-datepicker";
+import dateFormatter from "../../Utlis/dateFormatter";
 
 class MainModal extends React.PureComponent {
   constructor(props) {
@@ -10,6 +12,7 @@ class MainModal extends React.PureComponent {
     this.state = {
       title: "",
       description: "",
+      date: new Date(),
       ...props.editableTask,
     };
   }
@@ -21,16 +24,19 @@ class MainModal extends React.PureComponent {
     });
   };
 
-  handleS = (event) => {
-    const { key, type } = event;
-    if (
-      !this.state.title ||
-      (type === "keypress" && key !== "Enter") ||
-      !this.state.description
-    )
-      return;
-    this.props.onSubmit(this.state);
+  handleS = () => {
+    const formData = {
+      ...this.state,
+      date: dateFormatter(this.state.date),
+    };
+    this.props.onSubmit(formData);
     this.props.onHide();
+  };
+
+  setStartDate = (date) => {
+    this.setState({
+      date: date,
+    });
   };
 
   componentDidMount() {
@@ -67,10 +73,10 @@ class MainModal extends React.PureComponent {
                 name="title"
                 placeholder="Title"
                 onChange={this.handleChange}
-                onKeyPress={this.handleS}
                 value={this.state.title}
                 ref={this.inputRef}
                 onSubmit={(e) => e.preventDefault()}
+                className={MainModalStyles.itemInput}
               />
               <textarea
                 name="description"
@@ -80,6 +86,12 @@ class MainModal extends React.PureComponent {
                 value={this.state.description}
                 onSubmit={(e) => e.preventDefault()}
               ></textarea>
+              <div className={MainModalStyles.datepickerWrapper}>
+                <DatePicker
+                  selected={this.state.date}
+                  onChange={date => this.setStartDate(date)}
+                />
+              </div>
             </div>
           </div>
         </Modal.Body>
