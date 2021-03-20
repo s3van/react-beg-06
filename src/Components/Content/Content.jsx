@@ -2,16 +2,19 @@ import React from "react";
 import ContentStyle from "./Content.module.css";
 import Home from "./Home/Home"
 import AboutUs from "./AboutUs/AboutUs"
-import Profile from "./Profile/Profile"
-import { Route } from "react-router-dom";
+import Contact from "./Contact/Contact"
+import { Route, Switch, Redirect } from "react-router-dom";
 
 const Content = (props) => {
 
   return (
     <div className={ContentStyle.content}>
-      <Route path="/home/" render={() => <Home />} />
-      <Route path="/aboutus/" render={() => <AboutUs />} />
-      <Route path="/profile/" render={() => <Profile />} />
+      <Switch>
+      <Route path="/home/" component={Home} exact/>
+      <Route path="/aboutus/" component={AboutUs} exact/>
+      <Route path="/contact/" component={Contact} exact/>
+      <Redirect to="/home" />
+      </Switch>
     </div>
   );
 };

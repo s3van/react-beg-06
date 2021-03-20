@@ -179,7 +179,7 @@ export class Todo extends React.PureComponent {
   render() {
     const tasksJSX = this.state.tasks.map((task) => {
       return (
-        <Col key={task._id} xs={12} sm={6} md={4} lg={3}>
+        <Col key={task._id} xs={12} sm={6} md={2} lg={3} className={TodoStyles.column}>
           <Task
             task={task}
             handleDeleteTask={this.handleDeleteTask}
@@ -200,7 +200,7 @@ export class Todo extends React.PureComponent {
               <h1>Todo Component</h1>
               <button
                 onClick={this.toggleOpenAddTaskModal}
-                className={TodoStyles.setBtn}
+                className={TodoStyles.addBtn}
                 disabled={!!this.state.checkedTasks.size}
               >
                 Add Task

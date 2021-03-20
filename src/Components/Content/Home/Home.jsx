@@ -4,7 +4,9 @@ import HomeStyles from "./Home.module.css"
 
 const Home = () => {
     return(
-        <Todo />
+        <div className={HomeStyles.home}>
+            <Todo />
+        </div>
     )
 }
 
