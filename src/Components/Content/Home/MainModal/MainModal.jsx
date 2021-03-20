@@ -3,7 +3,7 @@ import { Modal } from "react-bootstrap";
 import MainModalStyles from "./MainModal.module.css";
 import PropTypes from "prop-types";
 import DatePicker from "react-datepicker";
-import dateFormatter from "../../Utlis/dateFormatter";
+import dateFormatter from "../../../../Utlis/dateFormatter";
 
 class MainModal extends React.PureComponent {
   constructor(props) {
