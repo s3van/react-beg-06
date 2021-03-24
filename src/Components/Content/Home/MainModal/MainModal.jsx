@@ -12,8 +12,8 @@ class MainModal extends React.PureComponent {
     this.state = {
       title: "",
       description: "",
-      date: new Date(),
       ...props.editableTask,
+      date: props.editableTask? new Date(props.editableTask.date) : new Date(),
     };
   }
 
@@ -117,7 +117,8 @@ class MainModal extends React.PureComponent {
 }
 
 MainModal.propTypes = {
-  onSubmit: PropTypes.func.isRequired,
+  editableTask: PropTypes.object,
+  onSubmit: PropTypes.func,
   onHide: PropTypes.func.isRequired,
 };
 

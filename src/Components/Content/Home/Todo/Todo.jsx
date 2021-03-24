@@ -34,16 +34,13 @@ export class Todo extends React.PureComponent {
         });
       })
       .catch((error) => {
-        console.log("HandleAddTask", error);
+        console.log("Todo-handleAddTask Error", error);
       });
   };
 
   handleDeleteTask = (_id) => {
     fetch(`${API_HOST}/task/${_id}`, {
       method: "DELETE",
-      headers: {
-        "Content-Type": "application/json",
-      },
     })
       .then((res) => res.json())
       .then((data) => {
@@ -55,7 +52,7 @@ export class Todo extends React.PureComponent {
         });
       })
       .catch((error) => {
-        console.log("HandleDeleteTask-Error", error);
+        console.log("Todo-handleDeleteTask Error", error);
       });
   };
 
@@ -77,9 +74,8 @@ export class Todo extends React.PureComponent {
           tasks: tasks,
         });
       })
-
       .catch((error) => {
-        console.log("EDITABLETASK", error);
+        console.log("Todo-handleEditTask Error", error);
       });
   };
 
@@ -115,7 +111,7 @@ export class Todo extends React.PureComponent {
         });
       })
       .catch((error) => {
-        console.log("HANDLEDELETETaskCHECKEDTASKS", error);
+        console.log("Todo-handleDeleteTaskCheckedTasks Error", error);
       });
   };
 
@@ -154,9 +150,6 @@ export class Todo extends React.PureComponent {
   };
 
   toggleSetEditableTask = (editableTask = null) => {
-    if (editableTask) {
-      editableTask.date = new Date(editableTask.date);
-    }
     this.setState({
       editableTask: editableTask,
     });
@@ -172,14 +165,21 @@ export class Todo extends React.PureComponent {
         });
       })
       .catch((error) => {
-        console.log("didmount", error);
+        console.log("Todo-componentDidMount Error", error);
       });
   }
 
   render() {
     const tasksJSX = this.state.tasks.map((task) => {
       return (
-        <Col key={task._id} xs={12} sm={6} md={2} lg={3} className={TodoStyles.column}>
+        <Col
+          key={task._id}
+          xs={12}
+          sm={6}
+          md={2}
+          lg={3}
+          className={TodoStyles.column}
+        >
           <Task
             task={task}
             handleDeleteTask={this.handleDeleteTask}

@@ -3,6 +3,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash, faEdit } from "@fortawesome/free-solid-svg-icons";
 import { Card } from "react-bootstrap";
 import { memo } from "react";
+import { withRouter, Link } from "react-router-dom";
+
 import PropTypes from "prop-types";
 
 function Task(props) {
@@ -17,7 +19,6 @@ function Task(props) {
 
   const handleDelete = () => {
     handleDeleteTask(task._id);
-
   };
 
   const handleCheck = () => {
@@ -28,10 +29,13 @@ function Task(props) {
   if (isChecked) {
     cls.push(TaskStyles.checkedWrapper);
   }
-  
+
   return (
     <>
-      <Card className={cls.join(" ")} style={{minWidth: "250px", maxWidth: "250px"}}>
+      <Card
+        className={cls.join(" ")}
+        style={{ minWidth: "250px", maxWidth: "250px" }}
+      >
         <div className={TaskStyles.toolsWrapper}>
           <button
             className={TaskStyles.deleteBtn}
@@ -40,10 +44,10 @@ function Task(props) {
           >
             <FontAwesomeIcon icon={faTrash} />
           </button>
-          <button 
-          className={TaskStyles.editBtn} 
-          disabled={isAnyTaskChecked}
-          onClick={() => toggleSetEditableTask(task)}
+          <button
+            className={TaskStyles.editBtn}
+            disabled={isAnyTaskChecked}
+            onClick={() => toggleSetEditableTask(task)}
           >
             <FontAwesomeIcon icon={faEdit} />
           </button>
@@ -55,15 +59,17 @@ function Task(props) {
           />
         </div>
         <Card.Body>
-          <Card.Title style={{ color: "#003049" }}>{task.title}</Card.Title>
+          <Link to={`/task/${task._id}`}>
+            <Card.Title style={{ color: "#003049" }}>{task.title}</Card.Title>{" "}
+          </Link>
         </Card.Body>
         <Card.Text className={TaskStyles.info}>
           <span>Description</span>
           {task.description}
-         <span>
-         Date:
-          {task.date.slice(0,10)}
-         </span>
+          <span>
+            Date:
+            {task.date.slice(0, 10)}
+          </span>
         </Card.Text>
       </Card>
     </>
@@ -71,12 +77,6 @@ function Task(props) {
 }
 
 Task.propTypes = {
-  // task: PropTypes.exact({
-  //   _id: PropTypes.string.isRequired,
-  //   title: PropTypes.string.isRequired,
-  //   description: PropTypes.string.isRequired,
-  //   date: PropTypes.string.isRequired
-  // }),
   handleDeleteTask: PropTypes.func.isRequired,
   handleCheckTask: PropTypes.func.isRequired,
   isAnyTaskChecked: PropTypes.bool.isRequired,
@@ -84,4 +84,4 @@ Task.propTypes = {
   toggleSetEditableTask: PropTypes.func.isRequired,
 };
 
-export default memo(Task);
+export default withRouter(memo(Task));

@@ -5,11 +5,15 @@ import App from './App';
 import 'bootstrap/dist/css/bootstrap.css';
 import "react-datepicker/dist/react-datepicker.css";
 import reportWebVitals from './reportWebVitals';
+import { BrowserRouter} from "react-router-dom";
 
 
 ReactDOM.render(
+  
   <React.StrictMode>
+    <BrowserRouter>
     <App />
+    </BrowserRouter>
   </React.StrictMode>,
   document.getElementById('root')
 );

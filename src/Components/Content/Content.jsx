@@ -1,22 +1,37 @@
-import React from "react";
+import React, { PureComponent } from "react";
 import ContentStyle from "./Content.module.css";
-import Home from "./Home/Home"
-import AboutUs from "./AboutUs/AboutUs"
-import Contact from "./Contact/Contact"
-import { Route, Switch, Redirect } from "react-router-dom";
+import Home from "./Home/Home";
+import AboutUs from "./AboutUs/AboutUs";
+import Contact from "./Contact/Contact";
+import NotFound from "./NotFound/NotFound";
+import SingleTask from "./SingleTask/SingleTask"
+import { Route, Redirect, Switch } from "react-router-dom";
 
-const Content = (props) => {
+class Content extends React.PureComponent {
+  pages = [
+    { path: "/", component: Home, exact: true },
+    { path: "/aboutus", component: AboutUs, exact: true },
+    { path: "/contact", component: Contact, exact: true },
+    { path: "/task/:id", component: SingleTask, exact: true },
+    { path: "/notfound", component: NotFound, exact: true },
 
-  return (
-    <div className={ContentStyle.content}>
-      <Switch>
-      <Route path="/home/" component={Home} exact/>
-      <Route path="/aboutus/" component={AboutUs} exact/>
-      <Route path="/contact/" component={Contact} exact/>
-      <Redirect to="/home" />
-      </Switch>
-    </div>
-  );
-};
+  ];
+
+  render() {
+    const pagesJSX = this.pages.map((page, index) => {
+      return (
+        <Route path={page.path} component={page.component} exact={page.exact} key={index}/>
+      );
+    });
+    return (
+      <div className={ContentStyle.content}>
+        <Switch>
+        {pagesJSX}
+        <Redirect to="/notfound" />
+        </Switch>
+      </div>
+    );
+  }
+}
 
 export default Content;
