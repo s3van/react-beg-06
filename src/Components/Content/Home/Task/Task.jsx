@@ -59,8 +59,11 @@ function Task(props) {
           />
         </div>
         <Card.Body>
-          <Link to={`/task/${task._id}`}>
-            <Card.Title style={{ color: "#003049" }}>{task.title}</Card.Title>{" "}
+          <Link
+            to={`/task/${task._id}`}
+            style={{textDecoration: "none", color: "#003049"}}
+          >
+            <Card.Title className={TaskStyles.link}>{task.title}</Card.Title>
           </Link>
         </Card.Body>
         <Card.Text className={TaskStyles.info}>

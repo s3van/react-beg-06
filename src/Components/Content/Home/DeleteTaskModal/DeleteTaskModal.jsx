@@ -53,7 +53,10 @@ const DeleteTaskModal = (props) => {
 
 DeleteTaskModal.propTypes = {
   onSubmit: PropTypes.func.isRequired,
-  checkedTasksCount: PropTypes.object,
+  checkedTasksCount: PropTypes.oneOfType([
+    PropTypes.number,
+    PropTypes.object,
+  ]),
   onHide: PropTypes.func.isRequired,
 };
 

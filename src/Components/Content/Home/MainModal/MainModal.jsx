@@ -13,7 +13,7 @@ class MainModal extends React.PureComponent {
       title: "",
       description: "",
       ...props.editableTask,
-      date: props.editableTask? new Date(props.editableTask.date) : new Date(),
+      date: props.editableTask ? new Date(props.editableTask.date) : new Date(),
     };
   }
 
@@ -30,7 +30,7 @@ class MainModal extends React.PureComponent {
       date: dateFormatter(this.state.date),
     };
     this.props.onSubmit(formData);
-    this.props.onHide();
+    this.props.onHide()
   };
 
   setStartDate = (date) => {
@@ -89,7 +89,7 @@ class MainModal extends React.PureComponent {
               <div className={MainModalStyles.datepickerWrapper}>
                 <DatePicker
                   selected={this.state.date}
-                  onChange={date => this.setStartDate(date)}
+                  onChange={(date) => this.setStartDate(date)}
                 />
               </div>
             </div>

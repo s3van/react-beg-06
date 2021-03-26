@@ -6,6 +6,7 @@
   height: 10vh;
   border: 2.5px solid #865f49;
   background-color: #ffb488;
+  z-index: 900;
 }
 .item{
   width: 100%;

@@ -4,19 +4,23 @@ import TodoStyles from "./Todo.module.css";
 import { Container, Row, Col } from "react-bootstrap";
 import DeleteTaskModal from "../DeleteTaskModal/DeleteTaskModal";
 import MainModal from "../MainModal/MainModal";
+import SpinnerLoader from "../../../SpinnerLoader/SpinnerLoader";
+
 
 const API_HOST = "http://localhost:3001";
 
-export class Todo extends React.PureComponent {
+class Todo extends React.PureComponent {
   state = {
     tasks: [],
     checkedTasks: new Set(),
     isOpenAddTaskModal: false,
     isOpenDeleteTaskModal: false,
     editableTask: null,
+    loading: false,
   };
 
   handleAddTask = (formData) => {
+    this.setState({loading: true})
     fetch(`${API_HOST}/task`, {
       method: "POST",
       body: JSON.stringify(formData),
@@ -31,14 +35,21 @@ export class Todo extends React.PureComponent {
         tasks.push(data);
         this.setState({
           tasks: tasks,
+          isOpenAddTaskModal: false,
         });
       })
       .catch((error) => {
         console.log("Todo-handleAddTask Error", error);
-      });
+      })
+      .finally(() => {
+        this.setState({
+          loading: false
+        });
+      })
   };
 
   handleDeleteTask = (_id) => {
+    this.setState({loading: true})
     fetch(`${API_HOST}/task/${_id}`, {
       method: "DELETE",
     })
@@ -53,10 +64,16 @@ export class Todo extends React.PureComponent {
       })
       .catch((error) => {
         console.log("Todo-handleDeleteTask Error", error);
-      });
+      })
+      .finally(() => {
+        this.setState({
+          loading: false
+        });
+      })
   };
 
   handleEditTask = (editableTask) => {
+    this.setState({loading: true})
     fetch(`${API_HOST}/task/${editableTask._id}`, {
       method: "PUT",
       body: JSON.stringify(editableTask),
@@ -72,11 +89,17 @@ export class Todo extends React.PureComponent {
         tasks[idx] = editableTask;
         this.setState({
           tasks: tasks,
+          editableTask: null
         });
       })
       .catch((error) => {
         console.log("Todo-handleEditTask Error", error);
-      });
+      })
+      .finally(() => {
+        this.setState({
+          loading: false
+        });
+      })
   };
 
   handleCheckTask = (_id) => {
@@ -92,6 +115,7 @@ export class Todo extends React.PureComponent {
   };
 
   handleDeleteTaskCheckedTasks = () => {
+    this.setState({loading: true})
     const { checkedTasks } = this.state;
     fetch(`${API_HOST}/task`, {
       method: "PATCH",
@@ -108,11 +132,17 @@ export class Todo extends React.PureComponent {
         this.setState({
           tasks: tasks,
           checkedTasks: new Set(),
+          isOpenDeleteTaskModal: false,
         });
       })
       .catch((error) => {
         console.log("Todo-handleDeleteTaskCheckedTasks Error", error);
-      });
+      })
+      .finally(() => {
+        this.setState({
+          loading: false
+        });
+      })
   };
 
   toggleCheckedAllTasks = () => {
@@ -156,6 +186,7 @@ export class Todo extends React.PureComponent {
   };
 
   componentDidMount() {
+    this.setState({loading: true})
     fetch(`${API_HOST}/task`)
       .then((res) => res.json())
       .then((data) => {
@@ -166,7 +197,12 @@ export class Todo extends React.PureComponent {
       })
       .catch((error) => {
         console.log("Todo-componentDidMount Error", error);
-      });
+      })
+      .finally(() => {
+        this.setState({
+          loading: false
+        });
+      })
   }
 
   render() {
@@ -207,7 +243,6 @@ export class Todo extends React.PureComponent {
               </button>
             </Col>
           </Row>
-
           <Row>
             {tasksJSX.length ? (
               tasksJSX
@@ -260,6 +295,9 @@ export class Todo extends React.PureComponent {
             editableTask={this.state.editableTask}
           />
         )}
+        {
+          this.state.loading && <SpinnerLoader />
+        }
       </>
     );
   }
