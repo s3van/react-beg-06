@@ -1,0 +1,151 @@
+@import url('https://fonts.googleapis.com/css?family=Josefin+Sans');
+.contactdata{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    background: #e1f0c4;
+}
+
+.wrapper{
+    width: 60%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 370px;
+    margin: 10px;
+    background: rgb(40,40,40);
+    overflow: hidden;
+    color: #edf2ef;
+}
+
+.feed{
+    font-family: 'Josefin Sans', sans-serif;
+}
+
+
+.inpt{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: rgb(255, 123, 0);
+    width: 100%;
+    position: relative;
+}
+
+.btnwrapp{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 50px;
+    position: relative;
+}
+
+.button{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 60%;
+    height: 100%;
+    position: relative;
+}
+
+.iteminput {
+	width: 100%;
+    background: rgb(40,40,40);
+    border-bottom: 2px solid rgb(255, 123, 0);
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    font-size: 15px;
+    font-style: italic;
+    font-weight: 300;
+    padding: 15px;
+    line-height: 1.1;
+    font-family: 'Montserrat', sans-serif;
+    margin-bottom: 7px;
+}
+  
+.iteminput:focus {
+	outline: 0;
+    border-color: #166996;
+}
+
+.iteminput::placeholder{
+    color: #ccc;
+}
+  
+.iteminput:focus::-webkit-input-placeholder {opacity: 0; transition: opacity 0.3s ease;} 
+
+.textarea{
+    resize: none;
+    width: 100%;
+    height: 80px;
+    background: rgb(40,40,40);
+    border-bottom: 2px solid rgb(255, 123, 0);
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    font-size: 15px;
+    font-style: italic;
+    font-weight: 300;
+    font-family: 'Montserrat', sans-serif;
+    padding: 13px 0 0 15px;
+    margin-bottom: 7px;
+}  
+
+.textarea:focus{
+    outline: 0;
+    border-color: #166996;
+}
+
+.textarea::placeholder{
+    color: #ccc;
+}
+  
+.textarea:focus::-webkit-.iteminput-placeholder {opacity: 0; transition: opacity 0.3s ease;} 
+
+.btntext{
+    font-size: 15px;
+}
+
+.btn{
+    width: 100px;
+    height: 40px;
+    border: 0;
+    background: rgb(255, 123, 0);
+    font-weight: 700;
+    color: snow;
+    transition: all 0.2s ease;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.btn:focus {
+    outline: none;
+}
+
+.btn:active {
+  transform: translateY(5px);
+}
+
+.btn:hover {
+  background: #166996;
+  transition: all 0.2s ease;
+  cursor: pointer;
+} 
+
+.btn:disabled{
+  opacity: 0.5;
+} 
+
+@media (max-width: 1207px) {
+    .feed{
+        font-size: 30px;
+    }
+  }

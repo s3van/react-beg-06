@@ -7,7 +7,6 @@ const DeleteTaskModal = (props) => {
 
   const handleDeleteTask = () => {
     onSubmit();
-    onHide();
   };
   return (
     <Modal

@@ -4,8 +4,7 @@ import TodoStyles from "./Todo.module.css";
 import { Container, Row, Col } from "react-bootstrap";
 import DeleteTaskModal from "../DeleteTaskModal/DeleteTaskModal";
 import MainModal from "../MainModal/MainModal";
-import SpinnerLoader from "../../../SpinnerLoader/SpinnerLoader";
-
+import SpinnerLoader from "../../../../Utlis/SpinnerLoader/SpinnerLoader"
 
 const API_HOST = "http://localhost:3001";
 
@@ -85,8 +84,8 @@ class Todo extends React.PureComponent {
       .then((data) => {
         if (data.error) throw data.error;
         const tasks = [...this.state.tasks];
-        const idx = tasks.findIndex((task) => task._id === editableTask._id);
-        tasks[idx] = editableTask;
+        const idx = tasks.findIndex((task) => task._id === data._id);
+        tasks[idx] = data;
         this.setState({
           tasks: tasks,
           editableTask: null
@@ -230,7 +229,7 @@ class Todo extends React.PureComponent {
 
     return (
       <>
-        <Container className={TodoStyles.wrapper}>
+        <Container className={TodoStyles.todo}>
           <Row>
             <Col>
               <h1>Todo Component</h1>
@@ -270,6 +269,9 @@ class Todo extends React.PureComponent {
             </button>
           </Row>
         </Container>
+        {
+          this.state.loading && <SpinnerLoader />
+        }
         {this.state.isOpenDeleteTaskModal && (
           <DeleteTaskModal
             onHide={this.toggleOpenDeleteTaskModal}
@@ -295,9 +297,7 @@ class Todo extends React.PureComponent {
             editableTask={this.state.editableTask}
           />
         )}
-        {
-          this.state.loading && <SpinnerLoader />
-        }
+        
       </>
     );
   }

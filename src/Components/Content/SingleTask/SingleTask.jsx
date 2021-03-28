@@ -1,8 +1,8 @@
 import React, { PureComponent } from "react";
 import SingleTaskStyles from "./SingleTask.module.css";
 import MainModal from "../Home/MainModal/MainModal";
-import SpinnerLoader from "../../SpinnerLoader/SpinnerLoader";
-import ErrorModal from "../../ErrorModal/ErrorModal";
+import SpinnerLoader from "../../../Utlis/SpinnerLoader/SpinnerLoader";
+import ErrorModal from "./ErrorModal/ErrorModal";
 
 const API_HOST = "http://localhost:3001";
 
@@ -29,13 +29,12 @@ class SingleTask extends React.PureComponent {
   };
 
   handleGoBack = () => {
-    this.props.history.push("/");
+    this.props.history.go(-1);
   };
 
   handleEditSingleTask = (editTask) => {
     this.setState({
       loading: true,
-      singleTask: editTask,
     });
     fetch(`${API_HOST}/task/${editTask._id}`, {
       method: "PUT",
@@ -49,6 +48,7 @@ class SingleTask extends React.PureComponent {
         if (data.error) throw data.error;
         this.setState({
           singleTask: data,
+          isEditModal: false,
         });
       })
       .catch((error) => {
@@ -91,7 +91,6 @@ class SingleTask extends React.PureComponent {
         }
         this.setState({
           singleTask: data,
-          loading: false,
         });
       })
       .catch((error) => {
@@ -100,12 +99,6 @@ class SingleTask extends React.PureComponent {
           singleTask: error,
           error: error,
           isErrorModal: !this.state.isErrorModal,
-          loading: false,
-        });
-      })
-      .finally(() => {
-        this.setState({
-          loading: false,
         });
       });
   }
@@ -118,7 +111,7 @@ class SingleTask extends React.PureComponent {
       error,
       loading,
     } = this.state;
-    if (!singleTask || loading) {
+    if (!singleTask) {
       return <SpinnerLoader />;
     }
 
@@ -179,6 +172,7 @@ class SingleTask extends React.PureComponent {
             editableTask={singleTask}
           />
         )}
+        {loading && <SpinnerLoader />}
       </>
     );
   }

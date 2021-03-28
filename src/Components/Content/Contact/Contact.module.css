@@ -5,4 +5,8 @@
     height: 100%;
     background-color: #e1f0c4;
     font-size: 50px;
+    flex-direction: column;
+    margin: 0 auto;
+    text-align: center;
+    position: relative;
 }

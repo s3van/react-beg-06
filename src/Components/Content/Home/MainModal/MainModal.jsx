@@ -3,7 +3,7 @@ import { Modal } from "react-bootstrap";
 import MainModalStyles from "./MainModal.module.css";
 import PropTypes from "prop-types";
 import DatePicker from "react-datepicker";
-import dateFormatter from "../../../../Utlis/dateFormatter";
+import DateFormatter from "../../../../Utlis/DateFormatter/DateFormatter";
 
 class MainModal extends React.PureComponent {
   constructor(props) {
@@ -27,10 +27,10 @@ class MainModal extends React.PureComponent {
   handleS = () => {
     const formData = {
       ...this.state,
-      date: dateFormatter(this.state.date),
+      date: DateFormatter(this.state.date),
     };
     this.props.onSubmit(formData);
-    this.props.onHide()
+
   };
 
   setStartDate = (date) => {
