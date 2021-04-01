@@ -2,19 +2,37 @@ import React, { PureComponent } from "react";
 import ContactDataStyles from "./ContactData.module.css";
 import SpinnerLoader from "../../../../Utlis/SpinnerLoader/SpinnerLoader";
 import FieldModal from "./FieldModal/FieldModal";
+import {
+  fieldValidator,
+  maxLengthValidator,
+  emailValidator,
+} from "../../../../Utlis/Validators/fieldValidator";
 
 const API_HOST = "http://localhost:3001";
 
+const maxlength30 = maxLengthValidator(200);
+
 class ContactData extends React.PureComponent {
   state = {
-    name: "",
-    email: "",
-    message: "",
+    name: {
+      valid: false,
+      error: null,
+      value: "",
+    },
+    email: {
+      valid: false,
+      error: null,
+      value: "",
+    },
+    message: {
+      valid: false,
+      error: null,
+      value: "",
+    },
     loading: false,
     fieldmodal: false,
-    error: null,
-    database: null,
-    empty: false,
+    backendError: false,
+    database: false,
   };
 
   toggleFieldModal = () => {
@@ -25,65 +43,72 @@ class ContactData extends React.PureComponent {
 
   handleChange = (e) => {
     const { name, value } = e.target;
+    let valid = true;
+    let error =
+      fieldValidator(value) ||
+      maxlength30(value) ||
+      (name === "email" && emailValidator(value));
+    if (error) {
+      valid = false;
+    }
     this.setState({
-      [name]: value,
+      [name]: {
+        valid: valid,
+        error: error,
+        value: value,
+      },
     });
   };
 
   handleSubmit = () => {
+
     const formData = { ...this.state };
-    delete formData.loading;
-    delete formData.field;
-    delete formData.error;
-    delete formData.database;
+    for (let key in formData) {
+      if (Object.keys(formData[key]).includes("value")) {
+        formData[key] = formData[key].value;
+      } else {
+        delete formData[key];
+      }
+    }
+    if (
+      !formData.name.trim() ||
+      !formData.email.trim() ||
+      !formData.message.trim()
+    )
+      return;
     this.setState({
       loading: true,
     });
-    if (
-      this.state.name === "" ||
-      this.state.email === "" ||
-      this.state.message === ""
-    ) {
-      this.setState({
-        fieldmodal: !this.state.empty,
-        loading: false,
-      });
-    } else {
-      fetch(`${API_HOST}/form`, {
-        method: "POST",
-        body: JSON.stringify(formData),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      })
-        .then((res) => res.json())
-        .then((data) => {
-          if (data.error) throw data.error;
-          this.setState({
-            fieldmodal: data,
-            database: data,
-            loading: false,
-            name: "",
-            email: "",
-            message: "",
-          });
-          console.log("database", this.state.database);
-        })
-        .catch((error) => {
-          console.log("ContactData-handleSubmit Error", error);
-          this.setState({
-            fieldmodal: error,
-            error: error,
-            loading: false,
-          });
+    fetch(`${API_HOST}/form`, {
+      method: "POST",
+      body: JSON.stringify(formData),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.error) throw data.error;
+        this.setState({
+          fieldmodal: data,
+          database: data,
+          loading: false,
+          value: "sad",
         });
-    }
+        console.log(this.state.message)
+      })
+      .catch((error) => {
+        this.setState({
+          fieldmodal: error,
+          backendError: error,
+          loading: false,
+        });
+      });
   };
 
   render() {
     return (
       <>
-        {this.state.loading && <SpinnerLoader />}
         <div className={ContactDataStyles.contactdata}>
           <div style={{ position: "absolute", top: "0", width: "100%" }}>
             <h1>Contact</h1>
@@ -103,10 +128,15 @@ class ContactData extends React.PureComponent {
                   type="name"
                   name="name"
                   placeholder="Name"
-                  value={this.state.name}
+                  value={this.state.name.value}
                   onChange={this.handleChange}
                   className={ContactDataStyles.iteminput}
                 />
+                {this.state.name.error && (
+                  <div className={ContactDataStyles.validDiv}>
+                    {this.state.name.error}
+                  </div>
+                )}
               </div>
             </div>
             <div className={ContactDataStyles.inpt}>
@@ -115,10 +145,15 @@ class ContactData extends React.PureComponent {
                   type="email"
                   name="email"
                   placeholder="Email"
-                  value={this.state.email}
+                  value={this.state.email.value}
                   onChange={this.handleChange}
                   className={ContactDataStyles.iteminput}
                 />
+                {this.state.email.error && (
+                  <div className={ContactDataStyles.validDiv}>
+                    {this.state.email.error}
+                  </div>
+                )}
               </div>
             </div>
             <div className={ContactDataStyles.inpt}>
@@ -127,10 +162,15 @@ class ContactData extends React.PureComponent {
                   type="message"
                   name="message"
                   placeholder="Message..."
-                  value={this.state.message}
+                  value={this.state.message.value}
                   onChange={this.handleChange}
                   className={ContactDataStyles.textarea}
                 />
+                {this.state.message.error && (
+                  <div className={ContactDataStyles.validDiv}>
+                    {this.state.message.error}
+                  </div>
+                )}
               </div>
             </div>
             <div className={ContactDataStyles.btnwrapp}>
@@ -138,6 +178,7 @@ class ContactData extends React.PureComponent {
                 <button
                   onClick={this.handleSubmit}
                   className={ContactDataStyles.btn}
+                  disabled={!this.state.message.value || !this.state.name.value || !this.state.email.value}
                 >
                   <div className={ContactDataStyles.btntext}>Send</div>
                 </button>
@@ -149,11 +190,11 @@ class ContactData extends React.PureComponent {
           <FieldModal
             onHide={this.toggleFieldModal}
             fieldmodal={this.state.fieldmodal}
-            error={this.state.error}
+            backendError={this.state.backendError}
             database={this.state.database}
-            empty={this.state.empty}
           />
         )}
+        {this.state.loading && <SpinnerLoader />}
       </>
     );
   }

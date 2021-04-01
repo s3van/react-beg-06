@@ -22,32 +22,21 @@ class FieldModal extends React.PureComponent {
                 width: "100%",
               }}
             >
-              <div>Validation Error</div>
+              {this.props.fieldmodal === this.props.database ? <div>Notification</div> : <div>Validation Error</div>}
             </Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            {this.props.fieldmodal === !this.props.empty && (
+            {this.props.fieldmodal === this.props.backendError && (
               <div
                 style={{
                   display: "flex",
                   justifyContent: "center",
                   alignItems: "center",
                   color: "red",
+                  paddingRight: "35px"
                 }}
               >
-                <h5>Fields cannot be empty</h5>
-              </div>
-            )}
-            {this.props.fieldmodal === this.props.error && (
-              <div
-                style={{
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                  color: "red",
-                }}
-              >
-                <h5>Email must contain @...</h5>
+                <h5>Failed to load resource</h5>
               </div>
             )}
             {this.props.fieldmodal === this.props.database && (
@@ -56,7 +45,7 @@ class FieldModal extends React.PureComponent {
                   display: "flex",
                   justifyContent: "center",
                   alignItems: "center",
-                  color: "green",
+                  color: "#2bb84ac0",
                 }}
               >
                 <h5>Your opinion has been sent successfully</h5>

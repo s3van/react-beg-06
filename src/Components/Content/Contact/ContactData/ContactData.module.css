@@ -14,7 +14,7 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    height: 370px;
+    height: 350px;
     margin: 10px;
     background: rgb(40,40,40);
     overflow: hidden;
@@ -23,8 +23,20 @@
 
 .feed{
     font-family: 'Josefin Sans', sans-serif;
+    font-size: 30px;
 }
+ input{
+     height: 40px;
+ }
 
+ .validDiv{
+    font-size: 14px;
+    color: rgba(221, 92, 52, 0.5);
+    font-style: italic;
+    font-weight: 300;
+    font-family: 'Montserrat', sans-serif;
+    opacity: 0.8;
+ }
 
 .inpt{
     display: flex;
@@ -68,6 +80,7 @@
     line-height: 1.1;
     font-family: 'Montserrat', sans-serif;
     margin-bottom: 7px;
+    opacity: 0.8;
 }
   
 .iteminput:focus {
@@ -84,7 +97,7 @@
 .textarea{
     resize: none;
     width: 100%;
-    height: 80px;
+    height: 60px;
     background: rgb(40,40,40);
     border-bottom: 2px solid rgb(255, 123, 0);
     border-top: none;
@@ -96,6 +109,7 @@
     font-family: 'Montserrat', sans-serif;
     padding: 13px 0 0 15px;
     margin-bottom: 7px;
+    opacity: 0.8;
 }  
 
 .textarea:focus{
@@ -122,7 +136,7 @@
     color: snow;
     transition: all 0.2s ease;
     position: absolute;
-    top: 0;
+    bottom: 0;
     left: 0;
 }
 
@@ -141,7 +155,10 @@
 } 
 
 .btn:disabled{
-  opacity: 0.5;
+    opacity: 0.5;
+    transition: 0.1s;
+    transform: translateY(-5px);
+    transition: none;
 } 
 
 @media (max-width: 1207px) {
