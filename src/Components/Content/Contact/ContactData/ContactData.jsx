@@ -180,7 +180,7 @@ class ContactData extends React.PureComponent {
                   className={ContactDataStyles.btn}
                   disabled={!this.state.message.value || !this.state.name.value || !this.state.email.value}
                 >
-                  <div className={ContactDataStyles.btntext}>Send</div>
+                  Send
                 </button>
               </div>
             </div>

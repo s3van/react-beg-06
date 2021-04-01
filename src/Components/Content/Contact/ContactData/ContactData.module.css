@@ -123,21 +123,18 @@
   
 .textarea:focus::-webkit-.iteminput-placeholder {opacity: 0; transition: opacity 0.3s ease;} 
 
-.btntext{
-    font-size: 15px;
-}
 
 .btn{
-    width: 100px;
-    height: 40px;
     border: 0;
     background: rgb(255, 123, 0);
     font-weight: 700;
     color: snow;
-    transition: all 0.2s ease;
     position: absolute;
     bottom: 0;
     left: 0;
+    padding: 8px 25px;
+    font-size: 15px;
+    transition: all 0.2s ease;
 }
 
 .btn:focus {
@@ -145,21 +142,22 @@
 }
 
 .btn:active {
-  transform: translateY(5px);
+  transform: translateY(4px);
 }
 
 .btn:hover {
   background: #166996;
-  transition: all 0.2s ease;
   cursor: pointer;
+  transition: all 0.2s ease;
 } 
 
 .btn:disabled{
     opacity: 0.5;
     transition: 0.1s;
-    transform: translateY(-5px);
     transition: none;
 } 
+
+
 
 @media (max-width: 1207px) {
     .feed{
