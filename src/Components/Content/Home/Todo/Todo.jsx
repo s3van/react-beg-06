@@ -232,7 +232,7 @@ class Todo extends React.PureComponent {
         <Container className={TodoStyles.todo}>
           <Row>
             <Col>
-              <h1>Todo Component</h1>
+              <h1>Home</h1>
               <button
                 onClick={this.toggleOpenAddTaskModal}
                 className={TodoStyles.addBtn}

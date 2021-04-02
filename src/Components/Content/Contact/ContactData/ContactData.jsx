@@ -5,12 +5,14 @@ import FieldModal from "./FieldModal/FieldModal";
 import {
   fieldValidator,
   maxLengthValidator,
+  minLengthValidator,
   emailValidator,
 } from "../../../../Utlis/Validators/fieldValidator";
 
 const API_HOST = "http://localhost:3001";
 
 const maxlength30 = maxLengthValidator(200);
+const minlength30 = minLengthValidator(2);
 
 class ContactData extends React.PureComponent {
   state = {
@@ -47,6 +49,7 @@ class ContactData extends React.PureComponent {
     let error =
       fieldValidator(value) ||
       maxlength30(value) ||
+      minlength30(value) ||
       (name === "email" && emailValidator(value));
     if (error) {
       valid = false;
@@ -61,7 +64,6 @@ class ContactData extends React.PureComponent {
   };
 
   handleSubmit = () => {
-
     const formData = { ...this.state };
     for (let key in formData) {
       if (Object.keys(formData[key]).includes("value")) {
@@ -93,9 +95,9 @@ class ContactData extends React.PureComponent {
           fieldmodal: data,
           database: data,
           loading: false,
-          value: "sad",
+          email: "sad",
         });
-        console.log(this.state.message)
+        console.log(this.state.message);
       })
       .catch((error) => {
         this.setState({
@@ -137,6 +139,9 @@ class ContactData extends React.PureComponent {
                     {this.state.name.error}
                   </div>
                 )}
+                {!this.state.name.error && this.state.name.value && (
+                  <div className={ContactDataStyles.validCheck}><span>&#x2714;</span></div>
+                )}
               </div>
             </div>
             <div className={ContactDataStyles.inpt}>
@@ -153,6 +158,9 @@ class ContactData extends React.PureComponent {
                   <div className={ContactDataStyles.validDiv}>
                     {this.state.email.error}
                   </div>
+                )}
+                {!this.state.email.error && this.state.email.value && (
+                  <div className={ContactDataStyles.validCheck}>&#x2714;</div>
                 )}
               </div>
             </div>
@@ -178,7 +186,11 @@ class ContactData extends React.PureComponent {
                 <button
                   onClick={this.handleSubmit}
                   className={ContactDataStyles.btn}
-                  disabled={!this.state.message.value || !this.state.name.value || !this.state.email.value}
+                  disabled={
+                    !this.state.message.value ||
+                    !this.state.name.value ||
+                    !this.state.email.value
+                  }
                 >
                   Send
                 </button>
