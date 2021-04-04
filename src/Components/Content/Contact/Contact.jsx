@@ -1,13 +1,15 @@
 import ContactStyles from "./Contact.module.css";
 import ContactData from "./ContactData/ContactData";
-import ContactDataWithHook from "./ContactDataWithHook/ContactDataWithHook"
+import ContactDataWithHook from "./ContactDataWithHook/ContactDataWithHook";
+import ContactDataProvider from "../../../Context/Providers/ContactDataProvider";
 
-const Contact = () => {
-
+const Contact = (props) => {
   return (
     <div className={ContactStyles.contact}>
       {/* <ContactData /> */}
-      <ContactDataWithHook />
+      <ContactDataProvider>
+        <ContactDataWithHook />
+      </ContactDataProvider>
     </div>
   );
 };

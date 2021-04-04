@@ -1,8 +1,8 @@
 import React, { PureComponent } from "react";
 import { Modal } from "react-bootstrap";
-import FieldModalStyles from "./FieldModal.module.css";
+import ContactModalStyles from "./ContactModal.module.css";
 
-class FieldModal extends React.PureComponent {
+class ContactModal extends React.PureComponent {
   render() {
     return (
       <div>
@@ -12,7 +12,7 @@ class FieldModal extends React.PureComponent {
           size="lg"
           aria-labelledby="contained-modal-title-vcenter"
           centered
-          className={FieldModalStyles.modalWrapp}
+          className={ContactModalStyles.modalWrapp}
         >
           <Modal.Header closeButton>
             <Modal.Title
@@ -22,11 +22,11 @@ class FieldModal extends React.PureComponent {
                 width: "100%",
               }}
             >
-              {this.props.fieldmodal === this.props.database ? <div>Notification</div> : <div>Validation Error</div>}
+              {this.props.ContactModal === this.props.database ? <div>Notification</div> : <div>Validation Error</div>}
             </Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            {this.props.fieldmodal === this.props.backendError && (
+            {this.props.ContactModal === this.props.backendError && (
               <div
                 style={{
                   display: "flex",
@@ -39,7 +39,7 @@ class FieldModal extends React.PureComponent {
                 <h5>Failed to load resource</h5>
               </div>
             )}
-            {this.props.fieldmodal === this.props.database && (
+            {this.props.ContactModal === this.props.database && (
               <div
                 style={{
                   display: "flex",
@@ -48,7 +48,7 @@ class FieldModal extends React.PureComponent {
                   color: "#2bb84ac0",
                 }}
               >
-                <h5>Your opinion has been sent successfully</h5>
+                <h5>Your message has been sent successfully</h5>
               </div>
             )}
           </Modal.Body>
@@ -58,4 +58,4 @@ class FieldModal extends React.PureComponent {
   }
 }
 
-export default FieldModal;
+export default ContactModal;
