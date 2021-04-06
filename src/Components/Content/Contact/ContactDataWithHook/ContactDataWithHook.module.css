@@ -151,11 +151,6 @@
     color: #e1f0c4;
 }
 
-/* textarea::-webkit-scrollbar {
-	width: 4px;
-	background-color: #e1f0c4;
-} */
-
 textarea::-webkit-scrollbar-thumb {
     background-color: #ff8800d7;
 

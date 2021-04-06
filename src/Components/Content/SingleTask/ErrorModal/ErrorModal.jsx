@@ -3,8 +3,9 @@ import { Modal } from "react-bootstrap";
 import ErrorModalStyles from "./ErrorModal.module.css";
 
 class ErrorModal extends React.PureComponent {
-  
+ 
   render() {
+     console.log("error",this.props.error)
     return (
       <div>
         <Modal

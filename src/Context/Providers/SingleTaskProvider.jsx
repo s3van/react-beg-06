@@ -4,13 +4,12 @@ import { SingleTaskContext } from "../context";
 const API_HOST = "http://localhost:3001";
 
 const SingleTaskProvider = (props) => {
-
   const [SingleTaskState, setSingleTaskState] = useState({
-    singleTask: null,
+    singleTask: false,
     isEditModal: false,
     isErrorModal: false,
     loading: false,
-    error: null,
+    error: false,
   });
 
   useEffect(() => {
@@ -79,12 +78,13 @@ const SingleTaskProvider = (props) => {
       })
       .catch((error) => {
         console.log("SingleTask-handleEditSingleTask Error", error);
-      })
-      .finally(() => {
         setSingleTaskState({
           ...SingleTaskState,
           loading: false,
           isEditModal: false,
+          isErrorModal: error,
+          singleTask: error,
+          error: error,
         });
       });
   };
