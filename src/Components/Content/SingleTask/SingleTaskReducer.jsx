@@ -103,17 +103,12 @@ const SingleTaskReducer = (props) => {
       })
       .catch((error) => {
         console.log("singleTask Request", error);
-        const actiondata = {
-          type: "SET_SINGLETASK_DATA",
-          error: error,
-        };
-        const actionerror = {
-          type: "SET_ERROR",
-          error: error,
-        };
-        dispatch(actiondata);
-        dispatch(actionerror);
         dispatch({ type: "REMOVE_ERROR_MODAL" });
+                const action = {
+                  type: "SET_ERROR_MODAL",
+                  error: error,
+                };
+        dispatch(action);
       });
   }, []);
 
@@ -150,7 +145,6 @@ const SingleTaskReducer = (props) => {
         console.log("SingleTask-handleEditSingleTask Error", error);
         dispatch({ type: "REMOVE_LOADING" });
         dispatch({ type: "SET_ERROR", error });
-        dispatch({ type: "SET_ERROR_MODAL", error });
         const action = {
           type: "SET_ERROR_MODAL",
           error: error,
