@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=Josefin+Sans');
+
 .contactdata{
     width: 100%;
     display: flex;
@@ -6,6 +7,7 @@
     justify-content: space-around;
     align-items: center;
     background: #e1f0c4;
+    font-family: 'Montserrat', sans-serif;
 }
 
 .wrapper{
@@ -14,49 +16,45 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    height: 350px;
-    margin: 10px;
+    height: 400px;
+    margin-top: 50px;
     background: rgb(40,40,40);
     overflow: hidden;
     color: #e1f0c4;
+    border: 2px solid #ff8700;
 }
 
-.feed{
-    font-family: 'Josefin Sans', sans-serif;
+.formTitle{
     font-size: 30px;
+    margin-bottom: 30px;
+    color: #ff8700;
 }
 
  .validCheck{
     font-size: 14px;
     color: #e1f0c4;
-    font-style: italic;
-    font-weight: 300;
     text-align: center;
     margin: 0 auto;
-    font-family: 'Montserrat', sans-serif;
     position: absolute;
     right: 2%;
+    padding-bottom: 15px;
  } 
 
 .validDiv{
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 2px 5px;
-  color: #e1f0c4;
-  font-size: 11px;
-  font-style: italic;
-  font-weight: 300;
-  font-family: 'Montserrat', sans-serif;
-  opacity: 0.8;
-  background: #ff0000c4;
-  border-radius: 2px;
-
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2px 5px;
+    color: #e1f0c4;
+    font-size: 11px;
+    opacity: 0.8;
+    background: #ff0000c4;
+    border-radius: 2px;
 }
 
 .validDiv:after{
-  content: '';
+    content: '';
   position: absolute; 
   bottom: 100%; 
   left: 45%;
@@ -71,7 +69,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    color: rgb(255, 123, 0);
+    color: #ff8700;
     width: 100%;
     position: relative;
 }
@@ -81,11 +79,11 @@
     justify-content: center;
     align-items: center;
     width: 100%;
-    height: 50px;
+    height: 44px;
     position: relative;
 }
 
-.button{
+.textWrapper{
     display: flex;
     justify-content: center;
     align-items: center;
@@ -97,22 +95,19 @@
 
 .iteminput {
     width: 100%;
-    height: 40px;
+    margin-bottom: 10px;
     background: rgb(40,40,40);
-    border-bottom: 2px solid rgb(255, 123, 0);
+    border-bottom: 2px solid #ff8700;
     border-top: none;
     border-left: none;
     border-right: none;
     font-size: 14px;
-    font-style: italic;
-    font-weight: 300;
-    padding: 15px 25px 15px 0px;
-    line-height: 1.1;
-    letter-spacing: 1px;
-    font-family: 'Montserrat', sans-serif;
-    margin-bottom: 7px;
+    padding: 0px 25px 15px 5px;
     opacity: 0.8;
     color: #e1f0c4;
+    font-style: italic;
+    line-height: 1.1;
+    letter-spacing: 1px;
 }
   
 .iteminput:focus {
@@ -130,21 +125,20 @@
     resize: none;
     width: 100%;
     height: 60px;
+    margin-bottom: 10px;
     background: rgb(40,40,40);
-    border-bottom: 2px solid rgb(255, 123, 0);
+    border-bottom: 2px solid #ff8700;
     border-top: none;
     border-left: none;
     border-right: none;
     font-size: 14px;
-    font-style: italic;
-    font-weight: 300;
-    letter-spacing: 1px;
-    font-family: 'Montserrat', sans-serif;
-    padding: 15px 25px 0 0px;
+    padding: 0px 25px 0px 5px;
     overflow-x: hidden;
-    margin-bottom: 7px;
     opacity: 0.8;
     color: #e1f0c4;
+    font-style: italic;
+    line-height: 1.1;
+    letter-spacing: 1px;
 }  
 
 .textarea:focus{
@@ -156,27 +150,23 @@
     color: #e1f0c4;
 }
 
-textarea::-webkit-scrollbar {
-	width: 4px;
-	background-color: #e1f0c4;
-}
-
 textarea::-webkit-scrollbar-thumb {
-    background-color: rgb(99, 152, 201);
-    border-radius: 0px;
+    background-color: #ff8800d7;
+
 }
   
 .textarea:focus::-webkit-.iteminput-placeholder {opacity: 0; transition: opacity 0.3s ease;} 
 
 .btn{
-    border: 0;
-    background: rgb(255, 123, 0);
+    border: none;
+    height: 100%;
+    background: #ff8700;
     font-weight: 700;
     color: rgb(255, 255, 255);
     position: absolute;
     bottom: 0;
     left: 0;
-    padding: 8px 25px;
+    padding: 10px 25px;
     font-size: 15px;
     transition: all 0.2s ease;
 }
@@ -186,13 +176,13 @@ textarea::-webkit-scrollbar-thumb {
 }
 
 .btn:active {
-  transform: translateY(4px);
+    transform: translateY(4px);
 }
 
 .btn:hover {
-  background: rgba(255, 123, 0, 0.623);
-  cursor: pointer;
-  transition: all 0.2s ease;
+    background: #ff8800b0;
+    cursor: pointer;
+    transition: all 0.2s ease;
 } 
 
 .btn:disabled{
@@ -204,5 +194,11 @@ textarea::-webkit-scrollbar-thumb {
 @media (max-width: 1207px) {
     .feed{
         font-size: 30px;
+    }
+  }
+
+@media (max-width: 500px) {
+    .wrapper{
+        width: 100%;
     }
   }

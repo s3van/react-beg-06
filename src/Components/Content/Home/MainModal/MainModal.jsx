@@ -24,7 +24,7 @@ class MainModal extends React.PureComponent {
     });
   };
 
-  handleS = () => {
+  handleSubmitFormData = () => {
     const formData = {
       ...this.state,
       date: DateFormatter(this.state.date),
@@ -97,7 +97,7 @@ class MainModal extends React.PureComponent {
         </Modal.Body>
         <div className={MainModalStyles.footer}>
           <button
-            onClick={this.handleS}
+            onClick={this.handleSubmitFormData}
             className={MainModalStyles.btn1}
             disabled={!this.state.title || !this.state.description}
           >

@@ -22,7 +22,11 @@ class ContactModal extends React.PureComponent {
                 width: "100%",
               }}
             >
-              {this.props.ContactModal === this.props.database ? <div>Notification</div> : <div>Validation Error</div>}
+              {this.props.ContactModal === this.props.database ? (
+                <div>Notification</div>
+              ) : (
+                <div>Error</div>
+              )}
             </Modal.Title>
           </Modal.Header>
           <Modal.Body>
@@ -33,7 +37,7 @@ class ContactModal extends React.PureComponent {
                   justifyContent: "center",
                   alignItems: "center",
                   color: "red",
-                  paddingRight: "35px"
+                  paddingRight: "35px",
                 }}
               >
                 <h5>Failed to load resource</h5>

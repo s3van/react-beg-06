@@ -4,8 +4,12 @@ import { SingleTaskContext } from "../context";
 const API_HOST = "http://localhost:3001";
 
 const SingleTaskProvider = (props) => {
+
   const [SingleTaskState, setSingleTaskState] = useState({
-    singleTask: false,
+    singleTask: null,
+  });
+
+  const [SecondaryValues, setSecondaryValues] = useState({
     isEditModal: false,
     isErrorModal: false,
     loading: false,
@@ -30,24 +34,27 @@ const SingleTaskProvider = (props) => {
         setSingleTaskState({
           ...SingleTaskState,
           singleTask: error,
+        });
+        setSecondaryValues({
+          ...SecondaryValues,
           error: error,
-          isErrorModal: !SingleTaskState.isErrorModal,
+          isErrorModal: !SecondaryValues.isErrorModal,
         });
       });
   }, []);
 
   const toggleSetErrorModal = () => {
-    setSingleTaskState({
-      ...SingleTaskState,
-      isErrorModal: !SingleTaskState.isErrorModal,
+    setSecondaryValues({
+      ...SecondaryValues,
+      isErrorModal: !SecondaryValues.isErrorModal,
     });
     props.children.props.history.push("/");
   };
 
-  const toggleEditModal = () => {
-    setSingleTaskState({
-      ...SingleTaskState,
-      isEditModal: !SingleTaskState.isEditModal,
+  const toggleSetEditModal = () => {
+    setSecondaryValues({
+      ...SecondaryValues,
+      isEditModal: !SecondaryValues.isEditModal,
     });
   };
 
@@ -56,9 +63,9 @@ const SingleTaskProvider = (props) => {
   };
 
   const handleEditSingleTask = (editTask) => {
-    setSingleTaskState({
-      ...SingleTaskState,
-      loading: true,
+    setSecondaryValues({
+      ...SecondaryValues,
+     loading: true,
     });
     fetch(`${API_HOST}/task/${editTask._id}`, {
       method: "PUT",
@@ -73,6 +80,9 @@ const SingleTaskProvider = (props) => {
         setSingleTaskState({
           ...SingleTaskState,
           singleTask: data,
+        });
+        setSecondaryValues({
+          ...SecondaryValues,
           isEditModal: false,
         });
       })
@@ -80,19 +90,23 @@ const SingleTaskProvider = (props) => {
         console.log("SingleTask-handleEditSingleTask Error", error);
         setSingleTaskState({
           ...SingleTaskState,
+        });
+        setSecondaryValues({
+          ...SecondaryValues,
           loading: false,
           isEditModal: false,
           isErrorModal: error,
           singleTask: error,
           error: error,
         });
+        
       });
   };
 
   const handleDeleteSingleTask = () => {
-    setSingleTaskState({
-      ...SingleTaskState,
-      loading: true,
+    setSecondaryValues({
+      ...SecondaryValues,
+     loading: true,
     });
     const { _id } = SingleTaskState.singleTask;
     fetch(`${API_HOST}/task/${_id}`, {
@@ -114,8 +128,9 @@ const SingleTaskProvider = (props) => {
     <SingleTaskContext.Provider
       value={{
         SingleTaskState: SingleTaskState,
+        SecondaryValues: SecondaryValues,
         toggleSetErrorModal: toggleSetErrorModal,
-        toggleEditModal: toggleEditModal,
+        toggleSetEditModal: toggleSetEditModal,
         handleGoBack: handleGoBack,
         handleEditSingleTask: handleEditSingleTask,
         handleDeleteSingleTask: handleDeleteSingleTask,
