@@ -26,6 +26,17 @@ class Navbar extends React.PureComponent {
     return (
       <div className={NavbarStyles.nav}>
         <div className={NavbarStyles.item}>{navlinksJSX}</div>
+        <div className={NavbarStyles.burger}>
+            <div className={NavbarStyles.menuToggle}>
+              <input type="checkbox" />
+              <span></span>
+              <span></span>
+              <span></span>
+              <div className={NavbarStyles.menu}>
+                {navlinksJSX}
+              </div>
+            </div>
+        </div>
       </div>
     );
   }

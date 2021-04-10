@@ -5,6 +5,7 @@ import PropTypes from "prop-types";
 import DatePicker from "react-datepicker";
 import DateFormatter from "../../../../Utlis/DateFormatter/DateFormatter";
 
+
 class MainModal extends React.PureComponent {
   constructor(props) {
     super(props);

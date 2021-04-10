@@ -4,7 +4,6 @@ import { faTrash, faEdit } from "@fortawesome/free-solid-svg-icons";
 import { Card } from "react-bootstrap";
 import { memo } from "react";
 import { withRouter, Link } from "react-router-dom";
-
 import PropTypes from "prop-types";
 
 function Task(props) {
@@ -80,7 +79,7 @@ function Task(props) {
 }
 
 Task.propTypes = {
-  handleDeleteTask: PropTypes.func.isRequired,
+  handleDeleteTask: PropTypes.func,
   handleCheckTask: PropTypes.func.isRequired,
   isAnyTaskChecked: PropTypes.bool.isRequired,
   isChecked: PropTypes.bool.isRequired,

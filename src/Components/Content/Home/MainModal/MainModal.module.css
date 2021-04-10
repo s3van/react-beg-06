@@ -68,6 +68,13 @@ textarea::placeholder{
   
 textarea:focus::-webkit-input-placeholder {opacity: 0; transition: opacity 0.3s ease;} 
 
+.datepickerWrapper{
+    width: 60%;
+    position: relative;
+    display: flex;
+    justify-content: flex-start;
+}
+
 .datepickerWrapper input{
     height: 30px;
     width: 80px;
@@ -80,6 +87,7 @@ textarea:focus::-webkit-input-placeholder {opacity: 0; transition: opacity 0.3s 
     line-height: 1.1;
     border-radius: 2px;
 }
+
 .datepickerWrapper input:focus {
 	outline: 0;
     border-color: #166996;
@@ -103,7 +111,6 @@ textarea:focus::-webkit-input-placeholder {opacity: 0; transition: opacity 0.3s 
     transition: all 0.2s ease;
     margin-right: 5px;
 } 
-
 
 .btn1:focus {
 	  outline: none;
