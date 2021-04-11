@@ -1,4 +1,5 @@
-import { createStore } from "redux";
+import { createStore, applyMiddleware } from 'redux';
+import thunk from 'redux-thunk';
 
 const initialState = {
     counter: 0,
@@ -8,6 +9,7 @@ const initialState = {
         isOpenAddTaskModal: false,
         isOpenDeleteTaskModal: false,
         editableTask: null,
+        oneCheckedTask: null,
     },
     singleTaskState: {
         singleTask: null,
@@ -41,51 +43,12 @@ const reducer = (state = initialState, action) => {
         }
         ////////////////////////////////////////////////////////////////////////////////TODO
 
-
         case "SET_TASKS": {
             return {
                 ...state,
                 todoState: {
                     ...state.todoState,
                     tasks: action.data
-                }
-            }
-        }
-
-        case "DELETE_ONE_TASK": {
-            let tasks = [...state.todoState.tasks]
-            tasks = tasks.filter(task => task._id !== action._id)
-            return {
-                ...state,
-                todoState: {
-                    ...state.todoState,
-                    tasks: tasks
-                }
-            }
-        }
-
-        case "CHECK_TASKS": {
-            let checkedTasks = new Set(state.todoState.checkedTasks);
-            if (!checkedTasks.has(action._id)) {
-                checkedTasks.add(action._id);
-            } else {
-                checkedTasks.delete(action._id);
-            }
-            return {
-                ...state,
-                todoState: {
-                    ...state.todoState,
-                    checkedTasks: checkedTasks
-                }
-            }
-        }
-
-        case "TOGGLE_OPEN_ADD_TASK_MODAL": {
-            return {
-                ...state,
-                todoState: {
-                    ...state.todoState,
-                    isOpenAddTaskModal: !state.todoState.isOpenAddTaskModal
                 }
             }
         }
@@ -103,12 +66,14 @@ const reducer = (state = initialState, action) => {
             }
         }
 
-        case "TOGGLE_OPEN_DELETE_TASK_MODAL": {
+        case "DELETE_ONE_TASK": {
+            let tasks = [...state.todoState.tasks]
+            tasks = tasks.filter(task => task._id !== action._id)
             return {
                 ...state,
                 todoState: {
                     ...state.todoState,
-                    isOpenDeleteTaskModal: !state.todoState.isOpenDeleteTaskModal
+                    tasks: tasks
                 }
             }
         }
@@ -128,16 +93,6 @@ const reducer = (state = initialState, action) => {
             }
         }
 
-        case "SET_EDIT_TASK": {
-            return {
-                ...state,
-                todoState: {
-                    ...state.todoState,
-                    editableTask: action.editableTask
-                }
-            }
-        }
-
         case "DELETE_CHECKED_TASKS": {
             let tasks = [...state.todoState.tasks]
             tasks = tasks.filter(task => !state.todoState.checkedTasks.has(task._id))
@@ -148,6 +103,58 @@ const reducer = (state = initialState, action) => {
                     tasks: tasks,
                     checkedTasks: new Set(),
                     isOpenDeleteTaskModal: false,
+                }
+            }
+        }
+
+        case "CHECK_TASKS": {
+            let checkedTasks = new Set(state.todoState.checkedTasks);
+            if (!checkedTasks.has(action._id)) {
+                checkedTasks.add(action._id);
+            } else {
+                checkedTasks.delete(action._id);
+            }
+            return {
+                ...state,
+                todoState: {
+                    ...state.todoState,
+                    checkedTasks: checkedTasks,
+                }
+            }
+        }
+
+        case "TOGGLE_OPEN_ADD_TASK_MODAL": {
+            return {
+                ...state,
+                todoState: {
+                    ...state.todoState,
+                    isOpenAddTaskModal: !state.todoState.isOpenAddTaskModal
+                }
+            }
+        }
+
+        case "TOGGLE_OPEN_DELETE_TASK_MODAL": {
+            const { tasks, checkedTasks } = state.todoState
+            let oneCheckedTask = null
+            if (checkedTasks.size === 1) {
+                oneCheckedTask = tasks.find(task => task._id === Array.from(checkedTasks)[0]);
+            }
+            return {
+                ...state,
+                todoState: {
+                    ...state.todoState,
+                    oneCheckedTask: oneCheckedTask,
+                    isOpenDeleteTaskModal: !state.todoState.isOpenDeleteTaskModal,
+                }
+            }
+        }
+
+        case "SET_EDIT_TASK": {
+            return {
+                ...state,
+                todoState: {
+                    ...state.todoState,
+                    editableTask: action.editableTask
                 }
             }
         }
@@ -167,7 +174,8 @@ const reducer = (state = initialState, action) => {
                 }
             }
         }
-////////////////////////////////////////////////////////////////////////////////SINGLETASK
+
+        ////////////////////////////////////////////////////////////////////////////////SINGLETASK
 
         case "SET_SINGLETASK_DATA": {
             return {
@@ -216,7 +224,7 @@ const reducer = (state = initialState, action) => {
 }
 
 
-const store = createStore(reducer)
+const store = createStore(reducer, applyMiddleware(thunk))
 
 window.store = store;
 export default store;

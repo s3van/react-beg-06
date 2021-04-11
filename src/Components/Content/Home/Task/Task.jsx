@@ -6,7 +6,7 @@ import { memo } from "react";
 import { withRouter, Link } from "react-router-dom";
 import PropTypes from "prop-types";
 
-function Task(props) {
+const Task = (props) => {
   const {
     task,
     handleDeleteTask,

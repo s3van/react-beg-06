@@ -15,7 +15,7 @@ const maxlength30 = maxLengthValidator(200);
 const minlength30 = minLengthValidator(2);
 
 const initialState = {
-  ContactData: {
+  contactData: {
     name: {
       valid: false,
       error: null,
@@ -54,8 +54,8 @@ const reducer = (state = initialState, action) => {
       }
       return {
         ...state,
-        ContactData: {
-          ...state.ContactData,
+        contactData: {
+          ...state.contactData,
           [name]: {
             valid: valid,
             error: error,
@@ -67,8 +67,8 @@ const reducer = (state = initialState, action) => {
 
     case "SET_CONTACT_DATA": {
       return {
-        ContactData: {
-          ...state.ContactData,
+        contactData: {
+          ...state.contactData,
           name: {
             value: "",
           },
@@ -127,7 +127,7 @@ const reducer = (state = initialState, action) => {
 const ContactDataWithReducer = (props) => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
-  const { ContactData, contactModal, backendError, database, loading } = state;
+  const { contactData, contactModal, backendError, database, loading } = state;
 
   const toggleContactModal = () => {
     dispatch({ type: "SET_CONTACTDATA_MODAL" });
@@ -143,7 +143,7 @@ const ContactDataWithReducer = (props) => {
   };
 
   const handleSubmit = () => {
-    const formData = { ...ContactData };
+    const formData = { ...contactData };
     for (let key in formData) {
       if (Object.keys(formData[key]).includes("value")) {
         formData[key] = formData[key].value;
@@ -211,16 +211,16 @@ const ContactDataWithReducer = (props) => {
                   type="name"
                   name="name"
                   placeholder="Name"
-                  value={ContactData.name.value}
+                  value={contactData.name.value}
                   onChange={handleChange}
                   className={ContactDataWithReducerStyles.iteminput}
                 />
-                {ContactData.name.error && (
+                {contactData.name.error && (
                   <div className={ContactDataWithReducerStyles.validDiv}>
-                    {ContactData.name.error}
+                    {contactData.name.error}
                   </div>
                 )}
-                {!ContactData.name.error && ContactData.name.value && (
+                {!contactData.name.error && contactData.name.value && (
                   <div className={ContactDataWithReducerStyles.validCheck}>
                     <span>&#x2714;</span>
                   </div>
@@ -233,16 +233,16 @@ const ContactDataWithReducer = (props) => {
                   type="email"
                   name="email"
                   placeholder="Email"
-                  value={ContactData.email.value}
+                  value={contactData.email.value}
                   onChange={handleChange}
                   className={ContactDataWithReducerStyles.iteminput}
                 />
-                {ContactData.email.error && (
+                {contactData.email.error && (
                   <div className={ContactDataWithReducerStyles.validDiv}>
-                    {ContactData.email.error}
+                    {contactData.email.error}
                   </div>
                 )}
-                {!ContactData.email.error && ContactData.email.value && (
+                {!contactData.email.error && contactData.email.value && (
                   <div className={ContactDataWithReducerStyles.validCheck}>
                     &#x2714;
                   </div>
@@ -255,13 +255,13 @@ const ContactDataWithReducer = (props) => {
                   type="message"
                   name="message"
                   placeholder="Your message..."
-                  value={ContactData.message.value}
+                  value={contactData.message.value}
                   onChange={handleChange}
                   className={ContactDataWithReducerStyles.textarea}
                 />
-                {ContactData.message.error && (
+                {contactData.message.error && (
                   <div className={ContactDataWithReducerStyles.validDiv}>
-                    {ContactData.message.error}
+                    {contactData.message.error}
                   </div>
                 )}
               </div>
@@ -272,12 +272,12 @@ const ContactDataWithReducer = (props) => {
                   onClick={handleSubmit}
                   className={ContactDataWithReducerStyles.btn}
                   disabled={
-                    ContactData.message.error ||
-                    ContactData.name.error ||
-                    ContactData.email.error ||
-                    !ContactData.email.value ||
-                    !ContactData.name.value ||
-                    !ContactData.message.value
+                    contactData.message.error ||
+                    contactData.name.error ||
+                    contactData.email.error ||
+                    !contactData.email.value ||
+                    !contactData.name.value ||
+                    !contactData.message.value
                   }
                 >
                   Send
@@ -290,7 +290,7 @@ const ContactDataWithReducer = (props) => {
       {contactModal && (
         <ContactModal
           onHide={toggleContactModal}
-          ContactModal={contactModal}
+          contactModal={contactModal}
           backendError={backendError}
           database={database}
         />

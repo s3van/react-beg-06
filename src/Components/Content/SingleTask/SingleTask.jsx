@@ -6,8 +6,11 @@ import SingleTaskStyles from "./SingleTask.module.css";
 import MainModal from "../Home/MainModal/MainModal";
 import ErrorModal from "./ErrorModal/ErrorModal";
 import SpinnerLoader from "../../../Utlis/SpinnerLoader/SpinnerLoader";
-
-const API_HOST = "http://localhost:3001";
+import {
+  setSingleTaskDataThunk,
+  editSingleTaskThunk,
+  deleteSingleTaskThunk,
+} from "../../../Redux/actions";
 
 const SingleTask = (props) => {
   const {
@@ -18,80 +21,32 @@ const SingleTask = (props) => {
     loading,
     error,
     //functions
-    setSingleTask,
-    setOrRemoveLoading,
+    //SYNC
     toggleSetOrRemoveErrorModal,
-    setErrorModal,
     toggleSetEditModal,
+    //ASYNC
+    setSingleTask,
+    editTask,
+    deleteTask,
   } = props;
 
   useEffect(() => {
-    setOrRemoveLoading(true);
     const { id } = props.match.params;
-    fetch(`${API_HOST}/task/${id}`)
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.error) {
-          throw data.error;
-        }
-        console.log(data);
-        setSingleTask(data);
-      })
-      .catch((error) => {
-        console.log("singleTask Request", error);
-        toggleSetOrRemoveErrorModal();
-        setErrorModal(error);
-      })
-      .finally(() => {
-        setOrRemoveLoading(false);
-      });
+    setSingleTask(id);
   }, []);
 
-  const handleGoBack = () => {
-    props.history.go(-1);
-  };
-
-  const handleEditSingleTask = (editTask) => {
-    setOrRemoveLoading(true);
-    fetch(`${API_HOST}/task/${editTask._id}`, {
-      method: "PUT",
-      body: JSON.stringify(editTask),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.error) throw data.error;
-        toggleSetEditModal();
-        setSingleTask(data);
-        setOrRemoveLoading(false);
-      })
-      .catch((error) => {
-        console.log("SingleTask-handleEditSingleTask Error", error);
-        setOrRemoveLoading(false);
-        setErrorModal(error);
-      });
+  const handleEditSingleTask = (editableTask) => {
+    editTask(editableTask);
   };
 
   const handleDeleteSingleTask = () => {
-    props.setOrRemoveLoading(true);
-    const { _id } = singleTask;
-    fetch(`${API_HOST}/task/${_id}`, {
-      method: "DELETE",
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.error) {
-          throw data.error;
-        }
-        props.history.push("/");
-      })
-      .catch((error) => {
-        console.log("SingleTask-handleDeleteSingleTask-Error", error);
-        setOrRemoveLoading(false);
-        setErrorModal(error);
-      });
+    const { history } = props;
+    console.log("singletaskdata", singleTask);
+    deleteTask(singleTask, history);
+  };
+
+  const handleGoBack = () => {
+    props.history.go(-1);
   };
 
   return (
@@ -158,12 +113,19 @@ const SingleTask = (props) => {
 };
 
 const mapStateToProps = (state) => {
+  const {
+    singleTask,
+    isEditModal,
+    isErrorModal,
+    error,
+  } = state.singleTaskState;
+
   return {
     loading: state.loading,
-    singleTask: state.singleTaskState.singleTask,
-    isEditModal: state.singleTaskState.isEditModal,
-    isErrorModal: state.singleTaskState.isErrorModal,
-    error: state.singleTaskState.error,
+    singleTask,
+    isEditModal,
+    isErrorModal,
+    error,
   };
 };
 
@@ -171,9 +133,6 @@ const mapDispatchToProps = (dispatch) => {
   return {
     setOrRemoveLoading: (isloading) => {
       dispatch({ type: "SET_OR_REMOVE_LOADING", isloading });
-    },
-    setSingleTask: (data) => {
-      dispatch({ type: "SET_SINGLETASK_DATA", data });
     },
     toggleSetOrRemoveErrorModal: () => {
       dispatch({ type: "REMOVE_ERROR_MODAL" });
@@ -183,6 +142,18 @@ const mapDispatchToProps = (dispatch) => {
     },
     toggleSetEditModal: () => {
       dispatch({ type: "SET_EDIT_MODAL" });
+    },
+    //ASYNC
+    setSingleTask: (id) => {
+      dispatch((dispatch) => setSingleTaskDataThunk(dispatch, id));
+    },
+    editTask: (editableTask) => {
+      dispatch((dispatch) => editSingleTaskThunk(dispatch, editableTask));
+    },
+    deleteTask: (singleTask, history) => {
+      dispatch((dispatch) =>
+        deleteSingleTaskThunk(dispatch, singleTask, history)
+      );
     },
   };
 };
