@@ -36,20 +36,6 @@ class Content extends React.PureComponent {
           />
         );
       } 
-      // else if (index === 2) {
-      //   return (
-      //     <Route
-      //       path={page.path}
-      //       render={(props) => (
-      //         <ContactDataProvider>
-      //           <page.component {...props} />
-      //         </ContactDataProvider>
-      //       )}
-      //       exact={page.exact}
-      //       key={index}
-      //     />
-      //   );
-      // }
       return (
         <Route
           path={page.path}

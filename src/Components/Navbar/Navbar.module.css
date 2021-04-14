@@ -62,7 +62,7 @@ a.active{
   z-index: 1;
   -webkit-user-select: none;
   user-select: none;
-  border: 5px solid rgb(10, 82, 116);
+  margin-right: 5px;
 }
 
 .menuToggle a{
@@ -148,7 +148,7 @@ a.active{
 .menuToggle input:checked ~ span
 {
   opacity: 1;
-  transform: rotate(45deg) translate(-2px, -1px);
+  transform: rotate(135deg) translate(-15px, -23px);
   background: rgb(136, 136, 136);
 }
 
@@ -160,12 +160,11 @@ a.active{
 
 .menuToggle input:checked ~ span:nth-last-child(2)
 {
-  transform: rotate(-45deg) translate(0, -1px);
+  transform: rotate(-135deg) translate(-24px, 24px);
 }
 
 .menu
 {
-  border: 3px solid rgb(255, 238, 0);
   position: absolute;
   display: flex;
   align-items: center;
@@ -195,4 +194,18 @@ a.active{
   .nav{
     justify-content: flex-end;
   }
+}
+
+@media (max-width: 376px) {
+  .menu{
+   margin: -46px 0 0 -220px;
+   transform: translate(130%, 0);
+  }
+ }
+
+@media (max-width: 330px) {
+ .menu{
+  margin: -46px 0 0 -205px;
+  transform: translate(130%, 0);
+ }
 }
