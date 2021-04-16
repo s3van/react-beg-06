@@ -1,12 +1,10 @@
 import ContactStyles from "./Contact.module.css";
-// import ContactDataWithHook from "./ContactDataWithHook/ContactDataWithHook";
-import ContactDataWithReducer from "./ContactDataWithReducer/ContactDataWithReducer"
+import ContactData from "../Contact/ContactData/ContactData"
 
 const Contact = (props) => {
   return (
     <div className={ContactStyles.contact}>
-      {/* <ContactDataWithHook /> */}
-      <ContactDataWithReducer />
+      <ContactData />
     </div>
   );
 };

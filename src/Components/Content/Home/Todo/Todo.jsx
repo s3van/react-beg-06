@@ -5,6 +5,7 @@ import { Container, Row, Col } from "react-bootstrap";
 import DeleteTaskModal from "../DeleteTaskModal/DeleteTaskModal";
 import MainModal from "../MainModal/MainModal";
 import SpinnerLoader from "../../../../Utlis/SpinnerLoader/SpinnerLoader";
+import ErrorModal from "../../../../Utlis/ErrorModal/ErrorModal"
 import { connect } from "react-redux";
 import {
   setTasksThunk,
@@ -24,24 +25,32 @@ const Todo = (props) => {
     isOpenDeleteTaskModal,
     editableTask,
     oneCheckedTask,
+    errorModal,
+    backendError,
     //functions
     //SYNC
     toggleOpenAddTaskModal,
     toggleOpenDeleteTaskModal,
-    handleCheckedTasks,
-    handleCheckAllTasks,
-    setEditTask,
+    toggleCheckTask,
+    toggleCheckAllTasks,
+    toggleSetOrRemoveErrorModal,
+    handleSetEditableTask,
     //ASYNC
     setTasks,
     addTask,
     deleteOneTask,
     editTask,
     deleteCheckedTasks,
+    reset,
   } = props;
 
   useEffect(() => {
     setTasks();
-  }, []);
+    return () => {
+      console.log("resettodo");
+      reset();
+    };
+  }, [setTasks, reset]);
 
   const handleAddTask = (formData) => {
     addTask(formData);
@@ -72,10 +81,10 @@ const Todo = (props) => {
         <Task
           task={task}
           handleDeleteTask={handleDeleteTask}
-          handleCheckTask={handleCheckedTasks}
+          handleCheckTask={toggleCheckTask}
           isAnyTaskChecked={!!checkedTasks.size}
           isChecked={!!checkedTasks.has(task._id)}
-          toggleSetEditableTask={setEditTask}
+          toggleSetEditableTask={handleSetEditableTask}
         />
       </Col>
     );
@@ -84,9 +93,13 @@ const Todo = (props) => {
   return (
     <>
       <Container className={TodoStyles.todo}>
-        <Row>
+        <Row style={{marginBottom: "30px"}}> 
           <Col>
             <h1>Home</h1>
+          </Col>
+        </Row>
+        <Row className={TodoStyles.btnWrap}>
+          <div className={TodoStyles.btn}>
             <button
               onClick={toggleOpenAddTaskModal}
               className={TodoStyles.addBtn}
@@ -94,17 +107,8 @@ const Todo = (props) => {
             >
               Add Task
             </button>
-          </Col>
-        </Row>
-        <Row>
-          {tasksJSX.length ? (
-            tasksJSX
-          ) : (
-            <p className={TodoStyles.ptux}>No Tasks</p>
-          )}
-        </Row>
-        <Row className={TodoStyles.btnWrap}>
-          <div style={{ width: "140px", height: "30px" }}>
+          </div>
+          <div className={TodoStyles.btn}>
             <button
               className={TodoStyles.deleteCheckedBtn}
               onClick={toggleOpenDeleteTaskModal}
@@ -113,10 +117,10 @@ const Todo = (props) => {
               Delete Selected
             </button>
           </div>
-          <div style={{ width: "140px", height: "30px" }}>
+          <div style={{ width: "140px" }}>
             <button
               className={TodoStyles.checkedAllTasksBtn}
-              onClick={handleCheckAllTasks}
+              onClick={toggleCheckAllTasks}
               disabled={!!!tasksJSX.length}
             >
               {tasks.length && checkedTasks.size === tasks.length
@@ -124,6 +128,13 @@ const Todo = (props) => {
                 : "Select all"}
             </button>
           </div>
+        </Row>
+        <Row>
+          {tasksJSX.length ? (
+            tasksJSX
+          ) : (
+            <p className={TodoStyles.ptux}>No Tasks</p>
+          )}
         </Row>
       </Container>
       {loading && <SpinnerLoader />}
@@ -136,13 +147,15 @@ const Todo = (props) => {
           }
         />
       )}
-
+       {errorModal && (
+        <ErrorModal onHide={toggleSetOrRemoveErrorModal} backendError={backendError} />
+      )}
       {isOpenAddTaskModal && (
         <MainModal onHide={toggleOpenAddTaskModal} onSubmit={handleAddTask} />
       )}
       {editableTask && (
         <MainModal
-          onHide={setEditTask}
+          onHide={handleSetEditableTask}
           onSubmit={handleEditTask}
           editableTask={editableTask}
         />
@@ -159,6 +172,7 @@ const mapStateToProps = (state) => {
     isOpenDeleteTaskModal,
     editableTask,
     oneCheckedTask,
+    backendError,
   } = state.todoState;
   return {
     tasks,
@@ -167,7 +181,9 @@ const mapStateToProps = (state) => {
     isOpenDeleteTaskModal,
     editableTask,
     oneCheckedTask,
-    loading: state.loading,
+    backendError,
+    loading: state.globalState.loading,
+    errorModal: state.globalState.errorModal,
   };
 };
 
@@ -197,7 +213,7 @@ const mapDispatchToProps = (dispatch) => {
     setOrRemoveLoading: (isloading) => {
       dispatch({ type: "SET_OR_REMOVE_LOADING", isloading });
     },
-    handleCheckedTasks: (_id) => {
+    toggleCheckTask: (_id) => {
       dispatch({ type: "CHECK_TASKS", _id });
     },
     toggleOpenAddTaskModal: () => {
@@ -206,11 +222,17 @@ const mapDispatchToProps = (dispatch) => {
     toggleOpenDeleteTaskModal: () => {
       dispatch({ type: "TOGGLE_OPEN_DELETE_TASK_MODAL" });
     },
-    setEditTask: (editableTask) => {
+    handleSetEditableTask: (editableTask) => {
       dispatch({ type: "SET_EDIT_TASK", editableTask });
     },
-    handleCheckAllTasks: () => {
+    toggleCheckAllTasks: () => {
       dispatch({ type: "CHECK_ALL_TASKS" });
+    },
+    toggleSetOrRemoveErrorModal: () => {
+      dispatch({ type: "SET_OR_REMOVE_ERROR_MODAL" });
+    },
+    reset: () => {
+      dispatch({ type: "RESET_TASK" });
     },
   };
 };

@@ -10,7 +10,8 @@ export const setTasksThunk = (dispatch) => {
             dispatch({ type: "SET_TASKS", data })
         })
         .catch((error) => {
-            console.log("Todo-componentDidMount Error", error);
+            dispatch({ type: "SET_OR_REMOVE_ERROR_MODAL" })
+            dispatch({ type: "SET_ERROR_MESSAGE_TODO", error })
         })
         .finally(() => {
             dispatch({ type: "SET_OR_REMOVE_LOADING", isloading: false })
@@ -30,7 +31,8 @@ export const deleteOneTaskThunk = (dispatch, _id) => {
             dispatch({ type: "DELETE_ONE_TASK", _id })
         })
         .catch((error) => {
-            console.log("Todo-handleDeleteTask Error", error);
+            dispatch({ type: "SET_OR_REMOVE_ERROR_MODAL" })
+            dispatch({ type: "SET_ERROR_MESSAGE_TODO", error })
         })
         .finally(() => {
             dispatch({ type: "SET_OR_REMOVE_LOADING", isloading: false })
@@ -53,7 +55,8 @@ export const addTaskThunk = (dispatch, formData) => {
             dispatch({ type: "ADD_TASK", data })
         })
         .catch((error) => {
-            console.log("Todo-handleAddTask Error", error);
+            dispatch({ type: "SET_OR_REMOVE_ERROR_MODAL" })
+            dispatch({ type: "SET_ERROR_MESSAGE_TODO", error })
         })
         .finally(() => {
             dispatch({ type: "SET_OR_REMOVE_LOADING", isloading: false })
@@ -76,7 +79,8 @@ export const editTaskThunk = (dispatch, editableTask) => {
             dispatch({ type: "EDIT_TASK", data })
         })
         .catch((error) => {
-            console.log("Todo-handleEditTask Error", error);
+            dispatch({ type: "SET_OR_REMOVE_ERROR_MODAL" })
+            dispatch({ type: "SET_ERROR_MESSAGE_TODO", error })
         })
         .finally(() => {
             dispatch({ type: "SET_OR_REMOVE_LOADING", isloading: false })
@@ -99,7 +103,8 @@ export const deleteTaskCheckedTasksThunk = (dispatch, checkedTasks) => {
             dispatch({ type: "DELETE_CHECKED_TASKS" })
         })
         .catch((error) => {
-            console.log("Todo-handleDeleteTaskCheckedTasks Error", error);
+            dispatch({ type: "SET_OR_REMOVE_ERROR_MODAL" })
+            dispatch({ type: "SET_ERROR_MESSAGE_TODO", error })
         })
         .finally(() => {
             dispatch({ type: "SET_OR_REMOVE_LOADING", isloading: false })
@@ -119,8 +124,8 @@ export const setSingleTaskDataThunk = (dispatch, id) => {
             dispatch({ type: "SET_SINGLETASK_DATA", data })
         })
         .catch((error) => {
-            dispatch({ type: "REMOVE_ERROR_MODAL" })
-            dispatch({ type: "SET_ERROR_MODAL", error })
+            dispatch({ type: "SET_OR_REMOVE_ERROR_MODAL" })
+            dispatch({ type: "SET_ERROR_MESSAGE_SINGLETASK", error })
         })
         .finally(() => {
             dispatch({ type: "SET_OR_REMOVE_LOADING", isloading: false })
@@ -146,7 +151,7 @@ export const editSingleTaskThunk = (dispatch, editableTask) => {
         })
         .catch((error) => {
             console.log("SingleTask-handleEditSingleTask Error", error);
-            dispatch({ type: "SET_ERROR_MODAL", error })
+            dispatch({ type: "SET_ERROR_MESSAGE_SINGLETASK", error })
             dispatch({ type: "SET_OR_REMOVE_LOADING", isloading: false })
         });
 }
@@ -167,7 +172,45 @@ export const deleteSingleTaskThunk = (dispatch, singleTask, history) => {
         })
         .catch((error) => {
             console.log("SingleTask-handleDeleteSingleTask-Error", error);
-            dispatch({ type: "SET_ERROR_MODAL", error })
+            dispatch({ type: "SET_ERROR_MESSAGE_SINGLETASK", error })
             dispatch({ type: "SET_OR_REMOVE_LOADING", isloading: false })
         });
+}
+
+///////////////////////////////////////////////////////////////CONTACTDATA
+///////////////////////////////////////////////////////////////SUBMITCONTACTDATA
+export const handleSubmitContactDataThunk = (dispatch,formData) => {
+    for (let key in formData) {
+      if (Object.keys(formData[key]).includes("value")) {
+        formData[key] = formData[key].value;
+      } else {
+        delete formData[key];
+      }
+    }
+    if (
+      !formData.name.trim() ||
+      !formData.email.trim() ||
+      !formData.message.trim()
+    )
+      return;
+      dispatch({ type: "SET_OR_REMOVE_LOADING", isloading: true })
+    fetch(`${API_HOST}/form`, {
+      method: "POST",
+      body: JSON.stringify(formData),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.error) throw data.error;
+        dispatch({ type: "SET_OR_REMOVE_LOADING", isloading: false })
+        dispatch({ type: "CLEAR_CONTACTDATA"});
+        dispatch({ type: "SET_DATA", data});
+      })
+      .catch((error) => {
+        console.log("ContactDataWithReducer Error", error);
+        dispatch({ type: "SET_OR_REMOVE_LOADING", isloading: false })
+        dispatch({ type: "SET_ERROR_MESSAGE_CONTACTDATA", error });
+      });
 }

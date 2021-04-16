@@ -1,10 +1,9 @@
 import { useEffect } from "react";
 import { withRouter } from "react-router-dom";
-import { compose } from "redux";
 import { connect } from "react-redux";
 import SingleTaskStyles from "./SingleTask.module.css";
 import MainModal from "../Home/MainModal/MainModal";
-import ErrorModal from "./ErrorModal/ErrorModal";
+import ErrorModal from "../../../Utlis/ErrorModal/ErrorModal";
 import SpinnerLoader from "../../../Utlis/SpinnerLoader/SpinnerLoader";
 import {
   setSingleTaskDataThunk,
@@ -16,24 +15,29 @@ const SingleTask = (props) => {
   const {
     //singleTaskState
     singleTask,
-    isEditModal,
-    isErrorModal,
+    editModal,
+    errorModal,
     loading,
-    error,
+    backendError,
     //functions
     //SYNC
-    toggleSetOrRemoveErrorModal,
+    setOrRemoveErrorModal,
     toggleSetEditModal,
     //ASYNC
     setSingleTask,
     editTask,
     deleteTask,
+    reset,
   } = props;
 
   useEffect(() => {
     const { id } = props.match.params;
     setSingleTask(id);
-  }, []);
+    return () => {
+      console.log("resetsingletask");
+      reset();
+    };
+  }, [setSingleTask, reset]);
 
   const handleEditSingleTask = (editableTask) => {
     editTask(editableTask);
@@ -41,7 +45,6 @@ const SingleTask = (props) => {
 
   const handleDeleteSingleTask = () => {
     const { history } = props;
-    console.log("singletaskdata", singleTask);
     deleteTask(singleTask, history);
   };
 
@@ -49,14 +52,18 @@ const SingleTask = (props) => {
     props.history.go(-1);
   };
 
+  const toggleSetOrRemoveErrorModal = () => {
+    setOrRemoveErrorModal();
+    props.history.go(-1);
+  };
+
   return (
     <>
-      {!singleTask && <SpinnerLoader />}
-      {singleTask && singleTask !== error && (
+      <div className={SingleTaskStyles.singleTaskTitleWrapper}>
+        <h1>Single Task</h1>
+      </div>
+      {singleTask && singleTask !== backendError && (
         <div className={SingleTaskStyles.wrapper}>
-          <div className={SingleTaskStyles.singleTaskTitleWrapper}>
-            <h1>Single Task</h1>
-          </div>
           <div className={SingleTaskStyles.singleTaskContentWrapper}>
             <div className={SingleTaskStyles.singleTaskContent}>
               <div>
@@ -73,39 +80,48 @@ const SingleTask = (props) => {
                   </div>
                 </div>
               </div>
-              <div style={{ marginBottom: "10px", padding: "10px" }}>
-                <button
-                  className={SingleTaskStyles.deleteBtn}
-                  onClick={handleDeleteSingleTask}
-                >
-                  Delete
-                </button>
-                <button
-                  className={SingleTaskStyles.editBtn}
-                  onClick={toggleSetEditModal}
-                >
-                  Edit
-                </button>
-                <button
-                  className={SingleTaskStyles.gobackBtn}
-                  onClick={handleGoBack}
-                >
-                  Go Back
-                </button>
+              <div className={SingleTaskStyles.buttonWrap}>
+                <div className={SingleTaskStyles.btn}>
+                  <button
+                    className={SingleTaskStyles.deleteBtn}
+                    onClick={handleDeleteSingleTask}
+                  >
+                    Delete
+                  </button>
+                </div>
+                <div className={SingleTaskStyles.btn}>
+                  <button
+                    className={SingleTaskStyles.editBtn}
+                    onClick={toggleSetEditModal}
+                  >
+                    Edit
+                  </button>
+                </div>
+                <div className={SingleTaskStyles.btn}>
+                  <button
+                    className={SingleTaskStyles.gobackBtn}
+                    onClick={handleGoBack}
+                  >
+                    Go Back
+                  </button>
+                </div>
               </div>
             </div>
           </div>
         </div>
       )}
-      {isEditModal && (
+      {editModal && (
         <MainModal
           onHide={toggleSetEditModal}
           onSubmit={handleEditSingleTask}
           editableTask={singleTask}
         />
       )}
-      {isErrorModal && (
-        <ErrorModal onHide={toggleSetOrRemoveErrorModal} error={error} />
+      {errorModal && (
+        <ErrorModal
+          onHide={toggleSetOrRemoveErrorModal}
+          backendError={backendError}
+        />
       )}
       {loading && <SpinnerLoader />}
     </>
@@ -113,35 +129,31 @@ const SingleTask = (props) => {
 };
 
 const mapStateToProps = (state) => {
-  const {
-    singleTask,
-    isEditModal,
-    isErrorModal,
-    error,
-  } = state.singleTaskState;
+  const { singleTask, editModal, backendError } = state.singletaskState;
 
   return {
-    loading: state.loading,
+    loading: state.globalState.loading,
+    errorModal: state.globalState.errorModal,
     singleTask,
-    isEditModal,
-    isErrorModal,
-    error,
+    editModal,
+    backendError,
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
+    //SYNC
     setOrRemoveLoading: (isloading) => {
       dispatch({ type: "SET_OR_REMOVE_LOADING", isloading });
     },
-    toggleSetOrRemoveErrorModal: () => {
-      dispatch({ type: "REMOVE_ERROR_MODAL" });
-    },
-    setErrorModal: (error) => {
-      dispatch({ type: "SET_ERROR_MODAL", error });
+    setOrRemoveErrorModal: () => {
+      dispatch({ type: "SET_OR_REMOVE_ERROR_MODAL" });
     },
     toggleSetEditModal: () => {
       dispatch({ type: "SET_EDIT_MODAL" });
+    },
+    reset: () => {
+      dispatch({ type: "RESET_SINGLETASK" });
     },
     //ASYNC
     setSingleTask: (id) => {
@@ -157,7 +169,6 @@ const mapDispatchToProps = (dispatch) => {
     },
   };
 };
-export default compose(
-  withRouter,
-  connect(mapStateToProps, mapDispatchToProps)
-)(SingleTask);
+export default withRouter(
+  connect(mapStateToProps, mapDispatchToProps)(SingleTask)
+);

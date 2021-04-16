@@ -3,8 +3,8 @@ import { Modal } from "react-bootstrap";
 import ErrorModalStyles from "./ErrorModal.module.css";
 
 const ErrorModal = (props) => {
-  const { onHide, error } = props;
-
+  const { onHide, backendError } = props;
+console.log("eeeeeee",backendError)
   return (
     <div>
       <Modal
@@ -30,7 +30,7 @@ const ErrorModal = (props) => {
           <div className={ErrorModalStyles.errorWrap}>
             <div>
               <div className={ErrorModalStyles.errorTextWrap}>
-                {error.status === 500 ? (
+                {backendError.status === 500 ? (
                   <div className={ErrorModalStyles.errorText}>
                     The Task with the given id does not exist.
                   </div>
@@ -44,19 +44,19 @@ const ErrorModal = (props) => {
             </div>
             <div className={ErrorModalStyles.errorStatusWrap}>
               <div className={ErrorModalStyles.errorTitle}>Status:</div>
-              {error.status === 500 ? (
+              {backendError.status === 500 ? (
                 <div
                   className={ErrorModalStyles.errorValue}
                   style={{ color: "red" }}
                 >
-                  {error.status}
+                  {backendError.status}
                 </div>
               ) : (
                 <div
                   className={ErrorModalStyles.errorValue}
                   style={{ color: "yellow" }}
                 >
-                  {error.status}
+                  {backendError.status}
                 </div>
               )}
             </div>

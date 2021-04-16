@@ -21,18 +21,18 @@
     background: rgb(40,40,40);
     overflow: hidden;
     color: #e1f0c4;
-    border: 2px solid #ff8700;
+    border: 2px solid rgb(90, 150, 150);
 }
 
 .formTitle{
     font-size: 30px;
     margin-bottom: 30px;
-    color: #ff8700;
+    color: rgb(90, 150, 150);
 }
 
  .validCheck{
     font-size: 14px;
-    color: #e1f0c4;
+    color: #3cbd01;
     text-align: center;
     margin: 0 auto;
     position: absolute;
@@ -69,7 +69,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    color: #ff8700;
+    color: rgb(90, 150, 150);
     width: 100%;
     position: relative;
 }
@@ -97,7 +97,7 @@
     width: 100%;
     margin-bottom: 10px;
     background: rgb(40,40,40);
-    border-bottom: 2px solid #ff8700;
+    border-bottom: 2px solid rgb(90, 150, 150);
     border-top: none;
     border-left: none;
     border-right: none;
@@ -127,7 +127,7 @@
     height: 60px;
     margin-bottom: 10px;
     background: rgb(40,40,40);
-    border-bottom: 2px solid #ff8700;
+    border-bottom: 2px solid rgb(90, 150, 150);
     border-top: none;
     border-left: none;
     border-right: none;
@@ -145,22 +145,13 @@
     outline: 0;
     border-color: #e1f0c4;
 }
-
-.textarea::placeholder{
-    color: #e1f0c4;
-}
-
-textarea::-webkit-scrollbar-thumb {
-    background-color: #ff8800d7;
-
-}
   
 .textarea:focus::-webkit-.iteminput-placeholder {opacity: 0; transition: opacity 0.3s ease;} 
 
 .btn{
     border: none;
     height: 100%;
-    background: #ff8700;
+    background: rgb(90, 150, 150);
     font-weight: 700;
     color: rgb(255, 255, 255);
     position: absolute;
@@ -180,7 +171,7 @@ textarea::-webkit-scrollbar-thumb {
 }
 
 .btn:hover {
-    background: #ff8800b0;
+    background: #6a8080;
     cursor: pointer;
     transition: all 0.2s ease;
 } 
@@ -190,6 +181,16 @@ textarea::-webkit-scrollbar-thumb {
     transition: 0.1s;
     transition: none;
 } 
+
+.textarea::placeholder{
+    color: #e1f0c4;
+}
+
+textarea::-webkit-scrollbar-thumb {
+    background-color: rgb(90, 150, 150);
+    border-radius: 0;
+
+}
 
 @media (max-width: 1207px) {
     .feed{

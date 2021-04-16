@@ -8,6 +8,7 @@
   background-color: #ffb488;
   z-index: 900;
   overflow: hidden;
+  margin-bottom: 5px;
 }
 .item{
   width: 100%;
@@ -43,12 +44,10 @@
 
 .item a:hover::after {
   opacity: 1;
-
 }
 
 a.active{
   color: #443d43;
-  
 }
 
 /* sadsssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss */
@@ -189,7 +188,11 @@ a.active{
   }
   .item{
     display: none;
-    
+  }
+  .menu a:after{
+    content: "";
+    display: none;
+    opacity: 0;
   }
   .nav{
     justify-content: flex-end;

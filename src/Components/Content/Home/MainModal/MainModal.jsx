@@ -18,8 +18,9 @@ class MainModal extends React.PureComponent {
     };
   }
 
-  handleChange = (event) => {
-    const { value, name } = event.target;
+  handleChange = (e) => {
+    e.preventDefault();
+    const { value, name } = e.target;
     this.setState({
       [name]: value,
     });
