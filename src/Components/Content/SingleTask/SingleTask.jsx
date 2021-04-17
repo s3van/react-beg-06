@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import SingleTaskStyles from "./SingleTask.module.css";
-import MainModal from "../Home/MainModal/MainModal";
+import MainModalRedux from "../Home/MainModal/MainModalRedux";
 import ErrorModal from "../../../Utlis/ErrorModal/ErrorModal";
 import SpinnerLoader from "../../../Utlis/SpinnerLoader/SpinnerLoader";
 import {
@@ -34,7 +34,6 @@ const SingleTask = (props) => {
     const { id } = props.match.params;
     setSingleTask(id);
     return () => {
-      console.log("resetsingletask");
       reset();
     };
   }, [setSingleTask, reset]);
@@ -111,7 +110,7 @@ const SingleTask = (props) => {
         </div>
       )}
       {editModal && (
-        <MainModal
+        <MainModalRedux
           onHide={toggleSetEditModal}
           onSubmit={handleEditSingleTask}
           editableTask={singleTask}
@@ -150,7 +149,7 @@ const mapDispatchToProps = (dispatch) => {
       dispatch({ type: "SET_OR_REMOVE_ERROR_MODAL" });
     },
     toggleSetEditModal: () => {
-      dispatch({ type: "SET_EDIT_MODAL" });
+      dispatch({ type: "SET_OR_REMOVE_EDIT_MODAL" });
     },
     reset: () => {
       dispatch({ type: "RESET_SINGLETASK" });

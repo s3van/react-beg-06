@@ -3,7 +3,7 @@ import Task from "../Task/Task";
 import TodoStyles from "./Todo.module.css";
 import { Container, Row, Col } from "react-bootstrap";
 import DeleteTaskModal from "../DeleteTaskModal/DeleteTaskModal";
-import MainModal from "../MainModal/MainModal";
+import MainModalRedux from "../MainModal/MainModalRedux";
 import SpinnerLoader from "../../../../Utlis/SpinnerLoader/SpinnerLoader";
 import ErrorModal from "../../../../Utlis/ErrorModal/ErrorModal"
 import { connect } from "react-redux";
@@ -13,6 +13,7 @@ import {
   addTaskThunk,
   editTaskThunk,
   deleteTaskCheckedTasksThunk,
+  toggleTaskStatusThunk,
 } from "../../../../Redux/actions";
 
 const Todo = (props) => {
@@ -42,12 +43,12 @@ const Todo = (props) => {
     editTask,
     deleteCheckedTasks,
     reset,
+    toggleTaskStatus
   } = props;
 
   useEffect(() => {
     setTasks();
     return () => {
-      console.log("resettodo");
       reset();
     };
   }, [setTasks, reset]);
@@ -68,6 +69,10 @@ const Todo = (props) => {
     deleteCheckedTasks(checkedTasks);
   };
 
+  const taskStatus = (task) => {
+    toggleTaskStatus(task)
+  }
+
   const tasksJSX = tasks.map((task) => {
     return (
       <Col
@@ -85,6 +90,7 @@ const Todo = (props) => {
           isAnyTaskChecked={!!checkedTasks.size}
           isChecked={!!checkedTasks.has(task._id)}
           toggleSetEditableTask={handleSetEditableTask}
+          taskStatus={taskStatus}
         />
       </Col>
     );
@@ -151,10 +157,10 @@ const Todo = (props) => {
         <ErrorModal onHide={toggleSetOrRemoveErrorModal} backendError={backendError} />
       )}
       {isOpenAddTaskModal && (
-        <MainModal onHide={toggleOpenAddTaskModal} onSubmit={handleAddTask} />
+        <MainModalRedux onHide={toggleOpenAddTaskModal} onSubmit={handleAddTask} />
       )}
       {editableTask && (
-        <MainModal
+        <MainModalRedux
           onHide={handleSetEditableTask}
           onSubmit={handleEditTask}
           editableTask={editableTask}
@@ -200,13 +206,16 @@ const mapDispatchToProps = (dispatch) => {
       dispatch((dispatch) => addTaskThunk(dispatch, formData));
     },
     editTask: (editableTask) => {
-      dispatch((dispatch) => {
-        editTaskThunk(dispatch, editableTask);
-      });
+      dispatch((dispatch) => {editTaskThunk(dispatch, editableTask)});
     },
     deleteCheckedTasks: (checkedTasks) => {
       dispatch((dispatch) => {
         deleteTaskCheckedTasksThunk(dispatch, checkedTasks);
+      });
+    },
+    toggleTaskStatus: (task) => {
+      dispatch((dispatch) => {
+        toggleTaskStatusThunk(dispatch, task);
       });
     },
     ////////////////////////////////////////////SYNC

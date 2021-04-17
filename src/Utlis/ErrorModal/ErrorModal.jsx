@@ -4,7 +4,6 @@ import ErrorModalStyles from "./ErrorModal.module.css";
 
 const ErrorModal = (props) => {
   const { onHide, backendError } = props;
-console.log("eeeeeee",backendError)
   return (
     <div>
       <Modal

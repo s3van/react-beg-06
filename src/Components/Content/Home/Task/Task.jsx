@@ -1,6 +1,6 @@
 import TaskStyles from "./Task.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTrash, faEdit } from "@fortawesome/free-solid-svg-icons";
+import { faTrash, faEdit, faCheck, faHourglassHalf } from "@fortawesome/free-solid-svg-icons";
 import { Card } from "react-bootstrap";
 import { memo } from "react";
 import { withRouter, Link } from "react-router-dom";
@@ -14,6 +14,7 @@ const Task = (props) => {
     isAnyTaskChecked,
     isChecked,
     toggleSetEditableTask,
+    taskStatus
   } = props;
 
   const handleDelete = () => {
@@ -50,6 +51,16 @@ const Task = (props) => {
           >
             <FontAwesomeIcon icon={faEdit} />
           </button>
+          <div style={{width: "32px", height: "30px" }} onClick={() => taskStatus(task)}>
+          <button
+            className={task.status === "done" ? TaskStyles.activestatusBtn : TaskStyles.statusBtn }
+            disabled={isAnyTaskChecked}
+            
+          >
+            {task.status==="done" && <FontAwesomeIcon icon={faCheck} />} 
+            {task.status==="active" && <FontAwesomeIcon icon={faHourglassHalf}/>} 
+          </button>
+          </div>
           <input
             type="checkbox"
             className={TaskStyles.inpt}
@@ -69,8 +80,8 @@ const Task = (props) => {
           <span>Description</span>
           {task.description}
           <span>
-            Date:
-            {task.date.slice(0, 10)}
+            {/* Date:
+            {task.date.slice(0, 10)} */}
           </span>
         </Card.Text>
       </Card>

@@ -27,7 +27,6 @@ export const deleteOneTaskThunk = (dispatch, _id) => {
         .then((res) => res.json())
         .then((data) => {
             if (data.error) throw data.error;
-
             dispatch({ type: "DELETE_ONE_TASK", _id })
         })
         .catch((error) => {
@@ -111,6 +110,26 @@ export const deleteTaskCheckedTasksThunk = (dispatch, checkedTasks) => {
         });
 }
 
+///////////////////////////////////////////////////////////////TOGGLETASKSTATUS
+export const toggleTaskStatusThunk = (dispatch, task) => {
+    const status = task.status === "done" ? "active" : "done"
+    fetch(`${API_HOST}/task/${task._id}`, {
+        method: "PUT",
+        body: JSON.stringify({ status }),
+        headers: {
+            "Content-Type": "application/json",
+        },
+    })
+        .then((res) => res.json())
+        .then((data) => {
+            if (data.error) throw data.error;
+            dispatch({ type: "EDIT_TASK", data })
+        })
+        .catch((error) => {
+            dispatch({ type: "SET_ERROR_MESSAGE_TODO", error })
+        })
+}
+
 ///////////////////////////////////////////////////////////////SINGLETASK
 ///////////////////////////////////////////////////////////////SETSINGLETASK
 export const setSingleTaskDataThunk = (dispatch, id) => {
@@ -145,12 +164,11 @@ export const editSingleTaskThunk = (dispatch, editableTask) => {
         .then((res) => res.json())
         .then((data) => {
             if (data.error) throw data.error;
-            dispatch({ type: "SET_EDIT_MODAL" })
+            dispatch({ type: "SET_OR_REMOVE_EDIT_MODAL" })
             dispatch({ type: "SET_SINGLETASK_DATA", data })
             dispatch({ type: "SET_OR_REMOVE_LOADING", isloading: false })
         })
         .catch((error) => {
-            console.log("SingleTask-handleEditSingleTask Error", error);
             dispatch({ type: "SET_ERROR_MESSAGE_SINGLETASK", error })
             dispatch({ type: "SET_OR_REMOVE_LOADING", isloading: false })
         });
@@ -171,7 +189,6 @@ export const deleteSingleTaskThunk = (dispatch, singleTask, history) => {
             history.push("/");
         })
         .catch((error) => {
-            console.log("SingleTask-handleDeleteSingleTask-Error", error);
             dispatch({ type: "SET_ERROR_MESSAGE_SINGLETASK", error })
             dispatch({ type: "SET_OR_REMOVE_LOADING", isloading: false })
         });
@@ -179,38 +196,37 @@ export const deleteSingleTaskThunk = (dispatch, singleTask, history) => {
 
 ///////////////////////////////////////////////////////////////CONTACTDATA
 ///////////////////////////////////////////////////////////////SUBMITCONTACTDATA
-export const handleSubmitContactDataThunk = (dispatch,formData) => {
+export const handleSubmitContactDataThunk = (dispatch, formData) => {
     for (let key in formData) {
-      if (Object.keys(formData[key]).includes("value")) {
-        formData[key] = formData[key].value;
-      } else {
-        delete formData[key];
-      }
+        if (Object.keys(formData[key]).includes("value")) {
+            formData[key] = formData[key].value;
+        } else {
+            delete formData[key];
+        }
     }
     if (
-      !formData.name.trim() ||
-      !formData.email.trim() ||
-      !formData.message.trim()
+        !formData.name.trim() ||
+        !formData.email.trim() ||
+        !formData.message.trim()
     )
-      return;
-      dispatch({ type: "SET_OR_REMOVE_LOADING", isloading: true })
+        return;
+    dispatch({ type: "SET_OR_REMOVE_LOADING", isloading: true })
     fetch(`${API_HOST}/form`, {
-      method: "POST",
-      body: JSON.stringify(formData),
-      headers: {
-        "Content-Type": "application/json",
-      },
+        method: "POST",
+        body: JSON.stringify(formData),
+        headers: {
+            "Content-Type": "application/json",
+        },
     })
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.error) throw data.error;
-        dispatch({ type: "SET_OR_REMOVE_LOADING", isloading: false })
-        dispatch({ type: "CLEAR_CONTACTDATA"});
-        dispatch({ type: "SET_DATA", data});
-      })
-      .catch((error) => {
-        console.log("ContactDataWithReducer Error", error);
-        dispatch({ type: "SET_OR_REMOVE_LOADING", isloading: false })
-        dispatch({ type: "SET_ERROR_MESSAGE_CONTACTDATA", error });
-      });
+        .then((res) => res.json())
+        .then((data) => {
+            if (data.error) throw data.error;
+            dispatch({ type: "SET_OR_REMOVE_LOADING", isloading: false })
+            dispatch({ type: "CLEAR_CONTACTDATA" });
+            dispatch({ type: "SET_DATA", data });
+        })
+        .catch((error) => {
+            dispatch({ type: "SET_OR_REMOVE_LOADING", isloading: false })
+            dispatch({ type: "SET_ERROR_MESSAGE_CONTACTDATA", error });
+        });
 }

@@ -20,7 +20,7 @@ const singletaskReducer = (state = initialState, action) => {
             };
         }
 
-        case "SET_EDIT_MODAL": {
+        case "SET_OR_REMOVE_EDIT_MODAL": {
             return {
                 ...state,
                 editModal: !state.editModal,
