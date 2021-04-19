@@ -38,7 +38,7 @@ const MainModalRedux = (props) => {
       const formData = {
         title,
         description,
-        date: DateFormatter(new Date()),
+        date: DateFormatter(new Date(date)),
       };
       props.onSubmit(formData);
     }
