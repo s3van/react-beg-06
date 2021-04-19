@@ -5,7 +5,7 @@ import { Container, Row, Col } from "react-bootstrap";
 import DeleteTaskModal from "../DeleteTaskModal/DeleteTaskModal";
 import MainModalRedux from "../MainModal/MainModalRedux";
 import SpinnerLoader from "../../../../Utlis/SpinnerLoader/SpinnerLoader";
-import ErrorModal from "../../../../Utlis/ErrorModal/ErrorModal"
+import ErrorModal from "../../../../Utlis/ErrorModal/ErrorModal";
 import { connect } from "react-redux";
 import {
   setTasksThunk,
@@ -43,7 +43,7 @@ const Todo = (props) => {
     editTask,
     deleteCheckedTasks,
     reset,
-    toggleTaskStatus
+    toggleTaskStatus,
   } = props;
 
   useEffect(() => {
@@ -70,8 +70,8 @@ const Todo = (props) => {
   };
 
   const taskStatus = (task) => {
-    toggleTaskStatus(task)
-  }
+    toggleTaskStatus(task);
+  };
 
   const tasksJSX = tasks.map((task) => {
     return (
@@ -99,7 +99,7 @@ const Todo = (props) => {
   return (
     <>
       <Container className={TodoStyles.todo}>
-        <Row style={{marginBottom: "30px"}}> 
+        <Row style={{ marginBottom: "30px" }}>
           <Col>
             <h1>Home</h1>
           </Col>
@@ -153,11 +153,17 @@ const Todo = (props) => {
           }
         />
       )}
-       {errorModal && (
-        <ErrorModal onHide={toggleSetOrRemoveErrorModal} backendError={backendError} />
+      {errorModal && (
+        <ErrorModal
+          onHide={toggleSetOrRemoveErrorModal}
+          backendError={backendError}
+        />
       )}
       {isOpenAddTaskModal && (
-        <MainModalRedux onHide={toggleOpenAddTaskModal} onSubmit={handleAddTask} />
+        <MainModalRedux
+          onHide={toggleOpenAddTaskModal}
+          onSubmit={handleAddTask}
+        />
       )}
       {editableTask && (
         <MainModalRedux
@@ -206,7 +212,9 @@ const mapDispatchToProps = (dispatch) => {
       dispatch((dispatch) => addTaskThunk(dispatch, formData));
     },
     editTask: (editableTask) => {
-      dispatch((dispatch) => {editTaskThunk(dispatch, editableTask)});
+      dispatch((dispatch) => {
+        editTaskThunk(dispatch, editableTask);
+      });
     },
     deleteCheckedTasks: (checkedTasks) => {
       dispatch((dispatch) => {

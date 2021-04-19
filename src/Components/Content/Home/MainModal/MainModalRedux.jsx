@@ -32,13 +32,12 @@ const MainModalRedux = (props) => {
         description,
         date: DateFormatter(new Date(editableTask.date)),
       };
-      console.log("uxarkvox", formData);
       props.onSubmit(formData);
     } else {
       const formData = {
         title,
         description,
-        date: DateFormatter(new Date()),
+        date: DateFormatter(new Date(date)),
       };
       props.onSubmit(formData);
     }

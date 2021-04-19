@@ -1,4 +1,4 @@
-import React, { PureComponent } from "react";
+import React from "react";
 import { Modal } from "react-bootstrap";
 import ErrorModalStyles from "./ErrorModal.module.css";
 
