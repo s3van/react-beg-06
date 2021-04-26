@@ -102,10 +102,17 @@ const todoReducer = (state = initialState, action) => {
         }
 
         case "SET_EDIT_TASK": {
+           if(action.editableTask){
             return {
                 ...state,
                 editableTask: action.editableTask
             }
+           }else{
+            return {
+                ...state,
+                editableTask: null
+            }
+           }
         }
 
         case "CHECK_ALL_TASKS": {

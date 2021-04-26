@@ -162,17 +162,19 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
+    //SYNC
     setOrRemoveLoading: (isloading) => {
       dispatch({ type: "SET_OR_REMOVE_LOADING", isloading });
     },
     changeContactData: (target) => {
       dispatch({ type: "CHANGE_CONTACTDATA", target });
     },
-    submitContactData: (formData) => {
-      dispatch((dispatch) => handleSubmitContactDataThunk(dispatch, formData));
-    },
     toggleSetContactModal: () => {
       dispatch({ type: "SET_OR_REMOVE_CONTACTDATA_MODAL" });
+    },
+    //ASYNC
+    submitContactData: (formData) => {
+      dispatch((dispatch) => handleSubmitContactDataThunk(dispatch, formData));
     },
   };
 };

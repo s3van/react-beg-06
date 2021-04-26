@@ -41,7 +41,7 @@ const ErrorModal = (props) => {
                 )}
               </div>
             </div>
-            <div className={ErrorModalStyles.errorStatusWrap}>
+            {backendError.status && <div className={ErrorModalStyles.errorStatusWrap}>
               <div className={ErrorModalStyles.errorTitle}>Status:</div>
               {backendError.status === 500 ? (
                 <div
@@ -58,7 +58,7 @@ const ErrorModal = (props) => {
                   {backendError.status}
                 </div>
               )}
-            </div>
+            </div>}
           </div>
         </Modal.Body>
       </Modal>

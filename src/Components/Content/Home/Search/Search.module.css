@@ -1,0 +1,140 @@
+.searchwrap{
+    display: flex;
+    align-items: center;
+    flex-wrap: nowrap;
+}
+
+.dropbtnswrap{
+    display: flex;
+    align-items: center;
+    flex-wrap: nowrap;
+}
+
+.btnwrap{
+    width: 80px;
+    height: 40px;
+    border: 0;
+    background: #12b4ff;
+    font-weight: 700;
+    color: snow;
+    border-radius: 2px;
+    transition: all 0.2s ease;
+    border-radius: 0px 3px 3px 0px;
+}
+
+.btnwrap:hover {
+  background-color: #12b4ffbe;
+  transition: all 0.2s ease;
+  cursor: pointer;
+} 
+
+.btnwrap:active {
+	transform: translateX(4px);
+}
+
+.btnwrap:disabled{
+    opacity: 0.5;
+    transition: 0.1s;
+    transition: none;
+}
+
+.inptwrap{
+    width: 70%;
+    height: 40px;
+    background: #fff;
+    border: 1px solid #bebebe;
+    border-right: 0;
+    font-size: 15px;
+    font-style: italic;
+    font-weight: 300;
+    font-family: 'Montserrat', sans-serif;
+    padding-left: 15px;
+    line-height: 1.1;
+    border-radius: 3px 0 0 3px;
+}
+
+  
+.inptwrap:focus {
+	outline: 0;
+    border-color: #12b4ff;
+}
+
+.inptwrap::placeholder{
+    color: #ccc;
+}
+  
+.inptwrap:focus::-webkit-input-placeholder {opacity: 0; transition: opacity 0.3s ease;} 
+
+.datepickerStyles{
+    font-size: 14px;
+    font-family:  "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-weight: 500;
+    letter-spacing: 0.3px;
+    color: #fff;
+    width: 100%;
+}
+
+.datepickerWrapper{
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 4px solid rgb(86, 104, 105);
+    background: rgb(86, 104, 105);
+    margin-bottom: 3px;
+    border-radius: 2px;
+    width: 180px;
+}
+
+.datepickerWrapper input{
+    height: 30px;
+    width: 80px;
+    background: #fff;
+    border: 1px solid #bebebe;
+    font-size: 15px;
+    font-style: italic;
+    font-weight: 300;
+    font-family: 'Montserrat', sans-serif;
+    line-height: 1.1;
+    border-radius: 2px;
+}
+
+.datepickerWrapper input:focus {
+	outline: 0;
+    border-color: #166996;
+}
+
+.datepickerWrapper input::placeholder{
+    color: #ccc;
+}
+  
+.datepickerWrapper input:focus::-webkit-input-placeholder {opacity: 0; transition: opacity 0.3s ease;} 
+
+.resetbtn{
+    width: 100%;
+    height: 100%;
+    font-size: 14px;
+    font-family:  "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-weight: 500;
+    letter-spacing: 0.3px;
+    border-radius: 4px;
+    border: 0;
+    background: rgb(86, 104, 105);
+    color: snow;
+    transition: all 0.2s ease;
+}
+
+.resetbtn:focus {
+	  outline: none;
+}
+
+.resetbtn:active {
+	transform: translateY(2px);
+}
+
+.resetbtn:hover {
+	background-color: rgb(252, 81, 69);
+	transition: all 0.2s ease;
+	cursor: pointer;
+} 

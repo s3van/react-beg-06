@@ -230,3 +230,31 @@ export const handleSubmitContactDataThunk = (dispatch, formData) => {
             dispatch({ type: "SET_ERROR_MESSAGE_CONTACTDATA", error });
         });
 }
+
+///////////////////////////////////////////////////////////////SEARCH
+///////////////////////////////////////////////////////////////SUBMITSEARCH
+export const handleSubmitQueryParametersThunk = (dispatch,queryParameters) => {
+    let url = "http://localhost:3001/task"
+    let query = "?"
+    for (let key in queryParameters) {
+        const value = queryParameters[key]
+        if (value) {
+            query += `${key}=${value}&`
+        }
+    }
+    url += query.slice(0, query.length - 1)
+    console.log(url)
+    dispatch({ type: "SET_OR_REMOVE_LOADING", isloading: true })
+    fetch(url)
+        .then((res) => res.json())
+        .then((data) => {
+            if (data.error) throw data.error;
+            dispatch({ type: "SET_OR_REMOVE_LOADING", isloading: false })
+            dispatch({ type: "RESET_STATE" })
+            dispatch({ type: "SET_TASKS", data })
+        })
+        .catch((error) => {
+            dispatch({ type: "SET_OR_REMOVE_LOADING", isloading: false })
+            dispatch({ type: "SET_ERROR_MESSAGE_CONTACTDATA", error });
+        });
+}

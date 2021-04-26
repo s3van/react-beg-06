@@ -1,11 +1,12 @@
 import { useEffect } from "react";
 import Task from "../Task/Task";
 import TodoStyles from "./Todo.module.css";
-import { Container, Row, Col } from "react-bootstrap";
+import { Container, Row, Col, Dropdown } from "react-bootstrap";
 import DeleteTaskModal from "../DeleteTaskModal/DeleteTaskModal";
 import MainModalRedux from "../MainModal/MainModalRedux";
 import SpinnerLoader from "../../../../Utlis/SpinnerLoader/SpinnerLoader";
 import ErrorModal from "../../../../Utlis/ErrorModal/ErrorModal";
+import Search from "../Search/Search";
 import { connect } from "react-redux";
 import {
   setTasksThunk,
@@ -75,14 +76,7 @@ const Todo = (props) => {
 
   const tasksJSX = tasks.map((task) => {
     return (
-      <Col
-        key={task._id}
-        xs={12}
-        sm={6}
-        md={2}
-        lg={3}
-        className={TodoStyles.column}
-      >
+      
         <Task
           task={task}
           handleDeleteTask={handleDeleteTask}
@@ -92,54 +86,61 @@ const Todo = (props) => {
           toggleSetEditableTask={handleSetEditableTask}
           taskStatus={taskStatus}
         />
-      </Col>
+
     );
   });
 
   return (
     <>
       <Container className={TodoStyles.todo}>
-        <Row style={{ marginBottom: "30px" }}>
-          <Col>
+        <Row className = {TodoStyles.toolsWrap}>
+          <div className={TodoStyles.searchWrap}>
             <h1>Home</h1>
-          </Col>
+          </div>
+          <div className={TodoStyles.searchWrap}>
+          <Search />
+          </div>
         </Row>
         <Row className={TodoStyles.btnWrap}>
-          <div className={TodoStyles.btn}>
-            <button
-              onClick={toggleOpenAddTaskModal}
-              className={TodoStyles.addBtn}
-              disabled={!!checkedTasks.size}
-            >
-              Add Task
-            </button>
-          </div>
-          <div className={TodoStyles.btn}>
-            <button
-              className={TodoStyles.deleteCheckedBtn}
-              onClick={toggleOpenDeleteTaskModal}
-              disabled={!!!checkedTasks.size}
-            >
-              Delete Selected
-            </button>
-          </div>
-          <div style={{ width: "140px" }}>
-            <button
-              className={TodoStyles.checkedAllTasksBtn}
-              onClick={toggleCheckAllTasks}
-              disabled={!!!tasksJSX.length}
-            >
-              {tasks.length && checkedTasks.size === tasks.length
-                ? "Deselect"
-                : "Select all"}
-            </button>
-          </div>
+              <div className={TodoStyles.btn}>
+                <button
+                  onClick={toggleOpenAddTaskModal}
+                  className={TodoStyles.addBtn}
+                  disabled={!!checkedTasks.size}
+                >
+                  Add Task
+                </button>
+              </div>
+
+              <div className={TodoStyles.btn}>
+                <button
+                  className={TodoStyles.deleteCheckedBtn}
+                  onClick={toggleOpenDeleteTaskModal}
+                  disabled={!!!checkedTasks.size}
+                >
+                  Delete Selected
+                </button>
+              </div>
+
+              <div className={TodoStyles.btn}>
+                <button
+                  className={TodoStyles.checkedAllTasksBtn}
+                  onClick={toggleCheckAllTasks}
+                  disabled={!!!tasksJSX.length}
+                >
+                  {tasks.length && checkedTasks.size === tasks.length
+                    ? "Deselect"
+                    : "Select all"}
+                </button>
+              </div>
         </Row>
         <Row>
           {tasksJSX.length ? (
             tasksJSX
           ) : (
-            <p className={TodoStyles.ptux}>No Tasks</p>
+            <p className={TodoStyles.ptux} style={{ marginTop: "270px" }}>
+              No Tasks
+            </p>
           )}
         </Row>
       </Container>

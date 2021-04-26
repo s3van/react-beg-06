@@ -1,10 +1,16 @@
 import TaskStyles from "./Task.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTrash, faEdit, faCheck, faHourglassHalf } from "@fortawesome/free-solid-svg-icons";
+import {
+  faTrash,
+  faEdit,
+  faCheck,
+  faHourglassHalf,
+} from "@fortawesome/free-solid-svg-icons";
 import { Card } from "react-bootstrap";
 import { memo } from "react";
 import { withRouter, Link } from "react-router-dom";
 import PropTypes from "prop-types";
+import DateFormatter from "../../../../Utlis/DateFormatter/DateFormatter";
 
 const Task = (props) => {
   const {
@@ -14,7 +20,7 @@ const Task = (props) => {
     isAnyTaskChecked,
     isChecked,
     toggleSetEditableTask,
-    taskStatus
+    taskStatus,
   } = props;
 
   const handleDelete = () => {
@@ -51,15 +57,23 @@ const Task = (props) => {
           >
             <FontAwesomeIcon icon={faEdit} />
           </button>
-          <div style={{width: "32px", height: "30px" }} onClick={() => taskStatus(task)}>
-          <button
-            className={task.status === "done" ? TaskStyles.activestatusBtn : TaskStyles.statusBtn }
-            disabled={isAnyTaskChecked}
-            
+          <div
+            style={{ width: "32px", height: "30px" }}
+            onClick={() => taskStatus(task)}
           >
-            {task.status==="done" && <FontAwesomeIcon icon={faCheck} />} 
-            {task.status==="active" && <FontAwesomeIcon icon={faHourglassHalf}/>} 
-          </button>
+            <button
+              className={
+                task.status === "done"
+                  ? TaskStyles.activestatusBtn
+                  : TaskStyles.statusBtn
+              }
+              disabled={isAnyTaskChecked}
+            >
+              {task.status === "done" && <FontAwesomeIcon icon={faCheck} />}
+              {task.status === "active" && (
+                <FontAwesomeIcon icon={faHourglassHalf} />
+              )}
+            </button>
           </div>
           <input
             type="checkbox"
@@ -71,7 +85,7 @@ const Task = (props) => {
         <Card.Body>
           <Link
             to={`/task/${task._id}`}
-            style={{textDecoration: "none", color: "#003049"}}
+            style={{ textDecoration: "none", color: "#003049" }}
           >
             <Card.Title className={TaskStyles.link}>{task.title}</Card.Title>
           </Link>
@@ -79,15 +93,12 @@ const Task = (props) => {
         <Card.Text className={TaskStyles.info}>
           <span>Description</span>
           {task.description}
-          <span>
-            {/* Date:
-            {task.date.slice(0, 10)} */}
-          </span>
+          <span>Date: {DateFormatter(new Date(task.date))}</span>
         </Card.Text>
       </Card>
     </>
   );
-}
+};
 
 Task.propTypes = {
   handleDeleteTask: PropTypes.func,
