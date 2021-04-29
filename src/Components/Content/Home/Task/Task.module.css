@@ -4,8 +4,8 @@
     justify-content: center;
     text-align: center;
     align-items: center;
-    height: 240px;
-    margin: 10px;
+    height: 280px;
+    margin: 8px;
     transition: all 0.1s ease;
 }
 
@@ -175,7 +175,7 @@
 
 .inpt:hover {
    cursor: pointer;
-  }
+}
 
 .link{
     position: relative;
@@ -184,7 +184,7 @@
     font-size: 20px;
     text-decoration: none;
     transition:color 0.2s linear;
-  }
+}
   
 .link:after{
     content: "";
@@ -195,13 +195,10 @@
     background-color:  #003049;
     position: absolute;
     transition: all 0.2s linear;
-  }
-  
-
+}
   
 .link:hover::after {
     opacity: 1;
   
-  }
-  
+}
   

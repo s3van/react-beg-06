@@ -1,11 +1,12 @@
 import { useEffect } from "react";
 import Task from "../Task/Task";
 import TodoStyles from "./Todo.module.css";
-import { Container, Row, Col, Dropdown } from "react-bootstrap";
+import { Container, Row } from "react-bootstrap";
 import DeleteTaskModal from "../DeleteTaskModal/DeleteTaskModal";
 import MainModalRedux from "../MainModal/MainModalRedux";
 import SpinnerLoader from "../../../../Utlis/SpinnerLoader/SpinnerLoader";
 import ErrorModal from "../../../../Utlis/ErrorModal/ErrorModal";
+import logo from "../../../../logos/home.png";
 import Search from "../Search/Search";
 import { connect } from "react-redux";
 import {
@@ -74,71 +75,73 @@ const Todo = (props) => {
     toggleTaskStatus(task);
   };
 
-  const tasksJSX = tasks.map((task) => {
+  const tasksJSX = tasks.map((task, index) => {
     return (
-      
-        <Task
-          task={task}
-          handleDeleteTask={handleDeleteTask}
-          handleCheckTask={toggleCheckTask}
-          isAnyTaskChecked={!!checkedTasks.size}
-          isChecked={!!checkedTasks.has(task._id)}
-          toggleSetEditableTask={handleSetEditableTask}
-          taskStatus={taskStatus}
-        />
-
+      <Task
+        key={index}
+        task={task}
+        handleDeleteTask={handleDeleteTask}
+        handleCheckTask={toggleCheckTask}
+        isAnyTaskChecked={!!checkedTasks.size}
+        isChecked={!!checkedTasks.has(task._id)}
+        toggleSetEditableTask={handleSetEditableTask}
+        taskStatus={taskStatus}
+      />
     );
   });
 
   return (
     <>
       <Container className={TodoStyles.todo}>
-        <Row className = {TodoStyles.toolsWrap}>
+        <Row className={TodoStyles.toolsWrap}>
           <div className={TodoStyles.searchWrap}>
-            <h1>Home</h1>
+            <img src={logo} style={{ height: "60px", width: "70px" }} />
           </div>
           <div className={TodoStyles.searchWrap}>
-          <Search />
+            <Search />
           </div>
         </Row>
+        <Row className={TodoStyles.todoTitle}>
+          <h1>Todo Component</h1>
+        </Row>
         <Row className={TodoStyles.btnWrap}>
-              <div className={TodoStyles.btn}>
-                <button
-                  onClick={toggleOpenAddTaskModal}
-                  className={TodoStyles.addBtn}
-                  disabled={!!checkedTasks.size}
-                >
-                  Add Task
-                </button>
-              </div>
+          <div className={TodoStyles.btn}>
+            <button
+              onClick={toggleOpenAddTaskModal}
+              className={TodoStyles.addBtn}
+              disabled={!!checkedTasks.size}
+            >
+              Add Task
+            </button>
+          </div>
 
-              <div className={TodoStyles.btn}>
-                <button
-                  className={TodoStyles.deleteCheckedBtn}
-                  onClick={toggleOpenDeleteTaskModal}
-                  disabled={!!!checkedTasks.size}
-                >
-                  Delete Selected
-                </button>
-              </div>
+          <div className={TodoStyles.btn}>
+            <button
+              className={TodoStyles.deleteCheckedBtn}
+              onClick={toggleOpenDeleteTaskModal}
+              disabled={!!!checkedTasks.size}
+            >
+              Delete Selected
+            </button>
+          </div>
 
-              <div className={TodoStyles.btn}>
-                <button
-                  className={TodoStyles.checkedAllTasksBtn}
-                  onClick={toggleCheckAllTasks}
-                  disabled={!!!tasksJSX.length}
-                >
-                  {tasks.length && checkedTasks.size === tasks.length
-                    ? "Deselect"
-                    : "Select all"}
-                </button>
-              </div>
+          <div className={TodoStyles.btn}>
+            <button
+              className={TodoStyles.checkedAllTasksBtn}
+              onClick={toggleCheckAllTasks}
+              disabled={!!!tasksJSX.length}
+            >
+              {tasks.length && checkedTasks.size === tasks.length
+                ? "Deselect"
+                : "Select all"}
+            </button>
+          </div>
         </Row>
         <Row>
           {tasksJSX.length ? (
             tasksJSX
           ) : (
-            <p className={TodoStyles.ptux} style={{ marginTop: "270px" }}>
+            <p className={TodoStyles.ptux} style={{ marginTop: "200px" }}>
               No Tasks
             </p>
           )}

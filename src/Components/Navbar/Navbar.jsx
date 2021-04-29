@@ -1,8 +1,9 @@
-import React, { PureComponent } from "react";
+import React from "react";
 import NavbarStyles from "./Navbar.module.css";
 import { NavLink } from "react-router-dom";
 
-class Navbar extends React.PureComponent {
+class Navbar extends React.Component {
+  
   navlinks = [
     { to: "/", exact: true, title: "Home" },
     { to: "/aboutus", exact: true, title: "About Us" },

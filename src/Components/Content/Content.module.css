@@ -8,3 +8,10 @@
     position: relative;
     background: #e1f0c4;
 }
+
+
+@media (max-width: 420px) {
+    .content{
+      width: 100%;
+    }
+  }
