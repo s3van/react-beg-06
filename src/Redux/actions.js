@@ -243,7 +243,6 @@ export const handleSubmitQueryParametersThunk = (dispatch,queryParameters) => {
         }
     }
     url += query.slice(0, query.length - 1)
-    console.log(url)
     dispatch({ type: "SET_OR_REMOVE_LOADING", isloading: true })
     fetch(url)
         .then((res) => res.json())
@@ -255,6 +254,6 @@ export const handleSubmitQueryParametersThunk = (dispatch,queryParameters) => {
         })
         .catch((error) => {
             dispatch({ type: "SET_OR_REMOVE_LOADING", isloading: false })
-            dispatch({ type: "SET_ERROR_MESSAGE_CONTACTDATA", error });
+            dispatch({ type: "SET_OR_REMOVE_ERROR_MODAL", error });
         });
 }

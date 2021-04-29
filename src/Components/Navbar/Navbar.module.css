@@ -167,7 +167,6 @@ a.active{
   position: absolute;
   display: flex;
   align-items: center;
-  border: 1px solid green;
   height: 65px;
   width: initial;
   margin: -46px 0 0 -230px;

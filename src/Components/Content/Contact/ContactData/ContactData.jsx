@@ -27,7 +27,6 @@ const ContactData = (props) => {
   };
 
   const handleChange = (e) => {
-    e.preventDefault();
     const { target } = e;
     changeContactData(target);
   };

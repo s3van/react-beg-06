@@ -59,20 +59,20 @@ const Task = (props) => {
           </button>
           <div
             style={{ width: "32px", height: "30px" }}
-            onClick={() => taskStatus(task)}
+           
           >
             <button
+            disabled={isAnyTaskChecked}
+            onClick={() => taskStatus(task)}
               className={
                 task.status === "done"
                   ? TaskStyles.activestatusBtn
                   : TaskStyles.statusBtn
               }
-              disabled={isAnyTaskChecked}
+              
             >
-              {task.status === "done" && <FontAwesomeIcon icon={faCheck} />}
-              {task.status === "active" && (
-                <FontAwesomeIcon icon={faHourglassHalf} />
-              )}
+              {task.status === "done" && <FontAwesomeIcon icon={faCheck}  />}
+              {task.status === "active" && <FontAwesomeIcon icon={faHourglassHalf} />}
             </button>
           </div>
           <input
