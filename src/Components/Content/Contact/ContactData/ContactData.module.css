@@ -7,7 +7,7 @@
     justify-content: space-around;
     align-items: center;
     background: #e1f0c4;
-    font-family: 'Montserrat', sans-serif;
+    font-family: inherit;
 }
 
 .wrapper{
@@ -54,14 +54,14 @@
 
 .validDiv:after{
     content: '';
-  position: absolute; 
-  bottom: 100%; 
-  left: 45%;
-  text-align: center;
-  transform: rotate(-90deg);
-  border-style: solid;
-  border-width: 5px 5px 5px 5px;
-  border-color: transparent transparent transparent #ff0000c4;
+    position: absolute; 
+    bottom: 100%; 
+    left: 45%;
+    text-align: center;
+    transform: rotate(-90deg);
+    border-style: solid;
+    border-width: 5px 5px 5px 5px;
+    border-color: transparent transparent transparent #ff0000c4;
  }
 
 .inpt{

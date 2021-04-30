@@ -5,7 +5,7 @@
     justify-content: space-around;
     align-items: center;
     background: #e1f0c4;
-    font-family: 'Montserrat', sans-serif;
+    font-family: inherit;
 } 
 
 .singleTaskTitleWrapper{

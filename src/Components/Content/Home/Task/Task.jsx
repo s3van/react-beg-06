@@ -56,8 +56,7 @@ const Task = (props) => {
           </button>
           </div>
           <div
-            style={{ width: "32px", height: "30px" }}
-           
+            style={{ width: "32px", height: "30px" }}   
           >
           <button
             className={TaskStyles.editBtn}
@@ -69,7 +68,6 @@ const Task = (props) => {
           </div>
           <div
             style={{ width: "32px", height: "30px" }}
-           
           >
             <button
             disabled={isAnyTaskChecked}
@@ -101,7 +99,7 @@ const Task = (props) => {
           </Link>
         </Card.Body>
         <Card.Text className={TaskStyles.info}>
-          <span>Date: {DateFormatter(new Date(task.date))}</span>
+          <span style={{marginBottom: "10px"}}>Date: {DateFormatter(new Date(task.date))}</span>
           <span style={{fontSize: "17px"}}>Description</span>
           {task.description}
         </Card.Text>
