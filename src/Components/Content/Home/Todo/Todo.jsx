@@ -141,7 +141,7 @@ const Todo = (props) => {
           {tasksJSX.length ? (
             tasksJSX
           ) : (
-            <p className={TodoStyles.ptux} style={{ marginTop: "200px" }}>
+            <p className={TodoStyles.ptux} style={{ marginTop: "180px" }}>
               No Tasks
             </p>
           )}

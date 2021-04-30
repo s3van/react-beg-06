@@ -194,7 +194,6 @@ a.active{
     display: none;
   }
   .menu{
-    margin: -46px 0 0 -250px;
     justify-content: space-between;
   }
   .menu a:after{
