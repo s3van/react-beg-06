@@ -58,57 +58,55 @@ const SingleTask = (props) => {
 
   return (
     <>
-      <div className={SingleTaskStyles.singleTaskTitleWrapper}>
-        <h1>Single Task</h1>
-      </div>
-      {singleTask && singleTask !== backendError && (
-        <div className={SingleTaskStyles.wrapper}>
-          <div className={SingleTaskStyles.singleTaskContentWrapper}>
-            <div className={SingleTaskStyles.singleTaskContent}>
-              <div>
-                <div className={SingleTaskStyles.title}>
-                  <div style={{ marginRight: "20px" }}>Title:</div>
-                  <div className={SingleTaskStyles.titleText}>
-                    {singleTask.title}
-                  </div>
-                </div>
-                <div className={SingleTaskStyles.title}>
-                  <div style={{ marginRight: "20px" }}>Description:</div>
-                  <div className={SingleTaskStyles.descriptionText}>
-                    {singleTask.description}
-                  </div>
+      <div className={SingleTaskStyles.singletask}>
+        <div className={SingleTaskStyles.singleTaskTitleWrapper}>
+          <h1>Single Task</h1>
+        </div>
+        {singleTask && singleTask !== backendError && (
+          <div className={SingleTaskStyles.wrapper}>
+            <div className={SingleTaskStyles.descriptionWrap}>
+              <div className={SingleTaskStyles.title}>
+                <div className={SingleTaskStyles.infoTitle}>Title:</div>
+                <div className={SingleTaskStyles.titleText}>
+                  {singleTask.title}
                 </div>
               </div>
-              <div className={SingleTaskStyles.buttonWrap}>
-                <div className={SingleTaskStyles.btn}>
-                  <button
-                    className={SingleTaskStyles.deleteBtn}
-                    onClick={handleDeleteSingleTask}
-                  >
-                    Delete
-                  </button>
-                </div>
-                <div className={SingleTaskStyles.btn}>
-                  <button
-                    className={SingleTaskStyles.editBtn}
-                    onClick={toggleSetEditModal}
-                  >
-                    Edit
-                  </button>
-                </div>
-                <div className={SingleTaskStyles.btn}>
-                  <button
-                    className={SingleTaskStyles.gobackBtn}
-                    onClick={handleGoBack}
-                  >
-                    Go Back
-                  </button>
+              <div className={SingleTaskStyles.title}>
+                <div className={SingleTaskStyles.infoTitle}>Description:</div>
+                <div className={SingleTaskStyles.descriptionText}>
+                  {singleTask.description}
                 </div>
               </div>
             </div>
+            <div className={SingleTaskStyles.buttonWrap}>
+              <div className={SingleTaskStyles.btn}>
+                <button
+                  className={SingleTaskStyles.deleteBtn}
+                  onClick={handleDeleteSingleTask}
+                >
+                  Delete
+                </button>
+              </div>
+              <div className={SingleTaskStyles.btn}>
+                <button
+                  className={SingleTaskStyles.editBtn}
+                  onClick={toggleSetEditModal}
+                >
+                  Edit
+                </button>
+              </div>
+              <div className={SingleTaskStyles.btn}>
+                <button
+                  className={SingleTaskStyles.gobackBtn}
+                  onClick={handleGoBack}
+                >
+                  Go Back
+                </button>
+              </div>
+            </div>
           </div>
-        </div>
-      )}
+        )}
+      </div>
       {editModal && (
         <MainModalRedux
           onHide={toggleSetEditModal}
