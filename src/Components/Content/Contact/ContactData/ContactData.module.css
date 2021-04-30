@@ -6,7 +6,7 @@
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
-    background: #e1f0c4;
+    background: #cdd6d5;
     font-family: inherit;
 }
 
@@ -21,6 +21,7 @@
     background: rgb(40,40,40);
     overflow: hidden;
     color: #e1f0c4;
+    border-radius: 2px;
 }
 
 .formTitle{
