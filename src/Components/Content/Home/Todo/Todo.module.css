@@ -50,7 +50,6 @@ h1{
     justify-content: center;
     align-items: center;
     height: 100px;
-    margin-bottom: 20px;
 }
 
 .btn{
@@ -224,6 +223,9 @@ h1{
 @media (max-width: 572px) {
     .btnWrap{
        flex-direction: column;
+    }
+    .todoTitle{
+        margin-bottom: 15px;
     }
 }
 
