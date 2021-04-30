@@ -223,6 +223,7 @@ h1{
 @media (max-width: 572px) {
     .btnWrap{
        flex-direction: column;
+       margin-top: 80px;
     }
     .todoTitle{
         margin-bottom: 15px;
