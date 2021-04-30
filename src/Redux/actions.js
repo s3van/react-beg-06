@@ -234,7 +234,8 @@ export const handleSubmitContactDataThunk = (dispatch, formData) => {
 ///////////////////////////////////////////////////////////////SEARCH
 ///////////////////////////////////////////////////////////////SUBMITSEARCH
 export const handleSubmitQueryParametersThunk = (dispatch,queryParameters) => {
-    let url = "http://localhost:3001/task"
+    let url = process.env.REACT_APP_API_URL+ `${"/task"}`
+    console.log("url",url)
     let query = "?"
     for (let key in queryParameters) {
         const value = queryParameters[key]
