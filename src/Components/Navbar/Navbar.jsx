@@ -6,7 +6,7 @@ class Navbar extends React.Component {
   
   navlinks = [
     { to: "/", exact: true, title: "Home" },
-    { to: "/aboutus", exact: true, title: "About Us" },
+    { to: "/about", exact: true, title: "About" },
     { to: "/contact", exact: true, title: "Contact" },
   ];
 

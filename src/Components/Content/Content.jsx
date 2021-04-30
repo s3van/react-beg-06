@@ -2,7 +2,7 @@ import React, { PureComponent } from "react";
 import ContentStyle from "./Content.module.css";
 //Pages
 import Home from "./Home/Home";
-import AboutUs from "./AboutUs/AboutUs";
+import About from "./About/About";
 import Contact from "./Contact/Contact";
 import NotFound from "./NotFound/NotFound";
 import SingleTask from "./SingleTask/SingleTask";
@@ -13,7 +13,7 @@ class Content extends React.PureComponent {
   
   pages = [
     { path: "/", component: Home, exact: true },
-    { path: "/aboutus", component: AboutUs, exact: true },
+    { path: "/about", component: About, exact: true },
     { path: "/contact", component: Contact, exact: true },
     { path: "/task/:id", component: SingleTask, exact: true },
     { path: "/notfound", component: NotFound, exact: true },

@@ -40,7 +40,7 @@ const ContactData = (props) => {
       <div>
         <div className={ContactDataStyles.contactdata}>
           <div style={{ position: "absolute", top: "0", width: "100%" }}>
-            <h1>Contact</h1>
+            <h1 style={{fontSize: "42px"}}>Contact</h1>
           </div>
           <div className={ContactDataStyles.wrapper}>
             <div className={ContactDataStyles.inpt}>

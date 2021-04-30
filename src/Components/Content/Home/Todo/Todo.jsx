@@ -102,7 +102,7 @@ const Todo = (props) => {
           </div>
         </Row>
         <Row className={TodoStyles.todoTitle}>
-          <h1>Todo Component</h1>
+          <h1 style={{fontSize: "42px"}}>Todo Component</h1>
         </Row>
         <Row className={TodoStyles.btnWrap}>
           <div className={TodoStyles.btn}>
