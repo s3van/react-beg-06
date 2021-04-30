@@ -99,7 +99,7 @@ const Task = (props) => {
           </Link>
         </Card.Body>
         <Card.Text className={TaskStyles.info}>
-          <span style={{marginBottom: "10px"}}>Date: {DateFormatter(new Date(task.date))}</span>
+          <span style={{marginBottom: "10px", marginTop: "5px"}}>Date: {DateFormatter(new Date(task.date))}</span>
           <span style={{fontSize: "17px"}}>Description</span>
           {task.description}
         </Card.Text>
