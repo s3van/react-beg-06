@@ -1,4 +1,4 @@
-const API_HOST = "http://localhost:3001";
+const API_HOST = process.env.REACT_APP_API_URL;
 ///////////////////////////////////////////////////////////////TODO
 ///////////////////////////////////////////////////////////////SETTASKS
 export const setTasksThunk = (dispatch) => {
@@ -234,7 +234,7 @@ export const handleSubmitContactDataThunk = (dispatch, formData) => {
 ///////////////////////////////////////////////////////////////SEARCH
 ///////////////////////////////////////////////////////////////SUBMITSEARCH
 export const handleSubmitQueryParametersThunk = (dispatch,queryParameters) => {
-    let url = "http://localhost:3001/task"
+    let url = process.env.REACT_APP_API_URL
     let query = "?"
     for (let key in queryParameters) {
         const value = queryParameters[key]

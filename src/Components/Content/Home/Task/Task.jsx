@@ -43,6 +43,10 @@ const Task = (props) => {
         style={{ minWidth: "250px", maxWidth: "250px" }}
       >
         <div className={TaskStyles.toolsWrapper}>
+          <div
+            style={{ width: "32px", height: "30px" }}
+           
+          >
           <button
             className={TaskStyles.deleteBtn}
             disabled={isAnyTaskChecked}
@@ -50,6 +54,11 @@ const Task = (props) => {
           >
             <FontAwesomeIcon icon={faTrash} />
           </button>
+          </div>
+          <div
+            style={{ width: "32px", height: "30px" }}
+           
+          >
           <button
             className={TaskStyles.editBtn}
             disabled={isAnyTaskChecked}
@@ -57,6 +66,7 @@ const Task = (props) => {
           >
             <FontAwesomeIcon icon={faEdit} />
           </button>
+          </div>
           <div
             style={{ width: "32px", height: "30px" }}
            
@@ -91,7 +101,7 @@ const Task = (props) => {
           </Link>
         </Card.Body>
         <Card.Text className={TaskStyles.info}>
-          <span>Description</span>
+          <span style={{fontSize: "17px"}}>Description</span>
           {task.description}
           <span>Date: {DateFormatter(new Date(task.date))}</span>
         </Card.Text>
