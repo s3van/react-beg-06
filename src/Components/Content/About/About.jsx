@@ -40,7 +40,7 @@ const About = () => {
               >
                 <FontAwesomeIcon icon={faLinkedin} />
               </Card.Link>
-              <address className={styles.address}>LinkendIn</address>
+              <address className={styles.address}>LinkedIn</address>
             </div>
           </div>
         </Card>

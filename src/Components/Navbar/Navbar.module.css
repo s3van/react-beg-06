@@ -25,6 +25,7 @@
   font-size: 20px;
   text-decoration: none;
   transition:color 0.2s linear;
+
 }
 
 .item a:after{
@@ -51,7 +52,6 @@ a.active{
   color: #443d43;
 }
 
-/* sadsssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss */
 .burger{
   display: none;
 }
@@ -66,13 +66,14 @@ a.active{
 }
 
 .menuToggle a{
-  padding-right: 20px;
+  padding-right: 60px;
   position: relative;
   color: #72606e;
   font-weight: 700;
   font-size: 15px;
   text-decoration: none;
   transition:color 0.2s linear;
+  border: 1px solid green;
 }
 
 .menuToggle a:hover
@@ -105,7 +106,6 @@ a.active{
   color: #443d43;
   
 }
-
 
 .menuToggle input
 {
@@ -170,7 +170,7 @@ a.active{
   align-items: center;
   height: 65px;
   width: initial;
-  margin: -46px 0 0 -210px;
+  margin: -46px 0 0 -300px;
   list-style-type: none;
   -webkit-font-smoothing: antialiased;
   transform: translate(130%, 0);
@@ -189,7 +189,7 @@ a.active{
     margin: 0 0 5px 0;
   }
   .burger{
-     display: block;
+    display: block;
   }
   .item{
     display: none;
@@ -204,18 +204,4 @@ a.active{
   }
 }
 
-@media (max-width: 320px) {
-
-  .burger{
-     display: block;
-  }
-  .item{
-    display: none;
-  }
-  .menu a:after{
-    content: "";
-    display: none;
-    opacity: 0;
-  }
-}
 
