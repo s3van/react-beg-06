@@ -4,7 +4,7 @@
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
-    background: #e1f0c4;
+    background: #cdd6d5;
     font-family: inherit;
 } 
 
@@ -178,6 +178,7 @@
 
     .infoTitle{
         font-size: 18px;
+        margin-bottom: 10px;
     }
 
     .descriptionText{
