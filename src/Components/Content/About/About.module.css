@@ -50,7 +50,6 @@
     }
     .aboutHolder {
         height: auto;
-        overflow-y: scroll;
         text-align: justify;
     }
     .aboutText{
