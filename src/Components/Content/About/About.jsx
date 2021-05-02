@@ -19,28 +19,34 @@ const About = () => {
           <div className={styles.contactsUser}>
             <div className={styles.contactUser}>
               <FontAwesomeIcon icon={faEnvelope} />
-              <address className={styles.address}>
-                sevanyeritsyan@gmail.com
-              </address>
+              <Card.Link href="mailto:sevanyeritsyan@gmail.com" target="_blank">
+                <address className={styles.address}>
+                  sevanyeritsyan@gmail.com
+                </address>
+              </Card.Link>
             </div>
             <div className={styles.contactUser}>
               <FontAwesomeIcon icon={faPhone} />
+              <Card.Link href="tel:+37499888996" target="_blank">
               <address className={styles.address}>+374-99-888-996</address>
+              </Card.Link>  
+              
             </div>
             <div className={styles.contactUser}>
+              <FontAwesomeIcon icon={faGithub} />
               <Card.Link href="https://github.com/s3van" target="_blank">
-                <FontAwesomeIcon icon={faGithub} />
-              </Card.Link>
-              <address className={styles.address}>Github</address>
+                <address className={styles.address}>github.com/s3van</address>
+              </Card.Link>              
             </div>
             <div className={styles.contactUser}>
+            <FontAwesomeIcon icon={faLinkedin} />
               <Card.Link
                 href="https://www.linkedin.com/in/gev-margaryan-b5a571188/"
                 target="_blank"
               >
-                <FontAwesomeIcon icon={faLinkedin} />
+                <address className={styles.address}>https://www.linkedin.com/in/sevan-yeritsyan-aa2b5620b/</address>
               </Card.Link>
-              <address className={styles.address}>LinkedIn</address>
+              
             </div>
           </div>
         </Card>
