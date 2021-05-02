@@ -59,9 +59,6 @@ const SingleTask = (props) => {
   return (
     <>
       <div className={SingleTaskStyles.singletask}>
-        <div className={SingleTaskStyles.singleTaskTitleWrapper}>
-          <h1>Single Task</h1>
-        </div>
         {singleTask && singleTask !== backendError && (
           <div className={SingleTaskStyles.wrapper}>
             <div className={SingleTaskStyles.descriptionWrap}>
